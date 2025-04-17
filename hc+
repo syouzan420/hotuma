@@ -1,0 +1,21 @@
+#!/bin/sh
+
+base=~/Documents/haskell/haste
+tg=~/Documents/www
+
+ho=$base/hotuma
+com=$ho/compiler-latest
+
+rm $com/Main.js
+hastec $ho/Main.hs
+echo "we make file Make.js"
+cp $ho/Main.js $com/
+java -jar $com/closure-compiler-v20200719.jar --js $com/Main.js --js_output_file $com/ho.js
+echo "we make file ho.js"
+rm $com/hotuma.js
+mv $com/ho.js $com/hotuma.js
+cp $com/hotuma.js $tg/ 
+
+cd $ho
+echo "complete"
+./clean.sh
