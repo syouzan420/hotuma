@@ -18,7 +18,7 @@ mouseClick c ci bmps aus (x,y) st = do
       nx = fromIntegral x*rtx
       ny = fromIntegral y*rty
       consSt = cons st
-  inputLoop c ci bmps aus (getConID (nx,ny) consSt) st 
+  inputLoop c ci bmps aus (getConID (nx,ny) (reverse consSt)) st 
 
 inputLoop :: Canvas -> CInfo -> Bmps -> Auds -> Int -> State -> IO State 
 inputLoop c ci@(cvSz,_) bmps aus cid st = do

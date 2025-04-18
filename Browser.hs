@@ -84,4 +84,4 @@ oneAudio aufile = do
   newAudio (defaultAudioSettings{audioLooping=False,audioVolume=1}) [adSrc] 
 
 setAudio :: IO [Audio]
-setAudio = mapM (\i -> oneAudio (pack (audioSrc++"os"++show i++".mp3"))) [0..7]
+setAudio = mapM (\i -> oneAudio (pack (audioSrc++"os"++show i++".mp3"))) [0..15]
