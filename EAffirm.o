@@ -1,0 +1,230 @@
+{-# LINE 1 "/tmp/ghc28083_0/ghc_9.s" #-}
+.data
+	.align 4
+.align 1
+.globl __stginit_EAffirm
+.type __stginit_EAffirm, @object
+__stginit_EAffirm:
+.data
+	.align 4
+.align 1
+.globl EAffirm_affr2_closure
+.type EAffirm_affr2_closure, @object
+EAffirm_affr2_closure:
+	.long	EAffirm_affr2_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	S737_srt-(EAffirm_affr2_info)+0
+	.long	0
+	.long	65558
+.globl EAffirm_affr2_info
+.type EAffirm_affr2_info, @object
+EAffirm_affr2_info:
+.Lc734:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc735
+.Lc736:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lc733
+.Lc732:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $Affirm_affirm_closure,8(%ebx)
+	addl $-12,%ebp
+	jmp base_DataziOldList_lines_info
+.Lc733:
+	jmp *(%esi)
+.Lc735:
+	jmp *-16(%ebx)
+	.size EAffirm_affr2_info, .-EAffirm_affr2_info
+.data
+	.align 4
+.align 1
+.globl EAffirm_affrzugo_closure
+.type EAffirm_affrzugo_closure, @object
+EAffirm_affrzugo_closure:
+	.long	EAffirm_affrzugo_info
+.text
+	.align 4,0x90
+	.long	131087
+	.long	0
+	.long	15
+.globl EAffirm_affrzugo_info
+.type EAffirm_affrzugo_info, @object
+EAffirm_affrzugo_info:
+.Lc73x:
+	movl 16(%ebx),%eax
+	movl 8(%ebx),%ecx
+	leal -8(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jae .Lc73k
+.Lc73y:
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	movl $EAffirm_affrzugo_closure,%esi
+	jmp *-8(%ebx)
+.Lc73v:
+	addl $8,%ebp
+	movl 2(%esi),%eax
+	movl 6(%esi),%ecx
+.Lc73k:
+	movl $c73n_info,-8(%ebp)
+	movl %ecx,%esi
+	movl %eax,-4(%ebp)
+	addl $-8,%ebp
+	testw $7,%si
+	jne .Lc73n
+.Lc73o:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+c73n_info:
+.Lc73n:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc73v
+.Lc73w:
+	movl 4(%ebp),%esi
+	andl $-8,%esi
+	addl $8,%ebp
+	jmp *(%esi)
+	.size EAffirm_affrzugo_info, .-EAffirm_affrzugo_info
+.data
+	.align 4
+.align 1
+.globl EAffirm_affr1_closure
+.type EAffirm_affr1_closure, @object
+EAffirm_affr1_closure:
+	.long	EAffirm_affr1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S737_srt-(s72W_info)+4
+	.long	1
+	.long	65553
+s72W_info:
+.Lc748:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc749
+.Lc74a:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl $base_GHCziList_last1_closure,16(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,8(%ebx)
+	addl $-12,%ebp
+	jmp EAffirm_affrzugo_info
+.Lc749:
+	jmp *-16(%ebx)
+	.size s72W_info, .-s72W_info
+.text
+	.align 4,0x90
+	.long	S737_srt-(EAffirm_affr1_info)+4
+	.long	131077
+	.long	0
+	.long	983055
+.globl EAffirm_affr1_info
+.type EAffirm_affr1_info, @object
+EAffirm_affr1_info:
+.Lc74b:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .Lc74d
+.Lc74e:
+	movl $c73X_info,-8(%ebp)
+	movl $EAffirm_affr2_closure,24(%ebx)
+	movl %eax,16(%ebx)
+	movl $1,8(%ebx)
+	movl %eax,-4(%ebp)
+	addl $-8,%ebp
+	jmp Libs_zdwa1_info
+.text
+	.align 4,0x90
+	.long	S737_srt-(c73X_info)+4
+	.long	1
+	.long	65568
+c73X_info:
+.Lc73X:
+	movl $c73Z_info,(%ebp)
+	testw $7,%si
+	jne .Lc73Z
+.Lc740:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S737_srt-(c73Z_info)+4
+	.long	1
+	.long	65568
+c73Z_info:
+.Lc73Z:
+	addl $28,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc74i
+.Lc74h:
+	movl 3(%esi),%eax
+	movl $s72W_info,-24(%edi)
+	movl %eax,-12(%edi)
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	leal -24(%edi),%eax
+	movl %eax,-4(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,(%edi)
+	leal -7(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.Lc74d:
+	movl %eax,8(%ebx)
+	movl $EAffirm_affr1_closure,%esi
+	jmp *-8(%ebx)
+.Lc74i:
+	movl $28,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size EAffirm_affr1_info, .-EAffirm_affr1_info
+.data
+	.align 4
+.align 1
+.globl EAffirm_affr_closure
+.type EAffirm_affr_closure, @object
+EAffirm_affr_closure:
+	.long	EAffirm_affr_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S737_srt-(EAffirm_affr_info)+12
+	.long	131077
+	.long	0
+	.long	65551
+.globl EAffirm_affr_info
+.type EAffirm_affr_info, @object
+EAffirm_affr_info:
+.Lc74y:
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp EAffirm_affr1_info
+	.size EAffirm_affr_info, .-EAffirm_affr_info
+.section .data
+	.align 4
+.align 1
+S737_srt:
+	.long	Affirm_affirm_closure
+	.long	base_GHCziList_last1_closure
+	.long	Libs_zdwa1_closure
+	.long	EAffirm_affr1_closure
+	.long	EAffirm_affr2_closure
+.section .note.GNU-stack,"",@progbits
+.ident "GHC 7.10.3"
+

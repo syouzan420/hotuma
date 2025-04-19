@@ -1,0 +1,4338 @@
+{-# LINE 1 "/tmp/ghc28313_0/ghc_16.s" #-}
+.data
+	.align 4
+.align 1
+.globl __stginit_Browser
+.type __stginit_Browser, @object
+__stginit_Browser:
+.data
+	.align 4
+.align 1
+.globl Browser_stringToJson1_closure
+.type Browser_stringToJson1_closure, @object
+Browser_stringToJson1_closure:
+	.long	Browser_stringToJson1_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgqR_str:
+	.byte	66
+	.byte	114
+	.byte	111
+	.byte	119
+	.byte	115
+	.byte	101
+	.byte	114
+	.byte	46
+	.byte	104
+	.byte	115
+	.byte	58
+	.byte	55
+	.byte	48
+	.byte	58
+	.byte	50
+	.byte	52
+	.byte	45
+	.byte	53
+	.byte	54
+	.byte	124
+	.byte	40
+	.byte	82
+	.byte	105
+	.byte	103
+	.byte	104
+	.byte	116
+	.byte	32
+	.byte	106
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_stringToJson1_info)+0
+	.long	0
+	.long	65558
+.globl Browser_stringToJson1_info
+.type Browser_stringToJson1_info, @object
+Browser_stringToJson1_info:
+.LcgqS:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgqT
+.LcgqU:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgqQ
+.LcgqP:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgqR_str,8(%ebx)
+	addl $-12,%ebp
+	jmp base_ControlziExceptionziBase_irrefutPatError_info
+.LcgqQ:
+	jmp *(%esi)
+.LcgqT:
+	jmp *-16(%ebx)
+	.size Browser_stringToJson1_info, .-Browser_stringToJson1_info
+.data
+	.align 4
+.align 1
+.globl Browser_stringToJson_closure
+.type Browser_stringToJson_closure, @object
+Browser_stringToJson_closure:
+	.long	Browser_stringToJson_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_stringToJson_info)+4
+	.long	65541
+	.long	0
+	.long	196623
+.globl Browser_stringToJson_info
+.type Browser_stringToJson_info, @object
+Browser_stringToJson_info:
+.Lcgrl:
+	movl 8(%ebx),%eax
+	leal -4(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .Lcgro
+.Lcgrp:
+	movl $cgrn_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgrn_info)+8
+	.long	0
+	.long	65568
+cgrn_info:
+.Lcgrn:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgrv
+.Lcgru:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgrF_info,(%ebp)
+	movl (%edi),%eax
+	movl 872(%ebx),%ecx
+	movl 20(%ecx),%edx
+	movl %ebp,12(%edx)
+	movl 888(%ebx),%edx
+	movl %eax,64(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%edx)
+	movl 100(%ecx),%eax
+	movl %eax,76(%esp)
+	movl 104(%ecx),%eax
+	movl %eax,88(%esp)
+	leal 4(%edi),%eax
+	subl (%edx),%eax
+	xorl %edx,%edx
+	movl %edx,100(%esp)
+	movl 76(%esp),%edx
+	subl %eax,%edx
+	movl 88(%esp),%eax
+	movl %edx,112(%esp)
+	movl 100(%esp),%edx
+	sbbl %edx,%eax
+	movl 112(%esp),%edx
+	movl %edx,100(%ecx)
+	movl %eax,104(%ecx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $8,%esp
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,136(%esp)
+	call jsParseJSON
+	addl $12,%esp
+	subl $8,%esp
+	movl 132(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,148(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,160(%esp)
+	movl %eax,%ecx
+	movl %edx,172(%esp)
+	movl 160(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 148(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,184(%esp)
+	movl 172(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 184(%esp),%ecx
+	adcl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 136(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.Lcgro:
+	movl %eax,8(%ebx)
+	movl $Browser_stringToJson_closure,%esi
+	jmp *-8(%ebx)
+.Lcgrv:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgrF_info)+8
+	.long	0
+	.long	65568
+cgrF_info:
+.LcgrF:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgrJ
+.LcgrI:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%eax
+	movl %eax,%ecx
+	andl $7,%ecx
+	cmpl $2,%ecx
+	jae .Lcgs1
+.Lcgs2:
+	movl $Browser_stringToJson1_closure,%esi
+	addl $4,%ebp
+	jmp *(%esi)
+.LcgrJ:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.Lcgs1:
+	movl 2(%eax),%esi
+	andl $-8,%esi
+	addl $4,%ebp
+	jmp *(%esi)
+	.size Browser_stringToJson_info, .-Browser_stringToJson_info
+.data
+	.align 4
+.align 1
+.globl Browser_localStore3_closure
+.type Browser_localStore3_closure, @object
+Browser_localStore3_closure:
+	.long	Browser_localStore3_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgsE_str:
+	.byte	108
+	.byte	111
+	.byte	97
+	.byte	100
+	.byte	69
+	.byte	114
+	.byte	114
+	.byte	111
+	.byte	114
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_localStore3_info
+.type Browser_localStore3_info, @object
+Browser_localStore3_info:
+.LcgsF:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgsG
+.LcgsH:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgsD
+.LcgsC:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgsE_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcgsD:
+	jmp *(%esi)
+.LcgsG:
+	jmp *-16(%ebx)
+	.size Browser_localStore3_info, .-Browser_localStore3_info
+.data
+	.align 4
+.align 1
+.globl Browser_chColors17_closure
+.type Browser_chColors17_closure, @object
+Browser_chColors17_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	200
+	.long	200
+	.long	180
+.data
+	.align 4
+.align 1
+.globl Browser_chColors16_closure
+.type Browser_chColors16_closure, @object
+Browser_chColors16_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	200
+	.long	255
+	.long	200
+.data
+	.align 4
+.align 1
+.globl Browser_chColors15_closure
+.type Browser_chColors15_closure, @object
+Browser_chColors15_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	255
+	.long	204
+	.long	153
+.data
+	.align 4
+.align 1
+.globl Browser_chColors14_closure
+.type Browser_chColors14_closure, @object
+Browser_chColors14_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	255
+	.long	153
+	.long	204
+.data
+	.align 4
+.align 1
+.globl Browser_chColors13_closure
+.type Browser_chColors13_closure, @object
+Browser_chColors13_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	153
+	.long	255
+	.long	255
+.data
+	.align 4
+.align 1
+.globl Browser_chColors12_closure
+.type Browser_chColors12_closure, @object
+Browser_chColors12_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	0
+	.long	128
+	.long	128
+.data
+	.align 4
+.align 1
+.globl Browser_chColors11_closure
+.type Browser_chColors11_closure, @object
+Browser_chColors11_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	255
+	.long	255
+	.long	100
+.data
+	.align 4
+.align 1
+.globl Browser_chColors10_closure
+.type Browser_chColors10_closure, @object
+Browser_chColors10_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	0
+	.long	0
+	.long	0
+.data
+	.align 4
+.align 1
+.globl Browser_chColors9_closure
+.type Browser_chColors9_closure, @object
+Browser_chColors9_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_RGB_static_info
+	.long	100
+	.long	100
+	.long	100
+.data
+	.align 4
+.align 1
+.globl Browser_chColors8_closure
+.type Browser_chColors8_closure, @object
+Browser_chColors8_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors9_closure+1
+	.long	ghczmprim_GHCziTypes_ZMZN_closure+1
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors7_closure
+.type Browser_chColors7_closure, @object
+Browser_chColors7_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors10_closure+1
+	.long	Browser_chColors8_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors6_closure
+.type Browser_chColors6_closure, @object
+Browser_chColors6_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors11_closure+1
+	.long	Browser_chColors7_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors5_closure
+.type Browser_chColors5_closure, @object
+Browser_chColors5_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors12_closure+1
+	.long	Browser_chColors6_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors4_closure
+.type Browser_chColors4_closure, @object
+Browser_chColors4_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors13_closure+1
+	.long	Browser_chColors5_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors3_closure
+.type Browser_chColors3_closure, @object
+Browser_chColors3_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors14_closure+1
+	.long	Browser_chColors4_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors2_closure
+.type Browser_chColors2_closure, @object
+Browser_chColors2_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors15_closure+1
+	.long	Browser_chColors3_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors1_closure
+.type Browser_chColors1_closure, @object
+Browser_chColors1_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors16_closure+1
+	.long	Browser_chColors2_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_chColors_closure
+.type Browser_chColors_closure, @object
+Browser_chColors_closure:
+	.long	ghczmprim_GHCziTypes_ZC_static_info
+	.long	Browser_chColors17_closure+1
+	.long	Browser_chColors1_closure+2
+	.long	1
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfozuf2_closure
+.type Browser_getCanvasInfozuf2_closure, @object
+Browser_getCanvasInfozuf2_closure:
+	.long	Browser_getCanvasInfozuf2_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgtD_str:
+	.byte	40
+	.byte	102
+	.byte	117
+	.byte	110
+	.byte	99
+	.byte	116
+	.byte	105
+	.byte	111
+	.byte	110
+	.byte	40
+	.byte	99
+	.byte	118
+	.byte	41
+	.byte	123
+	.byte	114
+	.byte	101
+	.byte	116
+	.byte	117
+	.byte	114
+	.byte	110
+	.byte	32
+	.byte	99
+	.byte	118
+	.byte	46
+	.byte	103
+	.byte	101
+	.byte	116
+	.byte	66
+	.byte	111
+	.byte	117
+	.byte	110
+	.byte	100
+	.byte	105
+	.byte	110
+	.byte	103
+	.byte	67
+	.byte	108
+	.byte	105
+	.byte	101
+	.byte	110
+	.byte	116
+	.byte	82
+	.byte	101
+	.byte	99
+	.byte	116
+	.byte	40
+	.byte	41
+	.byte	46
+	.byte	119
+	.byte	105
+	.byte	100
+	.byte	116
+	.byte	104
+	.byte	125
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_getCanvasInfozuf2_info
+.type Browser_getCanvasInfozuf2_info, @object
+Browser_getCanvasInfozuf2_info:
+.LcgtG:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgtY
+.LcgtZ:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgtC
+.LcgtB:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgtE_info,-16(%ebp)
+	movl $cgtD_str,8(%ebx)
+	addl $-16,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcgtC:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgtE_info:
+.LcgtE:
+	movl $cgtJ_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgtJ_info:
+.LcgtJ:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgu3
+.Lcgu2:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgtV_info,(%ebp)
+	movl (%edi),%eax
+	movl 872(%ebx),%ecx
+	movl 20(%ecx),%edx
+	movl %ebp,12(%edx)
+	movl 888(%ebx),%edx
+	movl %eax,64(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%edx)
+	movl 100(%ecx),%eax
+	movl %eax,76(%esp)
+	movl 104(%ecx),%eax
+	movl %eax,88(%esp)
+	leal 4(%edi),%eax
+	subl (%edx),%eax
+	xorl %edx,%edx
+	movl %edx,100(%esp)
+	movl 76(%esp),%edx
+	subl %eax,%edx
+	movl 88(%esp),%eax
+	movl %edx,112(%esp)
+	movl 100(%esp),%edx
+	sbbl %edx,%eax
+	movl 112(%esp),%edx
+	movl %edx,100(%ecx)
+	movl %eax,104(%ecx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $8,%esp
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,136(%esp)
+	call eval
+	addl $12,%esp
+	subl $8,%esp
+	movl 132(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,148(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,160(%esp)
+	movl %eax,%ecx
+	movl %edx,172(%esp)
+	movl 160(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 148(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,184(%esp)
+	movl 172(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 184(%esp),%ecx
+	adcl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 136(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgtV_info:
+.LcgtV:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgu7
+.Lcgu6:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgtY:
+	jmp *-16(%ebx)
+.Lcgu3:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.Lcgu7:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size Browser_getCanvasInfozuf2_info, .-Browser_getCanvasInfozuf2_info
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfozuf3_closure
+.type Browser_getCanvasInfozuf3_closure, @object
+Browser_getCanvasInfozuf3_closure:
+	.long	Browser_getCanvasInfozuf3_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cguQ_str:
+	.byte	40
+	.byte	102
+	.byte	117
+	.byte	110
+	.byte	99
+	.byte	116
+	.byte	105
+	.byte	111
+	.byte	110
+	.byte	40
+	.byte	99
+	.byte	118
+	.byte	41
+	.byte	123
+	.byte	114
+	.byte	101
+	.byte	116
+	.byte	117
+	.byte	114
+	.byte	110
+	.byte	32
+	.byte	99
+	.byte	118
+	.byte	46
+	.byte	104
+	.byte	101
+	.byte	105
+	.byte	103
+	.byte	104
+	.byte	116
+	.byte	125
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_getCanvasInfozuf3_info
+.type Browser_getCanvasInfozuf3_info, @object
+Browser_getCanvasInfozuf3_info:
+.LcguT:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lcgvb
+.Lcgvc:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcguP
+.LcguO:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cguR_info,-16(%ebp)
+	movl $cguQ_str,8(%ebx)
+	addl $-16,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcguP:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cguR_info:
+.LcguR:
+	movl $cguW_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cguW_info:
+.LcguW:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgvg
+.Lcgvf:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgv8_info,(%ebp)
+	movl (%edi),%eax
+	movl 872(%ebx),%ecx
+	movl 20(%ecx),%edx
+	movl %ebp,12(%edx)
+	movl 888(%ebx),%edx
+	movl %eax,64(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%edx)
+	movl 100(%ecx),%eax
+	movl %eax,76(%esp)
+	movl 104(%ecx),%eax
+	movl %eax,88(%esp)
+	leal 4(%edi),%eax
+	subl (%edx),%eax
+	xorl %edx,%edx
+	movl %edx,100(%esp)
+	movl 76(%esp),%edx
+	subl %eax,%edx
+	movl 88(%esp),%eax
+	movl %edx,112(%esp)
+	movl 100(%esp),%edx
+	sbbl %edx,%eax
+	movl 112(%esp),%edx
+	movl %edx,100(%ecx)
+	movl %eax,104(%ecx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $8,%esp
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,136(%esp)
+	call eval
+	addl $12,%esp
+	subl $8,%esp
+	movl 132(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,148(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,160(%esp)
+	movl %eax,%ecx
+	movl %edx,172(%esp)
+	movl 160(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 148(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,184(%esp)
+	movl 172(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 184(%esp),%ecx
+	adcl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 136(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgv8_info:
+.Lcgv8:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgvk
+.Lcgvj:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.Lcgvb:
+	jmp *-16(%ebx)
+.Lcgvg:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.Lcgvk:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size Browser_getCanvasInfozuf3_info, .-Browser_getCanvasInfozuf3_info
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfozuf4_closure
+.type Browser_getCanvasInfozuf4_closure, @object
+Browser_getCanvasInfozuf4_closure:
+	.long	Browser_getCanvasInfozuf4_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgw3_str:
+	.byte	40
+	.byte	102
+	.byte	117
+	.byte	110
+	.byte	99
+	.byte	116
+	.byte	105
+	.byte	111
+	.byte	110
+	.byte	40
+	.byte	99
+	.byte	118
+	.byte	41
+	.byte	123
+	.byte	114
+	.byte	101
+	.byte	116
+	.byte	117
+	.byte	114
+	.byte	110
+	.byte	32
+	.byte	99
+	.byte	118
+	.byte	46
+	.byte	119
+	.byte	105
+	.byte	100
+	.byte	116
+	.byte	104
+	.byte	125
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_getCanvasInfozuf4_info
+.type Browser_getCanvasInfozuf4_info, @object
+Browser_getCanvasInfozuf4_info:
+.Lcgw6:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lcgwo
+.Lcgwp:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lcgw2
+.Lcgw1:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgw4_info,-16(%ebp)
+	movl $cgw3_str,8(%ebx)
+	addl $-16,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.Lcgw2:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgw4_info:
+.Lcgw4:
+	movl $cgw9_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgw9_info:
+.Lcgw9:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgwt
+.Lcgws:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgwl_info,(%ebp)
+	movl (%edi),%eax
+	movl 872(%ebx),%ecx
+	movl 20(%ecx),%edx
+	movl %ebp,12(%edx)
+	movl 888(%ebx),%edx
+	movl %eax,64(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%edx)
+	movl 100(%ecx),%eax
+	movl %eax,76(%esp)
+	movl 104(%ecx),%eax
+	movl %eax,88(%esp)
+	leal 4(%edi),%eax
+	subl (%edx),%eax
+	xorl %edx,%edx
+	movl %edx,100(%esp)
+	movl 76(%esp),%edx
+	subl %eax,%edx
+	movl 88(%esp),%eax
+	movl %edx,112(%esp)
+	movl 100(%esp),%edx
+	sbbl %edx,%eax
+	movl 112(%esp),%edx
+	movl %edx,100(%ecx)
+	movl %eax,104(%ecx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $8,%esp
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,136(%esp)
+	call eval
+	addl $12,%esp
+	subl $8,%esp
+	movl 132(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,148(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,160(%esp)
+	movl %eax,%ecx
+	movl %edx,172(%esp)
+	movl 160(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 148(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,184(%esp)
+	movl 172(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 184(%esp),%ecx
+	adcl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 136(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgwl_info:
+.Lcgwl:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgwx
+.Lcgww:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.Lcgwo:
+	jmp *-16(%ebx)
+.Lcgwt:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.Lcgwx:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size Browser_getCanvasInfozuf4_info, .-Browser_getCanvasInfozuf4_info
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfozuf1_closure
+.type Browser_getCanvasInfozuf1_closure, @object
+Browser_getCanvasInfozuf1_closure:
+	.long	Browser_getCanvasInfozuf1_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgxg_str:
+	.byte	40
+	.byte	102
+	.byte	117
+	.byte	110
+	.byte	99
+	.byte	116
+	.byte	105
+	.byte	111
+	.byte	110
+	.byte	40
+	.byte	99
+	.byte	118
+	.byte	41
+	.byte	123
+	.byte	114
+	.byte	101
+	.byte	116
+	.byte	117
+	.byte	114
+	.byte	110
+	.byte	32
+	.byte	99
+	.byte	118
+	.byte	46
+	.byte	103
+	.byte	101
+	.byte	116
+	.byte	66
+	.byte	111
+	.byte	117
+	.byte	110
+	.byte	100
+	.byte	105
+	.byte	110
+	.byte	103
+	.byte	67
+	.byte	108
+	.byte	105
+	.byte	101
+	.byte	110
+	.byte	116
+	.byte	82
+	.byte	101
+	.byte	99
+	.byte	116
+	.byte	40
+	.byte	41
+	.byte	46
+	.byte	104
+	.byte	101
+	.byte	105
+	.byte	103
+	.byte	104
+	.byte	116
+	.byte	125
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_getCanvasInfozuf1_info
+.type Browser_getCanvasInfozuf1_info, @object
+Browser_getCanvasInfozuf1_info:
+.Lcgxj:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgxB
+.LcgxC:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lcgxf
+.Lcgxe:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgxh_info,-16(%ebp)
+	movl $cgxg_str,8(%ebx)
+	addl $-16,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.Lcgxf:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgxh_info:
+.Lcgxh:
+	movl $cgxm_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgxm_info:
+.Lcgxm:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgxG
+.LcgxF:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgxy_info,(%ebp)
+	movl (%edi),%eax
+	movl 872(%ebx),%ecx
+	movl 20(%ecx),%edx
+	movl %ebp,12(%edx)
+	movl 888(%ebx),%edx
+	movl %eax,64(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%edx)
+	movl 100(%ecx),%eax
+	movl %eax,76(%esp)
+	movl 104(%ecx),%eax
+	movl %eax,88(%esp)
+	leal 4(%edi),%eax
+	subl (%edx),%eax
+	xorl %edx,%edx
+	movl %edx,100(%esp)
+	movl 76(%esp),%edx
+	subl %eax,%edx
+	movl 88(%esp),%eax
+	movl %edx,112(%esp)
+	movl 100(%esp),%edx
+	sbbl %edx,%eax
+	movl 112(%esp),%edx
+	movl %edx,100(%ecx)
+	movl %eax,104(%ecx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $8,%esp
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,136(%esp)
+	call eval
+	addl $12,%esp
+	subl $8,%esp
+	movl 132(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,148(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,160(%esp)
+	movl %eax,%ecx
+	movl %edx,172(%esp)
+	movl 160(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 148(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,184(%esp)
+	movl 172(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 184(%esp),%ecx
+	adcl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 136(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgxy_info:
+.Lcgxy:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgxK
+.LcgxJ:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgxB:
+	jmp *-16(%ebx)
+.LcgxG:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.LcgxK:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size Browser_getCanvasInfozuf1_info, .-Browser_getCanvasInfozuf1_info
+.data
+	.align 4
+.align 1
+.globl Browser_cvRatio_closure
+.type Browser_cvRatio_closure, @object
+Browser_cvRatio_closure:
+	.long	Browser_cvRatio_info
+.text
+	.align 4,0x90
+	.long	2
+	.long	19
+sgmV_info:
+.LcgyK:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgyL
+.LcgyM:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl 16(%esi),%eax
+	movl %eax,16(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,8(%ebx)
+	addl $-12,%ebp
+	jmp base_GHCziFloat_divideDouble_info
+.LcgyL:
+	jmp *-16(%ebx)
+	.size sgmV_info, .-sgmV_info
+.text
+	.align 4,0x90
+	.long	2
+	.long	19
+sgmU_info:
+.LcgyR:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgyS
+.LcgyT:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl 16(%esi),%eax
+	movl %eax,16(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,8(%ebx)
+	addl $-12,%ebp
+	jmp base_GHCziFloat_divideDouble_info
+.LcgyS:
+	jmp *-16(%ebx)
+	.size sgmU_info, .-sgmU_info
+.text
+	.align 4,0x90
+	.long	65541
+	.long	0
+	.long	15
+.globl Browser_cvRatio_info
+.type Browser_cvRatio_info, @object
+Browser_cvRatio_info:
+.LcgyU:
+	movl 8(%ebx),%eax
+	leal -12(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgyW
+.LcgyX:
+	movl $cgyr_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lcgyr
+.Lcgys:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgyr_info:
+.Lcgyr:
+	movl $cgyw_info,-4(%ebp)
+	movl 7(%esi),%eax
+	movl 3(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lcgyw
+.Lcgyx:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgyw_info:
+.Lcgyw:
+	movl $cgyB_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 4(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,4(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgyB
+.LcgyC:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	2
+	.long	32
+cgyB_info:
+.LcgyB:
+	addl $52,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lcgz2
+.Lcgz1:
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl $sgmV_info,-48(%edi)
+	movl 4(%ebp),%edx
+	movl %edx,-36(%edi)
+	movl %ecx,-32(%edi)
+	movl $sgmU_info,-28(%edi)
+	movl 8(%ebp),%ecx
+	movl %ecx,-16(%edi)
+	movl %eax,-12(%edi)
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	leal -28(%edi),%eax
+	movl %eax,-4(%edi)
+	leal -48(%edi),%eax
+	movl %eax,(%edi)
+	leal -7(%edi),%esi
+	addl $12,%ebp
+	jmp *(%ebp)
+.LcgyW:
+	movl %eax,8(%ebx)
+	movl $Browser_cvRatio_closure,%esi
+	jmp *-8(%ebx)
+.Lcgz2:
+	movl $52,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_cvRatio_info, .-Browser_cvRatio_info
+.data
+	.align 4
+.align 1
+.globl Browser_localStore4_closure
+.type Browser_localStore4_closure, @object
+Browser_localStore4_closure:
+	.long	Browser_localStore4_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgzs_str:
+	.byte	115
+	.byte	97
+	.byte	118
+	.byte	101
+	.byte	100
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_localStore4_info
+.type Browser_localStore4_info, @object
+Browser_localStore4_info:
+.Lcgzt:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lcgzu
+.Lcgzv:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lcgzr
+.Lcgzq:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgzs_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.Lcgzr:
+	jmp *(%esi)
+.Lcgzu:
+	jmp *-16(%ebx)
+	.size Browser_localStore4_info, .-Browser_localStore4_info
+.data
+	.align 4
+.align 1
+.globl Browser_localStore2_closure
+.type Browser_localStore2_closure, @object
+Browser_localStore2_closure:
+	.long	Browser_localStore2_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgzI_str:
+	.byte	114
+	.byte	101
+	.byte	109
+	.byte	111
+	.byte	118
+	.byte	101
+	.byte	100
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Browser_localStore2_info
+.type Browser_localStore2_info, @object
+Browser_localStore2_info:
+.LcgzJ:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgzK
+.LcgzL:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgzH
+.LcgzG:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgzI_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcgzH:
+	jmp *(%esi)
+.LcgzK:
+	jmp *-16(%ebx)
+	.size Browser_localStore2_info, .-Browser_localStore2_info
+.data
+	.align 4
+.align 1
+.globl Browser_localStore1_closure
+.type Browser_localStore1_closure, @object
+Browser_localStore1_closure:
+	.long	Browser_localStore1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgnt_info)+12
+	.long	1
+	.long	196625
+sgnt_info:
+.LcgBo:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgBp
+.LcgBq:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl $cgBe_info,-16(%ebp)
+	movl 12(%esi),%esi
+	addl $-16,%ebp
+	testw $7,%si
+	jne .LcgBe
+.LcgBf:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgBe_info)+12
+	.long	0
+	.long	196640
+cgBe_info:
+.LcgBe:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgBm
+.LcgBn:
+	movl $Browser_localStore3_closure,%esi
+	addl $4,%ebp
+	jmp *(%esi)
+.LcgBm:
+	movl $cgBw_info,(%ebp)
+	movl 2(%esi),%eax
+	movl %eax,8(%ebx)
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziJSON_zdwencodeJSON_info
+.LcgBp:
+	jmp *-16(%ebx)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgBw_info:
+.LcgBw:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgBD
+.LcgBC:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl (%edi),%esi
+	addl $4,%ebp
+	jmp fromJSStr
+.LcgBD:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size sgnt_info, .-sgnt_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_localStore1_info)+4
+	.long	262167
+	.long	0
+	.long	134021135
+.globl Browser_localStore1_info
+.type Browser_localStore1_info, @object
+Browser_localStore1_info:
+.LcgBW:
+	movl 24(%ebx),%eax
+	movl 16(%ebx),%ecx
+	movl 8(%ebx),%edx
+	movl %edx,64(%esp)
+	leal -12(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .LcgBX
+.LcgBY:
+	movl $cgAQ_info,-12(%ebp)
+	movl 64(%esp),%edx
+	movl %edx,%esi
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .LcgAQ
+.LcgAR:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgAQ_info)+4
+	.long	2
+	.long	66912288
+cgAQ_info:
+.LcgAQ:
+	movl 4(%ebp),%eax
+	movl %esi,%ecx
+	andl $7,%ecx
+	cmpl $2,%ecx
+	jae .LcgBU
+.LcgBV:
+	movl $cgC2_info,4(%ebp)
+	movl %eax,%esi
+	addl $4,%ebp
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgAY_info)+12
+	.long	0
+	.long	2818080
+cgAY_info:
+.LcgAY:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgCH
+.LcgCG:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgB8_info,(%ebp)
+	movl (%edi),%eax
+	movl %eax,16(%ebx)
+	movl $L1I7vD3tc7JKpsYOmEkn6q_HasteziSerializze_zdfSerializzeJSON_closure,8(%ebx)
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_zdwa_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgB8_info)+12
+	.long	0
+	.long	196640
+cgB8_info:
+.LcgB8:
+	addl $16,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgCL
+.LcgCK:
+	movl $sgnt_info,-12(%edi)
+	movl %esi,(%edi)
+	leal -12(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgBR:
+	movl $cgCQ_info,8(%ebp)
+	movl %eax,%esi
+	addl $8,%ebp
+	jmp toJSStr
+.LcgBU:
+	cmpl $3,%ecx
+	jae .LcgBR
+.LcgBS:
+	movl $cgAY_info,8(%ebp)
+	movl %eax,%esi
+	addl $8,%ebp
+	jmp toJSStr
+.LcgBX:
+	movl %eax,24(%ebx)
+	movl %ecx,16(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,8(%ebx)
+	movl $Browser_localStore1_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgC2_info)+4
+	.long	1
+	.long	38076448
+cgC2_info:
+.LcgC2:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgCo
+.LcgCn:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgCc_info,(%ebp)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl (%edi),%eax
+	movl %eax,4(%ebp)
+	jmp Browser_stringToJson_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgCc_info)+12
+	.long	65
+	.long	9502752
+cgCc_info:
+.LcgCc:
+	movl $cgCg_info,(%ebp)
+	movl %esi,8(%ebx)
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziJSON_zdwencodeJSON_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgCg_info)+28
+	.long	65
+	.long	589856
+cgCg_info:
+.LcgCg:
+	movl $cgCk_info,-4(%ebp)
+	movl %esi,%eax
+	movl $L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_setItemzuf1_closure,%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgCk
+.LcgCs:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgCk_info)+40
+	.long	194
+	.long	65568
+cgCk_info:
+.LcgCk:
+	movl 8(%ebp),%eax
+	movl $cgCB_info,8(%ebp)
+	movl 4(%ebp),%ecx
+	addl $8,%ebp
+	movl 3(%esi),%edx
+	movl %edx,76(%esp)
+	movl 872(%ebx),%edx
+	movl %eax,88(%esp)
+	movl 20(%edx),%eax
+	movl %ebp,12(%eax)
+	movl 888(%ebx),%eax
+	movl %ecx,100(%esp)
+	leal 4(%edi),%ecx
+	movl %ecx,8(%eax)
+	movl 100(%edx),%ecx
+	movl %ecx,112(%esp)
+	movl 104(%edx),%ecx
+	movl %ecx,124(%esp)
+	leal 4(%edi),%ecx
+	subl (%eax),%ecx
+	xorl %eax,%eax
+	movl %eax,136(%esp)
+	movl 112(%esp),%eax
+	subl %ecx,%eax
+	movl 124(%esp),%ecx
+	movl %eax,148(%esp)
+	movl 136(%esp),%eax
+	sbbl %eax,%ecx
+	movl 148(%esp),%eax
+	movl %eax,100(%edx)
+	movl %ecx,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	movl 100(%esp),%ecx
+	pushl %ecx
+	movl 92(%esp),%ecx
+	pushl %ecx
+	movl 84(%esp),%ecx
+	pushl %ecx
+	movl %eax,172(%esp)
+	call __app2
+	addl $12,%esp
+	subl $8,%esp
+	movl 168(%esp),%ecx
+	pushl %ecx
+	movl %eax,184(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,184(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,196(%esp)
+	movl %eax,%ecx
+	movl %edx,208(%esp)
+	movl 196(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 184(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,220(%esp)
+	movl 208(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 220(%esp),%ecx
+	adcl %eax,%ecx
+	movl 184(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 172(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.LcgCo:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgCB_info)+40
+	.long	0
+	.long	65568
+cgCB_info:
+.LcgCB:
+	movl $Browser_localStore4_closure,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgCH:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.LcgCL:
+	movl $16,904(%ebx)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgCQ_info)+20
+	.long	0
+	.long	1114144
+cgCQ_info:
+.LcgCQ:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgD4
+.LcgD3:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgD0_info,-4(%ebp)
+	movl $L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_removeItemzuf1_closure,%esi
+	movl (%edi),%eax
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgD0
+.LcgD6:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgD0_info)+36
+	.long	65
+	.long	65568
+cgD0_info:
+.LcgD0:
+	movl 4(%ebp),%eax
+	movl $cgDe_info,4(%ebp)
+	addl $4,%ebp
+	movl 3(%esi),%ecx
+	movl 872(%ebx),%edx
+	movl %ecx,232(%esp)
+	movl 20(%edx),%ecx
+	movl %ebp,12(%ecx)
+	movl 888(%ebx),%ecx
+	movl %eax,244(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%ecx)
+	movl 100(%edx),%eax
+	movl %eax,256(%esp)
+	movl 104(%edx),%eax
+	movl %eax,268(%esp)
+	leal 4(%edi),%eax
+	subl (%ecx),%eax
+	xorl %ecx,%ecx
+	movl %ecx,280(%esp)
+	movl 256(%esp),%ecx
+	subl %eax,%ecx
+	movl 268(%esp),%eax
+	movl %ecx,292(%esp)
+	movl 280(%esp),%ecx
+	sbbl %ecx,%eax
+	movl 292(%esp),%ecx
+	movl %ecx,100(%edx)
+	movl %eax,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 248(%esp),%ecx
+	pushl %ecx
+	movl 240(%esp),%ecx
+	pushl %ecx
+	movl %eax,316(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 312(%esp),%ecx
+	pushl %ecx
+	movl %eax,328(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,328(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,340(%esp)
+	movl %eax,%ecx
+	movl %edx,352(%esp)
+	movl 340(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 328(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,364(%esp)
+	movl 352(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 364(%esp),%ecx
+	adcl %eax,%ecx
+	movl 328(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 316(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.LcgD4:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgDe_info)+36
+	.long	0
+	.long	65568
+cgDe_info:
+.LcgDe:
+	movl $Browser_localStore2_closure,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+	.size Browser_localStore1_info, .-Browser_localStore1_info
+.data
+	.align 4
+.align 1
+.globl Browser_localStore_closure
+.type Browser_localStore_closure, @object
+Browser_localStore_closure:
+	.long	Browser_localStore_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_localStore_info)+44
+	.long	262167
+	.long	0
+	.long	65551
+.globl Browser_localStore_info
+.type Browser_localStore_info, @object
+Browser_localStore_info:
+.LcgEl:
+	movl 24(%ebx),%eax
+	movl %eax,24(%ebx)
+	movl 16(%ebx),%eax
+	movl %eax,16(%ebx)
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Browser_localStore1_info
+	.size Browser_localStore_info, .-Browser_localStore_info
+.data
+	.align 4
+.align 1
+.globl Browser_touchIsTrue1_closure
+.type Browser_touchIsTrue1_closure, @object
+Browser_touchIsTrue1_closure:
+	.long	Browser_touchIsTrue1_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	17
+sgnX_info:
+.LcgEN:
+	leal -44(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgEX
+.LcgEY:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl $cgEK_info,-16(%ebp)
+	movl 12(%esi),%esi
+	addl $-16,%ebp
+	testw $7,%si
+	jne .LcgEK
+.LcgEL:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgEK_info:
+.LcgEK:
+	movl $cgEQ_info,-28(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 11(%esi),%edx
+	movl %eax,64(%esp)
+	movl 15(%esi),%eax
+	movl %ecx,76(%esp)
+	movl 19(%esi),%ecx
+	movl %edx,88(%esp)
+	movl 27(%esi),%edx
+	movl %eax,100(%esp)
+	movl 31(%esi),%eax
+	movl 23(%esi),%esi
+	movl %ecx,112(%esp)
+	movl 76(%esp),%ecx
+	movl %ecx,-24(%ebp)
+	movl 88(%esp),%ecx
+	movl %ecx,-20(%ebp)
+	movl 100(%esp),%ecx
+	movl %ecx,-16(%ebp)
+	movl 112(%esp),%ecx
+	movl %ecx,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl 64(%esp),%eax
+	movl %eax,(%ebp)
+	addl $-28,%ebp
+	testw $7,%si
+	jne .LcgEQ
+.LcgER:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1031
+	.long	32
+cgEQ_info:
+.LcgEQ:
+	addl $60,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgF2
+.LcgF1:
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 15(%esi),%edx
+	movl %eax,124(%esp)
+	movl 19(%esi),%eax
+	movl $Define_Switch_con_info,-56(%edi)
+	movl %ecx,136(%esp)
+	movl 124(%esp),%ecx
+	movl %ecx,-52(%edi)
+	movl 136(%esp),%ecx
+	movl %ecx,-48(%edi)
+	movl $ghczmprim_GHCziTypes_True_closure+2,-44(%edi)
+	movl %edx,-40(%edi)
+	movl %eax,-36(%edi)
+	movl $Define_State_con_info,-32(%edi)
+	movl 28(%ebp),%eax
+	movl %eax,-28(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-24(%edi)
+	movl 8(%ebp),%eax
+	movl %eax,-20(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,-16(%edi)
+	movl 16(%ebp),%eax
+	movl %eax,-12(%edi)
+	leal -55(%edi),%eax
+	movl %eax,-8(%edi)
+	movl 24(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 20(%ebp),%eax
+	movl %eax,(%edi)
+	leal -31(%edi),%esi
+	addl $32,%ebp
+	jmp *(%ebp)
+.LcgEX:
+	jmp *-16(%ebx)
+.LcgF2:
+	movl $60,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size sgnX_info, .-sgnX_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_touchIsTrue1_info
+.type Browser_touchIsTrue1_info, @object
+Browser_touchIsTrue1_info:
+.LcgF3:
+	addl $16,%edi
+	movl 8(%ebx),%eax
+	cmpl 856(%ebx),%edi
+	ja .LcgF7
+.LcgF6:
+	movl $sgnX_info,-12(%edi)
+	movl %eax,(%edi)
+	leal -12(%edi),%esi
+	jmp *(%ebp)
+.LcgF7:
+	movl $16,904(%ebx)
+	movl %eax,8(%ebx)
+	movl $Browser_touchIsTrue1_closure,%esi
+	jmp *-8(%ebx)
+	.size Browser_touchIsTrue1_info, .-Browser_touchIsTrue1_info
+.data
+	.align 4
+.align 1
+.globl Browser_touchIsTrue_closure
+.type Browser_touchIsTrue_closure, @object
+Browser_touchIsTrue_closure:
+	.long	Browser_touchIsTrue_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_touchIsTrue_info
+.type Browser_touchIsTrue_info, @object
+Browser_touchIsTrue_info:
+.LcgFr:
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Browser_touchIsTrue1_info
+	.size Browser_touchIsTrue_info, .-Browser_touchIsTrue_info
+.data
+	.align 4
+.align 1
+.globl Browser_tcEnd1_closure
+.type Browser_tcEnd1_closure, @object
+Browser_tcEnd1_closure:
+	.long	Browser_tcEnd1_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	17
+sgog_info:
+.LcgFR:
+	leal -44(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgG1
+.LcgG2:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl $cgFO_info,-16(%ebp)
+	movl 12(%esi),%esi
+	addl $-16,%ebp
+	testw $7,%si
+	jne .LcgFO
+.LcgFP:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgFO_info:
+.LcgFO:
+	movl $cgFU_info,-28(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 11(%esi),%edx
+	movl %eax,64(%esp)
+	movl 15(%esi),%eax
+	movl %ecx,76(%esp)
+	movl 19(%esi),%ecx
+	movl %edx,88(%esp)
+	movl 27(%esi),%edx
+	movl %eax,100(%esp)
+	movl 31(%esi),%eax
+	movl 23(%esi),%esi
+	movl %ecx,112(%esp)
+	movl 76(%esp),%ecx
+	movl %ecx,-24(%ebp)
+	movl 88(%esp),%ecx
+	movl %ecx,-20(%ebp)
+	movl 100(%esp),%ecx
+	movl %ecx,-16(%ebp)
+	movl 112(%esp),%ecx
+	movl %ecx,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl 64(%esp),%eax
+	movl %eax,(%ebp)
+	addl $-28,%ebp
+	testw $7,%si
+	jne .LcgFU
+.LcgFV:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1031
+	.long	32
+cgFU_info:
+.LcgFU:
+	addl $60,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgG6
+.LcgG5:
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 15(%esi),%edx
+	movl %eax,124(%esp)
+	movl 19(%esi),%eax
+	movl $Define_Switch_con_info,-56(%edi)
+	movl %ecx,136(%esp)
+	movl 124(%esp),%ecx
+	movl %ecx,-52(%edi)
+	movl 136(%esp),%ecx
+	movl %ecx,-48(%edi)
+	movl $ghczmprim_GHCziTypes_False_closure+1,-44(%edi)
+	movl %edx,-40(%edi)
+	movl %eax,-36(%edi)
+	movl $Define_State_con_info,-32(%edi)
+	movl 28(%ebp),%eax
+	movl %eax,-28(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-24(%edi)
+	movl 8(%ebp),%eax
+	movl %eax,-20(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,-16(%edi)
+	movl 16(%ebp),%eax
+	movl %eax,-12(%edi)
+	leal -55(%edi),%eax
+	movl %eax,-8(%edi)
+	movl 24(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 20(%ebp),%eax
+	movl %eax,(%edi)
+	leal -31(%edi),%esi
+	addl $32,%ebp
+	jmp *(%ebp)
+.LcgG1:
+	jmp *-16(%ebx)
+.LcgG6:
+	movl $60,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size sgog_info, .-sgog_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_tcEnd1_info
+.type Browser_tcEnd1_info, @object
+Browser_tcEnd1_info:
+.LcgG7:
+	addl $16,%edi
+	movl 8(%ebx),%eax
+	cmpl 856(%ebx),%edi
+	ja .LcgGb
+.LcgGa:
+	movl $sgog_info,-12(%edi)
+	movl %eax,(%edi)
+	leal -12(%edi),%esi
+	jmp *(%ebp)
+.LcgGb:
+	movl $16,904(%ebx)
+	movl %eax,8(%ebx)
+	movl $Browser_tcEnd1_closure,%esi
+	jmp *-8(%ebx)
+	.size Browser_tcEnd1_info, .-Browser_tcEnd1_info
+.data
+	.align 4
+.align 1
+.globl Browser_tcEnd_closure
+.type Browser_tcEnd_closure, @object
+Browser_tcEnd_closure:
+	.long	Browser_tcEnd_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_tcEnd_info
+.type Browser_tcEnd_info, @object
+Browser_tcEnd_info:
+.LcgGv:
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Browser_tcEnd1_info
+	.size Browser_tcEnd_info, .-Browser_tcEnd_info
+.data
+	.align 4
+.align 1
+.globl Browser_zdwa_closure
+.type Browser_zdwa_closure, @object
+Browser_zdwa_closure:
+	.long	Browser_zdwa_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_zdwa_info)+48
+	.long	131076
+	.long	0
+	.long	2031631
+.globl Browser_zdwa_info
+.type Browser_zdwa_info, @object
+Browser_zdwa_info:
+.LcgGZ:
+	movl 8(%ebx),%eax
+	leal -20(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgHI
+.LcgHJ:
+	movl $cgGW_info,-8(%ebp)
+	movl $Browser_getCanvasInfozuf4_closure,%esi
+	movl %eax,-4(%ebp)
+	addl $-8,%ebp
+	testw $7,%si
+	jne .LcgGW
+.LcgGX:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgGW_info)+48
+	.long	65
+	.long	458784
+cgGW_info:
+.LcgGW:
+	movl $cgH5_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 4(%ebp),%ecx
+	movl 872(%ebx),%edx
+	movl %eax,64(%esp)
+	movl 20(%edx),%eax
+	movl %ebp,12(%eax)
+	movl 888(%ebx),%eax
+	movl %ecx,76(%esp)
+	leal 4(%edi),%ecx
+	movl %ecx,8(%eax)
+	movl 100(%edx),%ecx
+	movl %ecx,88(%esp)
+	movl 104(%edx),%ecx
+	movl %ecx,100(%esp)
+	leal 4(%edi),%ecx
+	subl (%eax),%ecx
+	xorl %eax,%eax
+	movl %eax,112(%esp)
+	movl 88(%esp),%eax
+	subl %ecx,%eax
+	movl 100(%esp),%ecx
+	movl %eax,124(%esp)
+	movl 112(%esp),%eax
+	sbbl %eax,%ecx
+	movl 124(%esp),%eax
+	movl %eax,100(%edx)
+	movl %ecx,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 80(%esp),%ecx
+	pushl %ecx
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 144(%esp),%ecx
+	pushl %ecx
+	movl %eax,160(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,160(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,172(%esp)
+	movl %eax,%ecx
+	movl %edx,184(%esp)
+	movl 172(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 160(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,196(%esp)
+	movl 184(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 196(%esp),%ecx
+	adcl %eax,%ecx
+	movl 160(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 148(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgH5_info)+48
+	.long	65
+	.long	458784
+cgH5_info:
+.LcgH5:
+	movl $cgH7_info,-4(%ebp)
+	movl %esi,%eax
+	movl $Browser_getCanvasInfozuf3_closure,%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgH7
+.LcgH8:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgH7_info)+48
+	.long	194
+	.long	196640
+cgH7_info:
+.LcgH7:
+	movl $cgHf_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 8(%ebp),%ecx
+	movl 872(%ebx),%edx
+	movl %eax,208(%esp)
+	movl 20(%edx),%eax
+	movl %ebp,12(%eax)
+	movl 888(%ebx),%eax
+	movl %ecx,220(%esp)
+	leal 4(%edi),%ecx
+	movl %ecx,8(%eax)
+	movl 100(%edx),%ecx
+	movl %ecx,232(%esp)
+	movl 104(%edx),%ecx
+	movl %ecx,244(%esp)
+	leal 4(%edi),%ecx
+	subl (%eax),%ecx
+	xorl %eax,%eax
+	movl %eax,256(%esp)
+	movl 232(%esp),%eax
+	subl %ecx,%eax
+	movl 244(%esp),%ecx
+	movl %eax,268(%esp)
+	movl 256(%esp),%eax
+	sbbl %eax,%ecx
+	movl 268(%esp),%eax
+	movl %eax,100(%edx)
+	movl %ecx,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 224(%esp),%ecx
+	pushl %ecx
+	movl 216(%esp),%ecx
+	pushl %ecx
+	movl %eax,292(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 288(%esp),%ecx
+	pushl %ecx
+	movl %eax,304(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,304(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,316(%esp)
+	movl %eax,%ecx
+	movl %edx,328(%esp)
+	movl 316(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 304(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,340(%esp)
+	movl 328(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 340(%esp),%ecx
+	adcl %eax,%ecx
+	movl 304(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 292(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgHf_info)+48
+	.long	194
+	.long	196640
+cgHf_info:
+.LcgHf:
+	movl $cgHh_info,-4(%ebp)
+	movl %esi,%eax
+	movl $Browser_getCanvasInfozuf2_closure,%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgHh
+.LcgHi:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgHh_info)+48
+	.long	451
+	.long	65568
+cgHh_info:
+.LcgHh:
+	movl $cgHp_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 12(%ebp),%ecx
+	movl 872(%ebx),%edx
+	movl %eax,352(%esp)
+	movl 20(%edx),%eax
+	movl %ebp,12(%eax)
+	movl 888(%ebx),%eax
+	movl %ecx,364(%esp)
+	leal 4(%edi),%ecx
+	movl %ecx,8(%eax)
+	movl 100(%edx),%ecx
+	movl %ecx,376(%esp)
+	movl 104(%edx),%ecx
+	movl %ecx,388(%esp)
+	leal 4(%edi),%ecx
+	subl (%eax),%ecx
+	xorl %eax,%eax
+	movl %eax,400(%esp)
+	movl 376(%esp),%eax
+	subl %ecx,%eax
+	movl 388(%esp),%ecx
+	movl %eax,412(%esp)
+	movl 400(%esp),%eax
+	sbbl %eax,%ecx
+	movl 412(%esp),%eax
+	movl %eax,100(%edx)
+	movl %ecx,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 368(%esp),%ecx
+	pushl %ecx
+	movl 360(%esp),%ecx
+	pushl %ecx
+	movl %eax,436(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 432(%esp),%ecx
+	pushl %ecx
+	movl %eax,448(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,448(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,460(%esp)
+	movl %eax,%ecx
+	movl %edx,472(%esp)
+	movl 460(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 448(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,484(%esp)
+	movl 472(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 484(%esp),%ecx
+	adcl %eax,%ecx
+	movl 448(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 436(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgHp_info)+48
+	.long	451
+	.long	65568
+cgHp_info:
+.LcgHp:
+	movl $cgHr_info,-4(%ebp)
+	movl %esi,%eax
+	movl $Browser_getCanvasInfozuf1_closure,%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgHr
+.LcgHs:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	964
+	.long	32
+cgHr_info:
+.LcgHr:
+	movl $cgHz_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 16(%ebp),%ecx
+	movl 872(%ebx),%edx
+	movl %eax,496(%esp)
+	movl 20(%edx),%eax
+	movl %ebp,12(%eax)
+	movl 888(%ebx),%eax
+	movl %ecx,508(%esp)
+	leal 4(%edi),%ecx
+	movl %ecx,8(%eax)
+	movl 100(%edx),%ecx
+	movl %ecx,520(%esp)
+	movl 104(%edx),%ecx
+	movl %ecx,532(%esp)
+	leal 4(%edi),%ecx
+	subl (%eax),%ecx
+	xorl %eax,%eax
+	movl %eax,544(%esp)
+	movl 520(%esp),%eax
+	subl %ecx,%eax
+	movl 532(%esp),%ecx
+	movl %eax,556(%esp)
+	movl 544(%esp),%eax
+	sbbl %eax,%ecx
+	movl 556(%esp),%eax
+	movl %eax,100(%edx)
+	movl %ecx,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 512(%esp),%ecx
+	pushl %ecx
+	movl 504(%esp),%ecx
+	pushl %ecx
+	movl %eax,580(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 576(%esp),%ecx
+	pushl %ecx
+	movl %eax,592(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,592(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,604(%esp)
+	movl %eax,%ecx
+	movl %edx,616(%esp)
+	movl 604(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 592(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,628(%esp)
+	movl 616(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 628(%esp),%ecx
+	adcl %eax,%ecx
+	movl 592(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 580(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	964
+	.long	32
+cgHz_info:
+.LcgHz:
+	addl $68,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgHT
+.LcgHS:
+	movl $base_GHCziPtr_Ptr_con_info,-64(%edi)
+	movl %esi,-60(%edi)
+	movl $base_GHCziPtr_Ptr_con_info,-56(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-52(%edi)
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-48(%edi)
+	leal -55(%edi),%eax
+	movl %eax,-44(%edi)
+	leal -63(%edi),%eax
+	movl %eax,-40(%edi)
+	movl $base_GHCziPtr_Ptr_con_info,-36(%edi)
+	movl 8(%ebp),%eax
+	movl %eax,-32(%edi)
+	movl $base_GHCziPtr_Ptr_con_info,-28(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,-24(%edi)
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-20(%edi)
+	leal -27(%edi),%eax
+	movl %eax,-16(%edi)
+	leal -35(%edi),%eax
+	movl %eax,-12(%edi)
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	leal -19(%edi),%eax
+	movl %eax,-4(%edi)
+	leal -47(%edi),%eax
+	movl %eax,(%edi)
+	leal -7(%edi),%esi
+	addl $20,%ebp
+	jmp *(%ebp)
+.LcgHI:
+	movl %eax,8(%ebx)
+	movl $Browser_zdwa_closure,%esi
+	jmp *-8(%ebx)
+.LcgHT:
+	movl $68,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size Browser_zdwa_info, .-Browser_zdwa_info
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfo1_closure
+.type Browser_getCanvasInfo1_closure, @object
+Browser_getCanvasInfo1_closure:
+	.long	Browser_getCanvasInfo1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_getCanvasInfo1_info)+60
+	.long	131077
+	.long	0
+	.long	327695
+.globl Browser_getCanvasInfo1_info
+.type Browser_getCanvasInfo1_info, @object
+Browser_getCanvasInfo1_info:
+.LcgJM:
+	movl 8(%ebx),%eax
+	leal -4(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgJN
+.LcgJO:
+	movl $cgJJ_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgJJ
+.LcgJK:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgJJ_info)+60
+	.long	0
+	.long	65568
+cgJJ_info:
+.LcgJJ:
+	movl 7(%esi),%eax
+	movl %eax,8(%ebx)
+	addl $4,%ebp
+	jmp Browser_zdwa_info
+.LcgJN:
+	movl %eax,8(%ebx)
+	movl $Browser_getCanvasInfo1_closure,%esi
+	jmp *-8(%ebx)
+	.size Browser_getCanvasInfo1_info, .-Browser_getCanvasInfo1_info
+.data
+	.align 4
+.align 1
+.globl Browser_getCanvasInfo_closure
+.type Browser_getCanvasInfo_closure, @object
+Browser_getCanvasInfo_closure:
+	.long	Browser_getCanvasInfo_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_getCanvasInfo_info)+68
+	.long	131077
+	.long	0
+	.long	65551
+.globl Browser_getCanvasInfo_info
+.type Browser_getCanvasInfo_info, @object
+Browser_getCanvasInfo_info:
+.LcgK2:
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Browser_getCanvasInfo1_info
+	.size Browser_getCanvasInfo_info, .-Browser_getCanvasInfo_info
+.data
+	.align 4
+.align 1
+rgch_closure:
+	.long	rgch_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgKg_str:
+	.byte	46
+	.byte	112
+	.byte	110
+	.byte	103
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+rgch_info:
+.LcgKh:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgKi
+.LcgKj:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgKf
+.LcgKe:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgKg_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcgKf:
+	jmp *(%esi)
+.LcgKi:
+	jmp *-16(%ebx)
+	.size rgch_info, .-rgch_info
+.data
+	.align 4
+.align 1
+.globl Browser_zdwloadImgs_closure
+.type Browser_zdwloadImgs_closure, @object
+Browser_zdwloadImgs_closure:
+	.long	Browser_zdwloadImgs_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgoZ_info)+72
+	.long	65536
+	.long	65554
+sgoZ_info:
+.LcgL9:
+	leal -4(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgLa
+.LcgLb:
+	movl $cgL7_info,-4(%ebp)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,24(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,16(%ebx)
+	movl $0,8(%ebx)
+	addl $-4,%ebp
+	jmp base_GHCziShow_zdwshowSignedInt_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgL7_info)+72
+	.long	0
+	.long	65568
+cgL7_info:
+.LcgL7:
+	movl $rgch_closure,16(%ebx)
+	movl %esi,8(%ebx)
+	addl $4,%ebp
+	jmp base_GHCziBase_zpzp_info
+.LcgLa:
+	jmp *-16(%ebx)
+	.size sgoZ_info, .-sgoZ_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgp3_info)+72
+	.long	65537
+	.long	65556
+sgp3_info:
+.LcgLh:
+	movl %esi,%eax
+	leal -16(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgLp
+.LcgLq:
+	addl $16,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgLs
+.LcgLr:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl 12(%eax),%ecx
+	movl 16(%eax),%eax
+	movl $sgoZ_info,-12(%edi)
+	movl %eax,(%edi)
+	movl $cgLf_info,-16(%ebp)
+	leal -12(%edi),%eax
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	addl $-16,%ebp
+	jmp base_GHCziBase_zpzp_info
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgLf_info:
+.LcgLf:
+	movl $cgLk_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgLk_info:
+.LcgLk:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgLw
+.LcgLv:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgLs:
+	movl $16,904(%ebx)
+.LcgLp:
+	movl %eax,%esi
+	jmp *-16(%ebx)
+.LcgLw:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size sgp3_info, .-sgp3_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgp4_info)+72
+	.long	65537
+	.long	458772
+sgp4_info:
+.LcgLx:
+	movl %esi,%eax
+	leal -12(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgLy
+.LcgLz:
+	addl $20,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgLB
+.LcgLA:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl 12(%eax),%ecx
+	movl 16(%eax),%eax
+	movl $sgp3_info,-16(%edi)
+	movl %ecx,-4(%edi)
+	movl %eax,(%edi)
+	leal -16(%edi),%eax
+	movl %eax,16(%ebx)
+	movl $z35UPy7JlgLDw888SeTQH5AsL_ControlziMonadziIOziClass_zdfMonadIOIO_closure,8(%ebx)
+	addl $-12,%ebp
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_zdfBitmapSourceJSStringzuzdcloadBitmap_info
+.LcgLB:
+	movl $20,904(%ebx)
+.LcgLy:
+	movl %eax,%esi
+	jmp *-16(%ebx)
+	.size sgp4_info, .-sgp4_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_zdwloadImgs_info)+72
+	.long	131085
+	.long	0
+	.long	983055
+.globl Browser_zdwloadImgs_info
+.type Browser_zdwloadImgs_info, @object
+Browser_zdwloadImgs_info:
+.LcgLF:
+	movl 16(%ebx),%eax
+	movl 8(%ebx),%ecx
+	leal -8(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .LcgLG
+.LcgLH:
+	addl $32,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgLJ
+.LcgLI:
+	cmpl $-1,%ecx
+	jne .LcgLD
+.LcgLE:
+	addl $-32,%edi
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	jmp *(%ebp)
+.LcgLD:
+	movl $sgp4_info,-28(%edi)
+	movl %eax,-16(%edi)
+	movl %ecx,-12(%edi)
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	leal -28(%edi),%edx
+	movl %edx,-4(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,(%edi)
+	movl $cgLO_info,-8(%ebp)
+	movl %eax,16(%ebx)
+	leal -1(%ecx),%eax
+	movl %eax,8(%ebx)
+	leal -6(%edi),%eax
+	movl %eax,-4(%ebp)
+	addl $-8,%ebp
+	jmp Browser_zdwloadImgs_info
+.LcgLJ:
+	movl $32,904(%ebx)
+.LcgLG:
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	movl $Browser_zdwloadImgs_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgLO_info:
+.LcgLO:
+	movl 4(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl %esi,8(%ebx)
+	addl $8,%ebp
+	jmp base_GHCziBase_zpzp_info
+	.size Browser_zdwloadImgs_info, .-Browser_zdwloadImgs_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps5_closure
+.type Browser_setBmps5_closure, @object
+Browser_setBmps5_closure:
+	.long	Browser_setBmps5_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_setBmps5_info
+.type Browser_setBmps5_info, @object
+Browser_setBmps5_info:
+.LcgMy:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgMz
+.LcgMA:
+	movl $cgMo_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgMo
+.LcgMp:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgMo_info:
+.LcgMo:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgMw
+.LcgMx:
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgMw:
+	movl $cgMG_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	jmp stg_ap_v_fast
+.LcgMz:
+	movl %eax,8(%ebx)
+	movl $Browser_setBmps5_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgMG_info:
+.LcgMG:
+	movl $cgMI_info,(%ebp)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl %esi,4(%ebp)
+	jmp Browser_setBmps5_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgMI_info:
+.LcgMI:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgMP
+.LcgMO:
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -6(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgMP:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setBmps5_info, .-Browser_setBmps5_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps3_closure
+.type Browser_setBmps3_closure, @object
+Browser_setBmps3_closure:
+	.long	Browser_setBmps3_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_setBmps3_info
+.type Browser_setBmps3_info, @object
+Browser_setBmps3_info:
+.LcgNj:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgNk
+.LcgNl:
+	movl $cgN9_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgN9
+.LcgNa:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgN9_info:
+.LcgN9:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgNh
+.LcgNi:
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgNh:
+	movl $cgNr_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	jmp stg_ap_v_fast
+.LcgNk:
+	movl %eax,8(%ebx)
+	movl $Browser_setBmps3_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgNr_info:
+.LcgNr:
+	movl $cgNt_info,(%ebp)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl %esi,4(%ebp)
+	jmp Browser_setBmps3_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgNt_info:
+.LcgNt:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgNA
+.LcgNz:
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -6(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgNA:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setBmps3_info, .-Browser_setBmps3_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps2_closure
+.type Browser_setBmps2_closure, @object
+Browser_setBmps2_closure:
+	.long	Browser_setBmps2_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setBmps2_info)+84
+	.long	0
+	.long	196630
+.globl Browser_setBmps2_info
+.type Browser_setBmps2_info, @object
+Browser_setBmps2_info:
+.LcgNQ:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgNR
+.LcgNS:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgNP
+.LcgNO:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $Define_wstfile_closure,16(%ebx)
+	movl $120,8(%ebx)
+	addl $-12,%ebp
+	jmp Browser_zdwloadImgs_info
+.LcgNP:
+	jmp *(%esi)
+.LcgNR:
+	jmp *-16(%ebx)
+	.size Browser_setBmps2_info, .-Browser_setBmps2_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps4_closure
+.type Browser_setBmps4_closure, @object
+Browser_setBmps4_closure:
+	.long	Browser_setBmps4_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setBmps4_info)+84
+	.long	0
+	.long	327702
+.globl Browser_setBmps4_info
+.type Browser_setBmps4_info, @object
+Browser_setBmps4_info:
+.LcgO4:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgO5
+.LcgO6:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgO3
+.LcgO2:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $Define_imgfile_closure,16(%ebx)
+	movl $5,8(%ebx)
+	addl $-12,%ebp
+	jmp Browser_zdwloadImgs_info
+.LcgO3:
+	jmp *(%esi)
+.LcgO5:
+	jmp *-16(%ebx)
+	.size Browser_setBmps4_info, .-Browser_setBmps4_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps1_closure
+.type Browser_setBmps1_closure, @object
+Browser_setBmps1_closure:
+	.long	Browser_setBmps1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setBmps1_info)+96
+	.long	65539
+	.long	0
+	.long	458767
+.globl Browser_setBmps1_info
+.type Browser_setBmps1_info, @object
+Browser_setBmps1_info:
+.LcgOl:
+	leal -8(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgOm
+.LcgOn:
+	movl $cgOg_info,-4(%ebp)
+	movl $Browser_setBmps4_closure,8(%ebx)
+	addl $-4,%ebp
+	jmp Browser_setBmps5_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgOg_info)+96
+	.long	0
+	.long	65568
+cgOg_info:
+.LcgOg:
+	movl $cgOi_info,-4(%ebp)
+	movl $Browser_setBmps2_closure,8(%ebx)
+	movl %esi,(%ebp)
+	addl $-4,%ebp
+	jmp Browser_setBmps3_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgOi_info:
+.LcgOi:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgOr
+.LcgOq:
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -7(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgOm:
+	movl $Browser_setBmps1_closure,%esi
+	jmp *-8(%ebx)
+.LcgOr:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setBmps1_info, .-Browser_setBmps1_info
+.data
+	.align 4
+.align 1
+.globl Browser_setBmps_closure
+.type Browser_setBmps_closure, @object
+Browser_setBmps_closure:
+	.long	Browser_setBmps_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setBmps_info)+100
+	.long	65539
+	.long	0
+	.long	65551
+.globl Browser_setBmps_info
+.type Browser_setBmps_info, @object
+Browser_setBmps_info:
+.LcgOC:
+	jmp Browser_setBmps1_info
+	.size Browser_setBmps_info, .-Browser_setBmps_info
+.data
+	.align 4
+.align 1
+.globl Browser_tcStart1_closure
+.type Browser_tcStart1_closure, @object
+Browser_tcStart1_closure:
+	.long	Browser_tcStart1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_tcStart1_info)+108
+	.long	131077
+	.long	0
+	.long	196623
+.globl Browser_tcStart1_info
+.type Browser_tcStart1_info, @object
+Browser_tcStart1_info:
+.LcgP0:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgP4
+.LcgP5:
+	movl $cgOX_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgOX
+.LcgOY:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgOX_info)+108
+	.long	0
+	.long	65568
+cgOX_info:
+.LcgOX:
+	movl $cgP3_info,-4(%ebp)
+	movl %esi,%eax
+	movl 23(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgP3
+.LcgP7:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgP3_info)+108
+	.long	1
+	.long	65568
+cgP3_info:
+.LcgP3:
+	movl $cgPb_info,(%ebp)
+	movl 11(%esi),%esi
+	testw $7,%si
+	jne .LcgPb
+.LcgPd:
+	jmp *(%esi)
+.LcgP4:
+	movl %eax,8(%ebx)
+	movl $Browser_tcStart1_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgPb_info)+108
+	.long	1
+	.long	65568
+cgPb_info:
+.LcgPb:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgPt
+.LcgPu:
+	movl 4(%ebp),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgPm_info:
+.LcgPm:
+	movl 4(%ebp),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgPt:
+	movl $cgPm_info,(%ebp)
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziEventsziCore_preventDefault1_info
+	.size Browser_tcStart1_info, .-Browser_tcStart1_info
+.data
+	.align 4
+.align 1
+.globl Browser_tcStart_closure
+.type Browser_tcStart_closure, @object
+Browser_tcStart_closure:
+	.long	Browser_tcStart_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_tcStart_info)+112
+	.long	131077
+	.long	0
+	.long	65551
+.globl Browser_tcStart_info
+.type Browser_tcStart_info, @object
+Browser_tcStart_info:
+.LcgPG:
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Browser_tcStart1_info
+	.size Browser_tcStart_info, .-Browser_tcStart_info
+.data
+	.align 4
+.align 1
+rgci_closure:
+	.long	rgci_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgPU_str:
+	.byte	66
+	.byte	114
+	.byte	111
+	.byte	119
+	.byte	115
+	.byte	101
+	.byte	114
+	.byte	46
+	.byte	104
+	.byte	115
+	.byte	58
+	.byte	56
+	.byte	52
+	.byte	58
+	.byte	55
+	.byte	45
+	.byte	51
+	.byte	52
+	.byte	124
+	.byte	74
+	.byte	117
+	.byte	115
+	.byte	116
+	.byte	32
+	.byte	97
+	.byte	100
+	.byte	83
+	.byte	114
+	.byte	99
+	.byte	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(rgci_info)+116
+	.long	0
+	.long	65558
+rgci_info:
+.LcgPV:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgPW
+.LcgPX:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgPT
+.LcgPS:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgPU_str,8(%ebx)
+	addl $-12,%ebp
+	jmp base_ControlziExceptionziBase_irrefutPatError_info
+.LcgPT:
+	jmp *(%esi)
+.LcgPW:
+	jmp *-16(%ebx)
+	.size rgci_info, .-rgci_info
+.data
+	.align 4
+.align 1
+rgcj_closure:
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_AudioSettings_static_info
+	.long	ghczmprim_GHCziTypes_False_closure+1
+	.long	ghczmprim_GHCziTypes_False_closure+1
+	.long	ghczmprim_GHCziTypes_False_closure+1
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_Auto_closure+3
+	.long	ghczmprim_GHCziTypes_False_closure+1
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	240
+	.byte	63
+	.long	1
+.data
+	.align 4
+.align 1
+rgck_closure:
+	.long	rgck_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+cgQc_str:
+	.byte	46
+	.byte	109
+	.byte	112
+	.byte	51
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+rgck_info:
+.LcgQd:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgQe
+.LcgQf:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgQb
+.LcgQa:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $cgQc_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.LcgQb:
+	jmp *(%esi)
+.LcgQe:
+	jmp *-16(%ebx)
+	.size rgck_info, .-rgck_info
+.data
+	.align 4
+.align 1
+.globl Browser_zdwloadAudios_closure
+.type Browser_zdwloadAudios_closure, @object
+Browser_zdwloadAudios_closure:
+	.long	Browser_zdwloadAudios_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgq3_info)+120
+	.long	65536
+	.long	65554
+sgq3_info:
+.LcgRc:
+	leal -4(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgRd
+.LcgRe:
+	movl $cgRa_info,-4(%ebp)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,24(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,16(%ebx)
+	movl $0,8(%ebx)
+	addl $-4,%ebp
+	jmp base_GHCziShow_zdwshowSignedInt_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgRa_info)+120
+	.long	0
+	.long	65568
+cgRa_info:
+.LcgRa:
+	movl $rgck_closure,16(%ebx)
+	movl %esi,8(%ebx)
+	addl $4,%ebp
+	jmp base_GHCziBase_zpzp_info
+.LcgRd:
+	jmp *-16(%ebx)
+	.size sgq3_info, .-sgq3_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgqb_info)+120
+	.long	65537
+	.long	458772
+sgqb_info:
+.LcgRk:
+	movl %esi,%eax
+	leal -16(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgRo
+.LcgRp:
+	addl $16,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgRr
+.LcgRq:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl 12(%eax),%ecx
+	movl 16(%eax),%eax
+	movl $sgq3_info,-12(%edi)
+	movl %eax,(%edi)
+	movl $cgRi_info,-16(%ebp)
+	leal -12(%edi),%eax
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	addl $-16,%ebp
+	jmp base_GHCziBase_zpzp_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgRi_info)+124
+	.long	0
+	.long	196640
+cgRi_info:
+.LcgRi:
+	movl $cgRn_info,(%ebp)
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgRn_info)+124
+	.long	0
+	.long	196640
+cgRn_info:
+.LcgRn:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgRy
+.LcgRx:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $cgRF_info,(%ebp)
+	movl (%edi),%eax
+	movl %eax,8(%ebx)
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_zdwmkSource_info
+.LcgRr:
+	movl $16,904(%ebx)
+.LcgRo:
+	movl %eax,%esi
+	jmp *-16(%ebx)
+.LcgRy:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgRF_info)+128
+	.long	0
+	.long	65568
+cgRF_info:
+.LcgRF:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgRT
+.LcgRU:
+	movl $rgci_closure,%esi
+	addl $4,%ebp
+	jmp *(%esi)
+.LcgRT:
+	movl 2(%esi),%esi
+	andl $-8,%esi
+	addl $4,%ebp
+	jmp *(%esi)
+	.size sgqb_info, .-sgqb_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(sgqd_info)+80
+	.long	65537
+	.long	1006698516
+sgqd_info:
+.LcgRW:
+	movl %esi,%eax
+	leal -12(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgRX
+.LcgRY:
+	addl $32,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgS0
+.LcgRZ:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl 12(%eax),%ecx
+	movl 16(%eax),%eax
+	movl $sgqb_info,-28(%edi)
+	movl %ecx,-16(%edi)
+	movl %eax,-12(%edi)
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	leal -28(%edi),%eax
+	movl %eax,-4(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,(%edi)
+	leal -6(%edi),%eax
+	movl %eax,24(%ebx)
+	movl $rgcj_closure+1,16(%ebx)
+	movl $z35UPy7JlgLDw888SeTQH5AsL_ControlziMonadziIOziClass_zdfMonadIOIO_closure,8(%ebx)
+	addl $-12,%ebp
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_newAudio_info
+.LcgS0:
+	movl $32,904(%ebx)
+.LcgRX:
+	movl %eax,%esi
+	jmp *-16(%ebx)
+	.size sgqd_info, .-sgqd_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_zdwloadAudios_info)+80
+	.long	131085
+	.long	0
+	.long	2080440335
+.globl Browser_zdwloadAudios_info
+.type Browser_zdwloadAudios_info, @object
+Browser_zdwloadAudios_info:
+.LcgS4:
+	movl 16(%ebx),%eax
+	movl 8(%ebx),%ecx
+	leal -8(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .LcgS5
+.LcgS6:
+	addl $32,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgS8
+.LcgS7:
+	cmpl $-1,%ecx
+	jne .LcgS2
+.LcgS3:
+	addl $-32,%edi
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	jmp *(%ebp)
+.LcgS2:
+	movl $sgqd_info,-28(%edi)
+	movl %eax,-16(%edi)
+	movl %ecx,-12(%edi)
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	leal -28(%edi),%edx
+	movl %edx,-4(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,(%edi)
+	movl $cgSd_info,-8(%ebp)
+	movl %eax,16(%ebx)
+	leal -1(%ecx),%eax
+	movl %eax,8(%ebx)
+	leal -6(%edi),%eax
+	movl %eax,-4(%ebp)
+	addl $-8,%ebp
+	jmp Browser_zdwloadAudios_info
+.LcgS8:
+	movl $32,904(%ebx)
+.LcgS5:
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	movl $Browser_zdwloadAudios_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgSd_info:
+.LcgSd:
+	movl 4(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl %esi,8(%ebx)
+	addl $8,%ebp
+	jmp base_GHCziBase_zpzp_info
+	.size Browser_zdwloadAudios_info, .-Browser_zdwloadAudios_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio5_closure
+.type Browser_setAudio5_closure, @object
+Browser_setAudio5_closure:
+	.long	Browser_setAudio5_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_setAudio5_info
+.type Browser_setAudio5_info, @object
+Browser_setAudio5_info:
+.LcgT2:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgT3
+.LcgT4:
+	movl $cgSS_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgSS
+.LcgST:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgSS_info:
+.LcgSS:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgT0
+.LcgT1:
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgT0:
+	movl $cgTa_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	jmp stg_ap_v_fast
+.LcgT3:
+	movl %eax,8(%ebx)
+	movl $Browser_setAudio5_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgTa_info:
+.LcgTa:
+	movl $cgTc_info,(%ebp)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl %esi,4(%ebp)
+	jmp Browser_setAudio5_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgTc_info:
+.LcgTc:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgTj
+.LcgTi:
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -6(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgTj:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setAudio5_info, .-Browser_setAudio5_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio3_closure
+.type Browser_setAudio3_closure, @object
+Browser_setAudio3_closure:
+	.long	Browser_setAudio3_info
+.text
+	.align 4,0x90
+	.long	131077
+	.long	0
+	.long	15
+.globl Browser_setAudio3_info
+.type Browser_setAudio3_info, @object
+Browser_setAudio3_info:
+.LcgTN:
+	movl 8(%ebx),%eax
+	leal -8(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jb .LcgTO
+.LcgTP:
+	movl $cgTD_info,-4(%ebp)
+	movl %eax,%esi
+	addl $-4,%ebp
+	testw $7,%si
+	jne .LcgTD
+.LcgTE:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+cgTD_info:
+.LcgTD:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .LcgTL
+.LcgTM:
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.LcgTL:
+	movl $cgTV_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	jmp stg_ap_v_fast
+.LcgTO:
+	movl %eax,8(%ebx)
+	movl $Browser_setAudio3_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgTV_info:
+.LcgTV:
+	movl $cgTX_info,(%ebp)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl %esi,4(%ebp)
+	jmp Browser_setAudio3_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgTX_info:
+.LcgTX:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgU4
+.LcgU3:
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -6(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgU4:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setAudio3_info, .-Browser_setAudio3_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio2_closure
+.type Browser_setAudio2_closure, @object
+Browser_setAudio2_closure:
+	.long	Browser_setAudio2_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setAudio2_info)+136
+	.long	0
+	.long	196630
+.globl Browser_setAudio2_info
+.type Browser_setAudio2_info, @object
+Browser_setAudio2_info:
+.LcgUk:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgUl
+.LcgUm:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgUj
+.LcgUi:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $Define_seFile_closure,16(%ebx)
+	movl $3,8(%ebx)
+	addl $-12,%ebp
+	jmp Browser_zdwloadAudios_info
+.LcgUj:
+	jmp *(%esi)
+.LcgUl:
+	jmp *-16(%ebx)
+	.size Browser_setAudio2_info, .-Browser_setAudio2_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio4_closure
+.type Browser_setAudio4_closure, @object
+Browser_setAudio4_closure:
+	.long	Browser_setAudio4_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setAudio4_info)+136
+	.long	0
+	.long	327702
+.globl Browser_setAudio4_info
+.type Browser_setAudio4_info, @object
+Browser_setAudio4_info:
+.LcgUy:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgUz
+.LcgUA:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .LcgUx
+.LcgUw:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $Define_wstAuFile_closure,16(%ebx)
+	movl $47,8(%ebx)
+	addl $-12,%ebp
+	jmp Browser_zdwloadAudios_info
+.LcgUx:
+	jmp *(%esi)
+.LcgUz:
+	jmp *-16(%ebx)
+	.size Browser_setAudio4_info, .-Browser_setAudio4_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio1_closure
+.type Browser_setAudio1_closure, @object
+Browser_setAudio1_closure:
+	.long	Browser_setAudio1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setAudio1_info)+148
+	.long	65539
+	.long	0
+	.long	458767
+.globl Browser_setAudio1_info
+.type Browser_setAudio1_info, @object
+Browser_setAudio1_info:
+.LcgUP:
+	leal -8(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .LcgUQ
+.LcgUR:
+	movl $cgUK_info,-4(%ebp)
+	movl $Browser_setAudio4_closure,8(%ebx)
+	addl $-4,%ebp
+	jmp Browser_setAudio5_info
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(cgUK_info)+148
+	.long	0
+	.long	65568
+cgUK_info:
+.LcgUK:
+	movl $cgUM_info,-4(%ebp)
+	movl $Browser_setAudio2_closure,8(%ebx)
+	movl %esi,(%ebp)
+	addl $-4,%ebp
+	jmp Browser_setAudio3_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	32
+cgUM_info:
+.LcgUM:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .LcgUV
+.LcgUU:
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl %esi,(%edi)
+	leal -7(%edi),%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.LcgUQ:
+	movl $Browser_setAudio1_closure,%esi
+	jmp *-8(%ebx)
+.LcgUV:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Browser_setAudio1_info, .-Browser_setAudio1_info
+.data
+	.align 4
+.align 1
+.globl Browser_setAudio_closure
+.type Browser_setAudio_closure, @object
+Browser_setAudio_closure:
+	.long	Browser_setAudio_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	SgqV_srt-(Browser_setAudio_info)+152
+	.long	65539
+	.long	0
+	.long	65551
+.globl Browser_setAudio_info
+.type Browser_setAudio_info, @object
+Browser_setAudio_info:
+.LcgV6:
+	jmp Browser_setAudio1_info
+	.size Browser_setAudio_info, .-Browser_setAudio_info
+.section .data
+	.align 4
+.align 1
+SgqV_srt:
+	.long	base_ControlziExceptionziBase_irrefutPatError_closure
+	.long	Browser_stringToJson_closure
+	.long	Browser_stringToJson1_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziJSON_zdwencodeJSON_closure
+	.long	Browser_localStore3_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_removeItemzuf1_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_zdwa_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziLocalStorage_setItemzuf1_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziSerializze_zdfSerializzeJSON_closure
+	.long	Browser_localStore2_closure
+	.long	Browser_localStore4_closure
+	.long	Browser_localStore1_closure
+	.long	Browser_getCanvasInfozuf1_closure
+	.long	Browser_getCanvasInfozuf2_closure
+	.long	Browser_getCanvasInfozuf3_closure
+	.long	Browser_zdwa_closure
+	.long	Browser_getCanvasInfozuf4_closure
+	.long	Browser_getCanvasInfo1_closure
+	.long	rgch_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_zdfBitmapSourceJSStringzuzdcloadBitmap_closure
+	.long	z35UPy7JlgLDw888SeTQH5AsL_ControlziMonadziIOziClass_zdfMonadIOIO_closure
+	.long	Browser_zdwloadImgs_closure
+	.long	Define_wstfile_closure
+	.long	Define_imgfile_closure
+	.long	Browser_setBmps2_closure
+	.long	Browser_setBmps1_closure
+	.long	Browser_setBmps4_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziEventsziCore_preventDefault1_closure
+	.long	Browser_tcStart1_closure
+	.long	base_ControlziExceptionziBase_irrefutPatError_closure
+	.long	rgck_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_zdwmkSource_closure
+	.long	rgci_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_newAudio_closure
+	.long	Browser_zdwloadAudios_closure
+	.long	Define_seFile_closure
+	.long	Define_wstAuFile_closure
+	.long	Browser_setAudio2_closure
+	.long	Browser_setAudio1_closure
+	.long	Browser_setAudio4_closure
+.section .note.GNU-stack,"",@progbits
+.ident "GHC 7.10.3"
+

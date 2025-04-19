@@ -1,16 +1,16 @@
 module Loop (inputLoop,mouseClick) where
 
 import Haste.Graphics.Canvas(Canvas,Bitmap)
-import Haste.Audio(Audio)
+import Haste.Audio(Audio,play)
 import Control.Monad(unless)
 import Browser(chColors,cvRatio,localStore,stringToJson)
 import Output(clearScreen,drawCons,randomMessage)
-import Events(makeStgLt,makeStgWd,makeChoice,makeAns)
+import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
              ,Event(..),Stage(..))
 
 type Bmps = ([Bitmap],[Bitmap])
-type Auds = [Audio]
+type Auds = ([Audio],[Audio])
 
 mouseClick :: Canvas -> CInfo -> Bmps -> Auds -> (Int,Int) -> State -> IO State
 mouseClick c ci bmps aus (x,y) st = do
@@ -21,7 +21,7 @@ mouseClick c ci bmps aus (x,y) st = do
   inputLoop c ci bmps aus (getConID (nx,ny) (reverse consSt)) st 
 
 inputLoop :: Canvas -> CInfo -> Bmps -> Auds -> Int -> State -> IO State 
-inputLoop c ci@(cvSz,_) bmps aus cid st = do
+inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
   let consSt = cons st
       conNum = length consSt
       mbCon = if cid==(-1) then Nothing else findCon cid consSt
@@ -31,13 +31,17 @@ inputLoop c ci@(cvSz,_) bmps aus cid st = do
                   let ev = clEv co
                   case ev of
                     Quest stg -> case stg of
-                        StgLetter lv -> makeStgLt cvSz aus lv st{stage=Just stg} 
+                        StgLetter lv -> if lv > 45
+                            then makeResult cvSz st 
+                            else makeStgLt cvSz oss lv st{stage=Just stg} 
                         StgWord lv -> makeStgWd cvSz lv st{stage=Just stg}
                     Choice i -> return $ makeChoice cvSz conNum i st
                     Answer i -> return $ makeAns cvSz i st
                     _ -> return st
   unless (st==nst) $ clearScreen c >> drawCons c ci bmps (cons nst) 
-  return nst
+  case seAu nst of
+    Just seInd -> play (ses!!seInd) >> return nst{seAu=Nothing}
+    Nothing -> return nst
 
 findCon :: Int -> [Con] -> Maybe Con
 findCon _ [] = Nothing  

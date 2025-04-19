@@ -1,22 +1,32 @@
-module Events(makeStgLt,makeStgWd,makeChoice,makeAns) where
+module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult) where
 
 import Haste.Audio(Audio,play)
 import Generate (genLtQuest,genCons,genAnsCon)
-import Define (State(..),Event(..),Stage(..),Question(..),Con(..),Size,CRect(..))
+import Initialize (testCon)
+import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
+              ,Size,CRect(..),Score(..))
 
-type Auds = [Audio]
 
-makeStgLt :: Size -> Auds -> Int -> State -> IO State
-makeStgLt cvSz aus lv st = do  
+makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
+makeStgLt cvSz oss lv st = do  
   let g = rgn st -- random number generator 
   (q,ng) <- genLtQuest g lv 
   let cos = genCons cvSz q
-      tau = aus!!(audios q!!aInd q)
+      tau = oss!!(audios q!!aInd q)
   play tau
   return st{quest=Just q,cons=cos,rgn=ng}
 
 makeStgWd :: Size -> Int -> State -> IO State
 makeStgWd cvSz lv st = undefined
+
+makeResult :: Size -> State -> IO State
+makeResult cvSz st = do 
+  let (Score mis _) = score st 
+      ntxt = if mis==0 then "すごい！ 全問正解！"
+                       else show mis ++ "回まちがへちゃったね！"
+      ncon = testCon{txts=[ntxt]}
+      nst = st{cons=[ncon]}
+  return nst
 
 makeChoice :: Size -> Int -> Int -> State -> State
 makeChoice cvSz conNum i st =
@@ -26,8 +36,8 @@ makeChoice cvSz conNum i st =
         Nothing -> 0
       (hco:chCos) = cons st 
       tco = chCos!!i
-      chCos' = map (changeBColor 0) chCos 
-      ntco = changeBColor 4 tco
+      chCos' = map (changeFColor 7 . changeBColor 0) chCos 
+      ntco = (changeFColor 8 . changeBColor 4) tco
       chCos'' = repList ntco i chCos'
       nchCos = if qNum+1==conNum then chCos'' else init chCos'' 
       aco = genAnsCon cvSz (qNum+1) i
@@ -65,7 +75,7 @@ evCorrect (cW,cH) i st =
                 ,txtFsz=[fsz]
                 ,txts=["せいかい！"]
                 ,clEv=Quest nstg}
-   in st{cons=niCos++[nlco]} 
+   in st{cons=niCos++[nlco],seAu=Just 0} 
 
 evWrong :: Int -> State -> State
 evWrong i st = 
@@ -89,14 +99,15 @@ evWrong i st =
       chCos' = repList ntco i chCos
       chCos'' = repList naco ai chCos'
       nchCos = map (changeEvent NoEvent) chCos''
-   in st{cons=hco:nchCos++[nlco]}
-
-makeNextStg :: State -> IO State
-makeNextStg st = undefined
+      (Score pmis tim) = score st  
+   in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=Just 1}
 
 
 changeBColor :: Int -> Con -> Con
 changeBColor i co = co{borCol=i}
+
+changeFColor :: Int -> Con -> Con
+changeFColor i co = co{filCol=i}
 
 changeText :: [String] -> Con -> Con
 changeText txs co = co{txts=txs}

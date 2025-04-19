@@ -9,7 +9,7 @@ import Define (State(..),Con(..),Question(..),Size,CRect(..)
 genLtQuest :: Int -> Int -> IO (Question,Int)
 genLtQuest g lv = do
   let aqn = lv+3 -- avalable question numbers 
-      qn = 4 + lv `div` (8 - lv `div` 8) -- question numbers
+      qn = 4 + lv `div` 8 -- question numbers
   (ai,g') <- getRan qn g 
   (iqlist,ng) <- selectData qn g' (zip [0..] (take aqn ltQuestSrc))
   let (auInd,qlist) = unzip iqlist
@@ -23,15 +23,18 @@ genCons cSz@(cW,cH) (Question qlist auInd ai) =
       hConRec = CRect (cW/8) (cH/10) (cW/3) (cH/5)
       qConRecs = makeConsRec cSz qLen
       ext = fromIntegral (div (qLen-3) 2)
-      fsz = 50
-      tpX = 40
+      ifsz = 50
+      fsz = floor (fromIntegral ifsz - ext*8)
+      itpX = 40
+      tpX = itpX - (fromIntegral fsz/9)*4*ext
       tpY = 60
-      hCon = emCon{conID=0,cRec=hConRec,border=Round,filCol=5,txtPos=[(tpX,tpY)]
-                ,txtFsz=[fsz],txtCos=[1],txts=[aText],typs=[Normal]
+      
+      hCon = emCon{conID=0,cRec=hConRec,border=Round,filCol=5,txtPos=[(itpX,tpY)]
+                ,txtFsz=[ifsz],txtCos=[1],txts=[aText],typs=[Normal]
                 ,audio=Just aAudio,clEv=NoEvent}
       qCons = zipWith (\i rec -> hCon{conID=i+1,cRec=rec,border=Round,filCol=7
-                                     ,txtPos=[(tpX-(fromIntegral fsz/3)*ext,tpY)]
-                                     ,txtFsz=[floor (fromIntegral fsz - ext*10)]
+                                     ,txtPos=[(tpX,tpY)]
+                                     ,txtFsz=[fsz]
                                      ,txts=[qlist!!i],typs=[Osite]
                                      ,audio=Just (auInd!!i)
                                      ,clEv=Choice i}) [0..] qConRecs

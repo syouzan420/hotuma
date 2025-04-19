@@ -1,11 +1,13 @@
 module Initialize where
 
 import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
-             ,Event(..),Stage(..),TxType(..))
+             ,Event(..),Stage(..),TxType(..),Score(..))
 
 initState :: State
 initState = State {stage=Nothing
+                  ,score=Score 0 0
                   ,quest=Nothing
+                  ,seAu=Nothing
                   ,cons=[testCon]
                   ,rgn=0
                   ,swc=initSwitch

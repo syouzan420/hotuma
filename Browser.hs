@@ -12,11 +12,12 @@ import Haste.JSString(pack,unpack)
 import Haste.LocalStorage(setItem,getItem,removeItem)
 import Haste.Audio(mkSource,newAudio,defaultAudioSettings,AudioSettings(..),Audio)
 import Define (State(swc),Switch(itc),CInfo,LSA(..)
-              ,imgfile,wstfile,charafile,audioSrc)
+              ,imgfile,wstfile,wstAuFile,seFile)
 
 chColors :: [Color]
 chColors = [RGB 200 200 180,RGB 200 255 200,RGB 255 204 153,RGB 255 153 204
-           ,RGB 153 255 255,RGB 0 128 128,RGB 255 255 100,RGB 0 0 0] 
+           ,RGB 153 255 255,RGB 0 128 128,RGB 255 255 100,RGB 0 0 0
+           ,RGB 100 100 100] 
 
 canvasW :: Canvas -> IO Double 
 canvasW = ffi "(function(cv){return cv.width})"
@@ -83,5 +84,14 @@ oneAudio aufile = do
   let Just adSrc = mkSource aufile
   newAudio (defaultAudioSettings{audioLooping=False,audioVolume=1}) [adSrc] 
 
-setAudio :: IO [Audio]
-setAudio = mapM (\i -> oneAudio (pack (audioSrc++"os"++show i++".mp3"))) [0..15]
+loadAudios :: Int -> String -> [IO Audio]
+loadAudios (-1) str = []
+loadAudios i str = loadAudios (i-1) str
+                       ++ [oneAudio (pack (str ++ show i ++ ".mp3"))]
+
+setAudio :: IO ([Audio],[Audio])
+setAudio = do 
+  wstAus <- sequence (loadAudios 47 wstAuFile)
+  ses <- sequence (loadAudios 3 seFile)
+  return (wstAus,ses)
+

@@ -20,6 +20,8 @@ data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 
 data Event = NoEvent | Quest Stage | Choice Int | Answer Int deriving (Eq,Show)
 
+data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show)
+
 data Question = Question {quests :: ![String]
                          ,audios :: ![Int]
                          ,aInd :: !Int -- answer index
@@ -52,7 +54,9 @@ data Button = Button {btnId :: !Int
 data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
 
 data State = State {stage :: !(Maybe Stage)
+                   ,score :: !Score
                    ,quest :: !(Maybe Question)
+                   ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]
                    ,rgn :: !Int -- Random Number Generator
                    ,swc :: !Switch
@@ -84,14 +88,14 @@ cvT = 10  --trim(yohaku)
 imgfile :: String
 imgfile = "Images/img"
 
-charafile :: String
-charafile = "Images/Chara/ch"
-
 wstfile :: String
 wstfile = "Images/Wst/wst"
 
-audioSrc :: String
-audioSrc = "Audio/"
+wstAuFile :: String
+wstAuFile = "Audio/os"
+
+seFile :: String
+seFile = "Audio/se"
 
 ltQuestSrc :: String
 ltQuestSrc = "あかはなまいきひにみうくふぬむえけへねめおこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ"

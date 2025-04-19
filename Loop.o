@@ -1,0 +1,3455 @@
+{-# LINE 1 "/tmp/ghc29758_0/ghc_13.s" #-}
+.data
+	.align 4
+.align 1
+.globl __stginit_Loop
+.type __stginit_Loop, @object
+__stginit_Loop:
+.data
+	.align 4
+.align 1
+r6eY_closure:
+	.long	r6eY_info
+.text
+	.align 4,0x90
+	.long	131085
+	.long	0
+	.long	15
+r6eY_info:
+.Lc6Bj:
+	movl 16(%ebx),%eax
+	movl 8(%ebx),%ecx
+	leal -12(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jae .Lc6B6
+.Lc6Bk:
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	movl $r6eY_closure,%esi
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	130
+	.long	32
+c6Br_info:
+.Lc6Br:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Bz
+.Lc6By:
+	movl 8(%ebp),%eax
+	cmpl 51(%esi),%eax
+	je .Lc6BL
+.Lc6BM:
+	addl $-8,%edi
+	movl 4(%ebp),%ecx
+	addl $12,%ebp
+.Ln6BU:
+	movl %eax,64(%esp)
+	movl %ecx,%eax
+	movl 64(%esp),%ecx
+.Lc6B6:
+	movl $c6B9_info,-8(%ebp)
+	movl %eax,%esi
+	movl %ecx,-4(%ebp)
+	addl $-8,%ebp
+	testw $7,%si
+	jne .Lc6B9
+.Lc6Ba:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	65
+	.long	32
+c6B9_info:
+.Lc6B9:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6Bh
+.Lc6Bi:
+	movl $base_GHCziBase_Nothing_closure+1,%esi
+	addl $8,%ebp
+	jmp *(%ebp)
+.Lc6Bh:
+	movl $c6Br_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Br
+.Lc6Bt:
+	jmp *(%esi)
+.Lc6Bz:
+	movl $8,904(%ebx)
+	jmp stg_gc_unpt_r1
+.Lc6BL:
+	movl $base_GHCziBase_Just_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -2(%edi),%esi
+	addl $12,%ebp
+	jmp *(%ebp)
+	.size r6eY_info, .-r6eY_info
+.data
+	.align 4
+.align 1
+r6eZ_closure:
+	.long	r6eZ_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(r6eZ_info)+0
+	.long	65539
+	.long	0
+	.long	65551
+r6eZ_info:
+.Lc6C0:
+	movl $base_GHCziErr_undefined_closure,%esi
+	jmp stg_ap_0_fast
+	.size r6eZ_info, .-r6eZ_info
+.data
+	.align 4
+.align 1
+r6f0_closure:
+	.long	r6f0_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+c6Ce_str:
+	.byte	119
+	.byte	119
+	.byte	95
+	.byte	115
+	.byte	53
+	.byte	86
+	.byte	71
+	.byte	32
+	.byte	40
+	.byte	68
+	.byte	111
+	.byte	117
+	.byte	98
+	.byte	108
+	.byte	101
+	.byte	44
+	.byte	32
+	.byte	68
+	.byte	111
+	.byte	117
+	.byte	98
+	.byte	108
+	.byte	101
+	.byte	41
+	.byte	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(r6f0_info)+4
+	.long	0
+	.long	65558
+r6f0_info:
+.Lc6Cf:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6Cg
+.Lc6Ch:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lc6Cd
+.Lc6Cc:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $c6Ce_str,8(%ebx)
+	addl $-12,%ebp
+	jmp base_ControlziExceptionziBase_absentError_info
+.Lc6Cd:
+	jmp *(%esi)
+.Lc6Cg:
+	jmp *-16(%ebx)
+	.size r6f0_info, .-r6f0_info
+.data
+	.align 4
+.align 1
+r6f1_closure:
+	.long	r6f1_info
+	.long	0
+	.long	0
+	.long	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(r6f1_info)+8
+	.long	0
+	.long	65558
+r6f1_info:
+.Lc6Cu:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6Cv
+.Lc6Cw:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lc6Ct
+.Lc6Cs:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	addl $-12,%ebp
+	jmp r6eZ_info
+.Lc6Ct:
+	jmp *(%esi)
+.Lc6Cv:
+	jmp *-16(%ebx)
+	.size r6f1_info, .-r6f1_info
+.data
+	.align 4
+.align 1
+.globl Loop_zdwa_closure
+.type Loop_zdwa_closure, @object
+Loop_zdwa_closure:
+	.long	Loop_zdwa_info
+	.long	0
+.text
+	.align 4,0x90
+.globl Loop_zdwa_slow
+.type Loop_zdwa_slow, @object
+Loop_zdwa_slow:
+.Lc6CY:
+	movl 16(%ebp),%eax
+	movl %eax,40(%ebx)
+	movl 12(%ebp),%eax
+	movl %eax,32(%ebx)
+	movl 8(%ebp),%eax
+	movl %eax,24(%ebx)
+	movl 4(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl (%ebp),%eax
+	movl %eax,8(%ebx)
+	addl $20,%ebp
+	jmp Loop_zdwa_info
+	.size Loop_zdwa_slow, .-Loop_zdwa_slow
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(s6vQ_info)+12
+	.long	65536
+	.long	196626
+s6vQ_info:
+.Lc6F3:
+	leal -16(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6F4
+.Lc6Fb:
+	movl $stg_upd_frame_info,-12(%ebp)
+	movl %esi,-8(%ebp)
+	movl 12(%esi),%eax
+	testl %eax,%eax
+	jne .Lc6F1
+.Lc6F2:
+	movl $Events_makeResult2_closure,%esi
+	addl $-12,%ebp
+	jmp *(%esi)
+.Lc6F1:
+	movl $c6F6_info,-16(%ebp)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,24(%ebx)
+	movl %eax,16(%ebx)
+	movl $0,8(%ebx)
+	addl $-16,%ebp
+	jmp base_GHCziShow_zdwshowSignedInt_info
+.Lc6F4:
+	jmp *-16(%ebx)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6F6_info)+16
+	.long	0
+	.long	65568
+c6F6_info:
+.Lc6F6:
+	movl $Events_makeResult3_closure,16(%ebx)
+	movl %esi,8(%ebx)
+	addl $4,%ebp
+	jmp base_GHCziBase_zpzp_info
+	.size s6vQ_info, .-s6vQ_info
+.text
+	.align 4,0x90
+	.long	1
+	.long	17
+s6vY_info:
+.Lc6Fm:
+	leal -4(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6Fq
+.Lc6Fr:
+	movl $c6Fk_info,-4(%ebp)
+	movl $0,16(%ebx)
+	movl 12(%esi),%eax
+	movl %eax,8(%ebx)
+	addl $-4,%ebp
+	jmp base_GHCziList_zdwlenAcc_info
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+c6Fk_info:
+.Lc6Fk:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Fu
+.Lc6Ft:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	leal -3(%edi),%esi
+	addl $4,%ebp
+	jmp *(%ebp)
+.Lc6Fq:
+	jmp *-16(%ebx)
+.Lc6Fu:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+	.size s6vY_info, .-s6vY_info
+.text
+	.align 4,0x90
+	.long	Loop_zdwa_slow-(Loop_zdwa_info)+0
+	.long	288787
+	.long	S6C3_srt-(Loop_zdwa_info)+12
+	.long	1310720
+	.long	0
+	.long	1073676303
+.globl Loop_zdwa_info
+.type Loop_zdwa_info, @object
+Loop_zdwa_info:
+.Lc6Fy:
+	movl 40(%ebx),%eax
+	movl 32(%ebx),%ecx
+	movl 24(%ebx),%edx
+	movl %edx,208(%esp)
+	movl 16(%ebx),%edx
+	movl %edx,64(%esp)
+	movl 8(%ebx),%edx
+	movl %edx,220(%esp)
+	leal -104(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .Lc6Fz
+.Lc6FA:
+	movl 4(%ebp),%edx
+	movl %ecx,232(%esp)
+	movl 8(%ebp),%ecx
+	movl %eax,244(%esp)
+	movl 12(%ebp),%eax
+	movl %edx,76(%esp)
+	movl 16(%ebp),%edx
+	movl %ecx,88(%esp)
+	movl 20(%ebp),%ecx
+	movl %eax,100(%esp)
+	movl 24(%ebp),%eax
+	movl %edx,112(%esp)
+	movl 28(%ebp),%edx
+	movl %ecx,124(%esp)
+	movl 32(%ebp),%ecx
+	movl %eax,136(%esp)
+	movl 36(%ebp),%eax
+	movl %edx,148(%esp)
+	movl 40(%ebp),%edx
+	movl %ecx,160(%esp)
+	movl 44(%ebp),%ecx
+	movl %eax,172(%esp)
+	movl 48(%ebp),%eax
+	movl %edx,184(%esp)
+	movl 52(%ebp),%edx
+	movl %ecx,196(%esp)
+	movl (%ebp),%ecx
+	cmpl $-1,%ecx
+	je .Lc6IW
+.Lc6Fw:
+	movl $c6D6_info,-20(%ebp)
+	movl 136(%esp),%eax
+	movl %eax,16(%ebx)
+	movl %ecx,8(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 208(%esp),%eax
+	movl %eax,-12(%ebp)
+	movl 232(%esp),%eax
+	movl %eax,-8(%ebp)
+	movl 244(%esp),%eax
+	movl %eax,-4(%ebp)
+	movl 220(%esp),%eax
+	movl %eax,(%ebp)
+	addl $-20,%ebp
+	jmp r6eY_info
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6D6_info)+12
+	.long	143378
+	.long	536805408
+c6D6_info:
+.Lc6D6:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6J5
+.Lu6J7:
+	movl 20(%ebp),%eax
+	movl 4(%ebp),%ecx
+	movl 8(%ebp),%edx
+	movl %eax,220(%esp)
+	movl 16(%ebp),%eax
+	movl %ecx,64(%esp)
+	movl 24(%ebp),%ecx
+	movl %edx,208(%esp)
+	movl 28(%ebp),%edx
+	movl %eax,244(%esp)
+	movl 32(%ebp),%eax
+	movl %ecx,76(%esp)
+	movl 36(%ebp),%ecx
+	movl %edx,88(%esp)
+	movl 40(%ebp),%edx
+	movl %eax,100(%esp)
+	movl 44(%ebp),%eax
+	movl %ecx,112(%esp)
+	movl 48(%ebp),%ecx
+	movl %edx,124(%esp)
+	movl 52(%ebp),%edx
+	movl %eax,136(%esp)
+	movl 56(%ebp),%eax
+	movl %ecx,148(%esp)
+	movl 60(%ebp),%ecx
+	movl %edx,160(%esp)
+	movl 64(%ebp),%edx
+	movl %eax,172(%esp)
+	movl 68(%ebp),%eax
+	movl %ecx,184(%esp)
+	movl 72(%ebp),%ecx
+	addl $20,%ebp
+.Ln6Ld:
+	movl %edx,196(%esp)
+	movl %ecx,%edx
+.Lc6IW:
+	movl 220(%esp),%ecx
+	movl %ecx,(%ebp)
+	movl 64(%esp),%ecx
+	movl %ecx,-16(%ebp)
+	movl 208(%esp),%ecx
+	movl %ecx,-12(%ebp)
+	movl 244(%esp),%ecx
+	movl %ecx,-4(%ebp)
+	addl $-48,%ebp
+	movl %edx,%ecx
+	movl %eax,460(%esp)
+	movl %edx,472(%esp)
+	movl 196(%esp),%edx
+	movl %edx,484(%esp)
+	movl 184(%esp),%edx
+	movl %edx,496(%esp)
+	movl 172(%esp),%edx
+	movl %edx,508(%esp)
+	movl 160(%esp),%edx
+	movl %edx,520(%esp)
+	movl 148(%esp),%edx
+	movl %edx,532(%esp)
+	movl 136(%esp),%edx
+	movl %edx,544(%esp)
+	movl 124(%esp),%edx
+	movl %edx,556(%esp)
+	movl 112(%esp),%edx
+	movl %edx,568(%esp)
+	movl 100(%esp),%edx
+	movl %edx,580(%esp)
+	movl 88(%esp),%edx
+	movl %edx,592(%esp)
+	movl 76(%esp),%edx
+.Ln6Le:
+	movl %eax,616(%esp)
+	movl %edx,%eax
+	movl 616(%esp),%edx
+.Ls6ua:
+	movl $c6FG_info,28(%ebp)
+	movl %eax,628(%esp)
+	movl 124(%esp),%eax
+	movl %eax,40(%ebx)
+	movl 112(%esp),%eax
+	movl %eax,32(%ebx)
+	movl 100(%esp),%eax
+	movl %eax,24(%ebx)
+	movl 88(%esp),%eax
+	movl %eax,16(%ebx)
+	movl 76(%esp),%eax
+	movl %eax,8(%ebx)
+	movl 136(%esp),%eax
+	movl %eax,-56(%ebp)
+	movl 148(%esp),%eax
+	movl %eax,-52(%ebp)
+	movl 160(%esp),%eax
+	movl %eax,-48(%ebp)
+	movl 172(%esp),%eax
+	movl %eax,-44(%ebp)
+	movl 184(%esp),%eax
+	movl %eax,-40(%ebp)
+	movl 196(%esp),%eax
+	movl %eax,-36(%ebp)
+	movl 460(%esp),%eax
+	movl %eax,-32(%ebp)
+	movl 472(%esp),%eax
+	movl %eax,-28(%ebp)
+	movl 628(%esp),%eax
+	movl %eax,-24(%ebp)
+	movl 592(%esp),%eax
+	movl %eax,-20(%ebp)
+	movl 580(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 568(%esp),%eax
+	movl %eax,-12(%ebp)
+	movl 556(%esp),%eax
+	movl %eax,-8(%ebp)
+	movl 544(%esp),%eax
+	movl %eax,-4(%ebp)
+	movl 532(%esp),%eax
+	movl %eax,(%ebp)
+	movl 520(%esp),%eax
+	movl %eax,4(%ebp)
+	movl 508(%esp),%eax
+	movl %eax,8(%ebp)
+	movl 496(%esp),%eax
+	movl %eax,12(%ebp)
+	movl 484(%esp),%eax
+	movl %eax,16(%ebp)
+	movl %edx,20(%ebp)
+	movl %ecx,24(%ebp)
+	movl %ecx,52(%ebp)
+	movl %edx,56(%ebp)
+	movl %eax,60(%ebp)
+	movl 496(%esp),%eax
+	movl %eax,64(%ebp)
+	movl 508(%esp),%eax
+	movl %eax,68(%ebp)
+	movl 520(%esp),%eax
+	movl %eax,72(%ebp)
+	movl 532(%esp),%eax
+	movl %eax,76(%ebp)
+	movl 544(%esp),%eax
+	movl %eax,80(%ebp)
+	movl 556(%esp),%eax
+	movl %eax,84(%ebp)
+	movl 568(%esp),%eax
+	movl %eax,88(%ebp)
+	movl 580(%esp),%eax
+	movl %eax,92(%ebp)
+	movl 592(%esp),%eax
+	movl %eax,96(%ebp)
+	movl 628(%esp),%eax
+	movl %eax,100(%ebp)
+	addl $-56,%ebp
+	jmp Define_zdwzdczeze2_info
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Db_info)+12
+	.long	143378
+	.long	536805408
+c6Db_info:
+.Lc6Db:
+	movl $c6Dg_info,(%ebp)
+	movl 47(%esi),%esi
+	testw $7,%si
+	jne .Lc6Dg
+.Lc6Dh:
+	jmp *(%esi)
+.Lc6J5:
+	movl $c6Db_info,(%ebp)
+	movl 2(%esi),%esi
+	testw $7,%si
+	jne .Lc6Db
+.Lc6Dc:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Dg_info)+12
+	.long	143378
+	.long	536805408
+c6Dg_info:
+.Lc6Dg:
+	movl 4(%ebp),%eax
+	movl 24(%ebp),%ecx
+	movl 28(%ebp),%edx
+	movl %eax,64(%esp)
+	movl 32(%ebp),%eax
+	movl %ecx,76(%esp)
+	movl 36(%ebp),%ecx
+	movl %edx,88(%esp)
+	movl 40(%ebp),%edx
+	movl %eax,100(%esp)
+	movl 44(%ebp),%eax
+	movl %ecx,112(%esp)
+	movl 48(%ebp),%ecx
+	movl %edx,124(%esp)
+	movl 52(%ebp),%edx
+	movl %eax,136(%esp)
+	movl 56(%ebp),%eax
+	movl %ecx,148(%esp)
+	movl 60(%ebp),%ecx
+	movl %edx,160(%esp)
+	movl 64(%ebp),%edx
+	movl %eax,172(%esp)
+	movl 68(%ebp),%eax
+	movl %ecx,184(%esp)
+	movl 72(%ebp),%ecx
+	movl %edx,196(%esp)
+	movl %esi,%edx
+	andl $7,%edx
+	cmpl $3,%edx
+	jae .Lc6J1
+.Lc6J2:
+	cmpl $2,%edx
+	jae .Lc6IV
+.Lu6J8:
+	movl 20(%ebp),%edx
+	movl %edx,220(%esp)
+	movl 8(%ebp),%edx
+	movl %edx,208(%esp)
+	movl 16(%ebp),%edx
+	addl $20,%ebp
+.Ln6Lc:
+	movl %edx,244(%esp)
+	movl %ecx,%edx
+	jmp .Lc6IW
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Dm_info)+12
+	.long	143378
+	.long	436142112
+c6Dm_info:
+.Lc6Dm:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6I2
+.Lc6I3:
+	movl $c6Dr_info,-4(%ebp)
+	movl %esi,%eax
+	movl 3(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Dr
+.Lc6Ds:
+	jmp *(%esi)
+.Lc6IV:
+	movl $c6Dm_info,(%ebp)
+	movl 2(%esi),%esi
+	testw $7,%si
+	jne .Lc6Dm
+.Lc6Dn:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Dr_info)+12
+	.long	286739
+	.long	167706656
+c6Dr_info:
+.Lc6Dr:
+	addl $104,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Hq
+.Lc6Hp:
+	movl 32(%ebp),%eax
+	movl 36(%ebp),%ecx
+	movl 40(%ebp),%edx
+	movl %eax,88(%esp)
+	movl 44(%ebp),%eax
+	movl %ecx,100(%esp)
+	movl 48(%ebp),%ecx
+	movl %edx,112(%esp)
+	movl 52(%ebp),%edx
+	movl %eax,124(%esp)
+	movl 56(%ebp),%eax
+	movl %ecx,136(%esp)
+	movl 60(%ebp),%ecx
+	movl %edx,148(%esp)
+	movl 64(%ebp),%edx
+	movl %eax,160(%esp)
+	movl 68(%ebp),%eax
+	movl %ecx,172(%esp)
+	movl 72(%ebp),%ecx
+	movl %edx,184(%esp)
+	movl 76(%ebp),%edx
+	cmpl $45,3(%esi)
+	jg .Lc6HU
+.Lc6HV:
+	movl $Define_Switch_con_info,-100(%edi)
+	movl %eax,196(%esp)
+	movl 160(%esp),%eax
+	movl %eax,-96(%edi)
+	movl 172(%esp),%eax
+	movl %eax,-92(%edi)
+	movl 184(%esp),%eax
+	movl %eax,-88(%edi)
+	movl 196(%esp),%eax
+	movl %eax,-84(%edi)
+	movl %ecx,-80(%edi)
+	movl $Define_Score_con_info,-76(%edi)
+	movl 88(%esp),%eax
+	movl %eax,-72(%edi)
+	movl 100(%esp),%eax
+	movl %eax,-68(%edi)
+	movl $base_GHCziBase_Just_con_info,-64(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-60(%edi)
+	movl $Define_State_con_info,-56(%edi)
+	leal -62(%edi),%eax
+	movl %eax,-52(%edi)
+	leal -75(%edi),%eax
+	movl %eax,-48(%edi)
+	movl 112(%esp),%eax
+	movl %eax,-44(%edi)
+	movl 124(%esp),%eax
+	movl %eax,-40(%edi)
+	movl 136(%esp),%eax
+	movl %eax,-36(%edi)
+	leal -99(%edi),%eax
+	movl %eax,-32(%edi)
+	movl %edx,-28(%edi)
+	movl 148(%esp),%eax
+	movl %eax,-24(%edi)
+	leal -55(%edi),%eax
+	addl $-24,%edi
+	movl $c6Hv_info,4(%ebp)
+	movl %eax,32(%ebx)
+	movl %esi,24(%ebx)
+	movl 16(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl 8(%ebp),%eax
+	movl %eax,8(%ebx)
+	addl $4,%ebp
+	jmp Events_makeStgLt1_info
+.Lc6Fz:
+	movl $Loop_zdwa_closure,%esi
+	movl 220(%esp),%edx
+	movl %edx,-20(%ebp)
+	movl 64(%esp),%edx
+	movl %edx,-16(%ebp)
+	movl 208(%esp),%edx
+	movl %edx,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-20,%ebp
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6FG_info)+20
+	.long	6422802
+	.long	37683232
+c6FG_info:
+.Lc6FG:
+	movl 56(%ebp),%eax
+	movl %esi,%ecx
+	andl $7,%ecx
+	cmpl $2,%ecx
+	jae .Ls6up
+.Lc6H7:
+	movl $c6Gt_info,(%ebp)
+	movl 20(%ebp),%esi
+	testw $7,%si
+	jne .Lc6Gt
+.Lc6Gu:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6FL_info)+20
+	.long	868495
+	.long	458784
+c6FL_info:
+.Lc6FL:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6Go
+.Lc6Gp:
+	addl $72,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6FY
+.Lc6FX:
+	movl $Define_Switch_con_info,-68(%edi)
+	movl 32(%ebp),%eax
+	movl %eax,-64(%edi)
+	movl 28(%ebp),%eax
+	movl %eax,-60(%edi)
+	movl 24(%ebp),%eax
+	movl %eax,-56(%edi)
+	movl 20(%ebp),%eax
+	movl %eax,-52(%edi)
+	movl 16(%ebp),%eax
+	movl %eax,-48(%edi)
+	movl $Define_Score_con_info,-44(%edi)
+	movl 56(%ebp),%eax
+	movl %eax,-40(%edi)
+	movl 52(%ebp),%eax
+	movl %eax,-36(%edi)
+	movl $Define_State_con_info,-32(%edi)
+	movl 60(%ebp),%eax
+	movl %eax,-28(%edi)
+	leal -43(%edi),%eax
+	movl %eax,-24(%edi)
+	movl 48(%ebp),%eax
+	movl %eax,-20(%edi)
+	movl $base_GHCziBase_Nothing_closure+1,-16(%edi)
+	movl 40(%ebp),%eax
+	movl %eax,-12(%edi)
+	leal -67(%edi),%eax
+	movl %eax,-8(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 36(%ebp),%eax
+	movl %eax,(%edi)
+	leal -31(%edi),%esi
+	addl $64,%ebp
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6GM_info)+20
+	.long	802959
+	.long	458784
+c6GM_info:
+.Lc6GM:
+	movl 44(%ebp),%eax
+	addl $-12,%ebp
+.Ls6up:
+	movl $c6FL_info,12(%ebp)
+	movl %eax,%esi
+	addl $12,%ebp
+	testw $7,%si
+	jne .Lc6FL
+.Lc6FN:
+	jmp *(%esi)
+.Lc6FY:
+	movl $72,904(%ebx)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6G1_info)+20
+	.long	868495
+	.long	458784
+c6G1_info:
+.Lc6G1:
+	movl $c6G6_info,8(%ebp)
+	movl 3(%esi),%eax
+	movl %eax,16(%ebx)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	addl $8,%ebp
+	jmp base_GHCziList_zdwznzn_info
+.Lc6Go:
+	movl $c6G1_info,(%ebp)
+	movl 2(%esi),%esi
+	testw $7,%si
+	jne .Lc6G1
+.Lc6G2:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6G6_info)+24
+	.long	217101
+	.long	196640
+c6G6_info:
+.Lc6G6:
+	movl $c6Ga_info,(%ebp)
+	movl 3(%esi),%eax
+	movl %eax,16(%ebx)
+	movl $z35UPy7JlgLDw888SeTQH5AsL_ControlziMonadziIOziClass_zdfMonadIOIO_closure,8(%ebx)
+	movl $stg_ap_v_info,-4(%ebp)
+	addl $-4,%ebp
+	jmp L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_zdwplay_info
+.text
+	.align 4,0x90
+	.long	217101
+	.long	32
+c6Ga_info:
+.Lc6Ga:
+	addl $72,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Gl
+.Lc6Gk:
+	movl $Define_Switch_con_info,-68(%edi)
+	movl 24(%ebp),%eax
+	movl %eax,-64(%edi)
+	movl 20(%ebp),%eax
+	movl %eax,-60(%edi)
+	movl 16(%ebp),%eax
+	movl %eax,-56(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,-52(%edi)
+	movl 8(%ebp),%eax
+	movl %eax,-48(%edi)
+	movl $Define_Score_con_info,-44(%edi)
+	movl 48(%ebp),%eax
+	movl %eax,-40(%edi)
+	movl 44(%ebp),%eax
+	movl %eax,-36(%edi)
+	movl $Define_State_con_info,-32(%edi)
+	movl 52(%ebp),%eax
+	movl %eax,-28(%edi)
+	leal -43(%edi),%eax
+	movl %eax,-24(%edi)
+	movl 40(%ebp),%eax
+	movl %eax,-20(%edi)
+	movl $base_GHCziBase_Nothing_closure+1,-16(%edi)
+	movl 32(%ebp),%eax
+	movl %eax,-12(%edi)
+	leal -67(%edi),%eax
+	movl %eax,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 28(%ebp),%eax
+	movl %eax,(%edi)
+	leal -31(%edi),%esi
+	addl $56,%ebp
+	jmp *(%ebp)
+.Lc6Gl:
+	movl $72,904(%ebx)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Gt_info)+20
+	.long	6423826
+	.long	37683232
+c6Gt_info:
+.Lc6Gt:
+	movl $c6Gy_info,-4(%ebp)
+	movl %esi,%eax
+	movl 3(%esi),%ecx
+	movl 7(%esi),%edx
+	movl $L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_bufferzuf1_closure,%esi
+	movl %edx,(%ebp)
+	movl %ecx,12(%ebp)
+	movl %eax,20(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Gy
+.Lc6Gz:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Gy_info)+20
+	.long	12845651
+	.long	37158944
+c6Gy_info:
+.Lc6Gy:
+	movl 4(%ebp),%eax
+	movl $c6GG_info,4(%ebp)
+	addl $4,%ebp
+	movl 3(%esi),%ecx
+	movl 872(%ebx),%edx
+	movl %ecx,256(%esp)
+	movl 20(%edx),%ecx
+	movl %ebp,12(%ecx)
+	movl 888(%ebx),%ecx
+	movl %eax,268(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%ecx)
+	movl 100(%edx),%eax
+	movl %eax,280(%esp)
+	movl 104(%edx),%eax
+	movl %eax,292(%esp)
+	leal 4(%edi),%eax
+	subl (%ecx),%eax
+	xorl %ecx,%ecx
+	movl %ecx,304(%esp)
+	movl 280(%esp),%ecx
+	subl %eax,%ecx
+	movl 292(%esp),%eax
+	movl %ecx,316(%esp)
+	movl 304(%esp),%ecx
+	sbbl %ecx,%eax
+	movl 316(%esp),%ecx
+	movl %ecx,100(%edx)
+	movl %eax,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 272(%esp),%ecx
+	pushl %ecx
+	movl 264(%esp),%ecx
+	pushl %ecx
+	movl %eax,340(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 336(%esp),%ecx
+	pushl %ecx
+	movl %eax,352(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,352(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,364(%esp)
+	movl %eax,%ecx
+	movl %edx,376(%esp)
+	movl 364(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 352(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,388(%esp)
+	movl 376(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 388(%esp),%ecx
+	adcl %eax,%ecx
+	movl 352(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 340(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6GG_info)+20
+	.long	6422802
+	.long	37158944
+c6GG_info:
+.Lc6GG:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6GU
+.Lc6GT:
+	movl $base_GHCziPtr_Ptr_con_info,-4(%edi)
+	movl 12(%ebp),%eax
+	movl %eax,(%edi)
+	movl $c6GJ_info,(%ebp)
+	leal -3(%edi),%eax
+	movl %eax,8(%ebx)
+	movl $Output_clearScreen2_closure,%esi
+	jmp stg_ap_pv_fast
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6GJ_info)+20
+	.long	6422802
+	.long	35061792
+c6GJ_info:
+.Lc6GJ:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6GX
+.Lc6GW:
+	movl $ghczmprim_GHCziTuple_Z2T_con_info,-8(%edi)
+	movl 4(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl $r6f0_closure,(%edi)
+	movl $c6GM_info,12(%ebp)
+	movl 52(%ebp),%eax
+	movl %eax,32(%ebx)
+	movl 8(%ebp),%eax
+	movl %eax,24(%ebx)
+	leal -7(%edi),%eax
+	movl %eax,16(%ebx)
+	movl 20(%ebp),%eax
+	movl %eax,8(%ebx)
+	addl $12,%ebp
+	jmp Output_drawCons1_info
+.Lc6GU:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.Lc6GX:
+	movl $12,904(%ebx)
+	jmp stg_gc_unpt_r1
+.Lc6Hq:
+	movl $104,904(%ebx)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Hv_info)+20
+	.long	143634
+	.long	37683232
+c6Hv_info:
+.Lc6Hv:
+	movl $c6Hx_info,(%ebp)
+	testw $7,%si
+	jne .Lc6Hx
+.Lc6Hy:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Hx_info)+20
+	.long	143634
+	.long	37683232
+c6Hx_info:
+.Lc6Hx:
+	movl $c6HC_info,-24(%ebp)
+	movl 3(%esi),%eax
+	movl 11(%esi),%ecx
+	movl 15(%esi),%edx
+	movl %eax,400(%esp)
+	movl 19(%esi),%eax
+	movl %ecx,412(%esp)
+	movl 23(%esi),%ecx
+	movl %edx,424(%esp)
+	movl 27(%esi),%edx
+	movl %eax,436(%esp)
+	movl 31(%esi),%eax
+	movl 7(%esi),%esi
+	movl %eax,448(%esp)
+	movl 424(%esp),%eax
+	movl %eax,-20(%ebp)
+	movl 436(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 448(%esp),%eax
+	movl %eax,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl 412(%esp),%eax
+	movl %eax,(%ebp)
+	movl 400(%esp),%eax
+	movl %eax,12(%ebp)
+	addl $-24,%ebp
+	testw $7,%si
+	jne .Lc6HC
+.Lc6HD:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6HC_info)+20
+	.long	9175320
+	.long	37683232
+c6HC_info:
+.Lc6HC:
+	movl $c6HH_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 16(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,16(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6HH
+.Lc6HN:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6HH_info)+20
+	.long	18351705
+	.long	37683232
+c6HH_info:
+.Lc6HH:
+	movl 52(%ebp),%eax
+	movl 56(%ebp),%ecx
+	movl 60(%ebp),%edx
+	movl %eax,76(%esp)
+	movl 64(%ebp),%eax
+	movl %ecx,88(%esp)
+	movl 68(%ebp),%ecx
+	movl %edx,100(%esp)
+	movl 72(%ebp),%edx
+	movl %eax,112(%esp)
+	movl 76(%ebp),%eax
+	movl %ecx,124(%esp)
+	movl 80(%ebp),%ecx
+	movl %edx,136(%esp)
+	movl 84(%ebp),%edx
+	movl %eax,148(%esp)
+	movl 88(%ebp),%eax
+	movl %ecx,160(%esp)
+	movl 92(%ebp),%ecx
+	movl %edx,172(%esp)
+	movl 96(%ebp),%edx
+	movl %eax,184(%esp)
+	movl 100(%ebp),%eax
+	movl %ecx,196(%esp)
+	movl 24(%ebp),%ecx
+	movl %edx,460(%esp)
+	movl 19(%esi),%edx
+	movl %eax,472(%esp)
+	movl 15(%esi),%eax
+	movl %eax,484(%esp)
+	movl 11(%esi),%eax
+	movl %eax,496(%esp)
+	movl 7(%esi),%eax
+	movl %eax,508(%esp)
+	movl 3(%esi),%eax
+	movl %eax,520(%esp)
+	movl 16(%ebp),%eax
+	movl %eax,532(%esp)
+	movl 12(%ebp),%eax
+	movl %eax,544(%esp)
+	movl 8(%ebp),%eax
+	movl %eax,556(%esp)
+	movl 28(%ebp),%eax
+	movl %eax,568(%esp)
+	movl 4(%ebp),%eax
+	movl %eax,580(%esp)
+	movl 20(%ebp),%eax
+	movl %eax,592(%esp)
+	movl 40(%ebp),%eax
+	jmp .Ls6ua
+.Lc6HU:
+	movl $s6vQ_info,-100(%edi)
+	movl %eax,196(%esp)
+	movl 88(%esp),%eax
+	movl %eax,-88(%edi)
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-84(%edi)
+	leal -100(%edi),%eax
+	movl %eax,-80(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,-76(%edi)
+	movl $Define_Con_con_info,-72(%edi)
+	movl $Initializze_testCon14_closure,-68(%edi)
+	movl $Define_Round_closure+3,-64(%edi)
+	movl $Initializze_testCon10_closure,-60(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,-56(%edi)
+	movl $Initializze_testCon8_closure,-52(%edi)
+	movl $Initializze_testCon7_closure,-48(%edi)
+	leal -82(%edi),%eax
+	movl %eax,-44(%edi)
+	movl $Initializze_testCon4_closure,-40(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,-36(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,-32(%edi)
+	movl $base_GHCziBase_Nothing_closure+1,-28(%edi)
+	movl $Initializze_testCon1_closure,-24(%edi)
+	movl $0,-20(%edi)
+	movl $0,-16(%edi)
+	movl $5,-12(%edi)
+	movl $ghczmprim_GHCziTypes_ZC_con_info,-8(%edi)
+	leal -71(%edi),%eax
+	movl %eax,-4(%edi)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,(%edi)
+	movl 28(%ebp),%eax
+	addl $-24,%ebp
+	movl %eax,76(%esp)
+	movl %edx,%eax
+	movl %ecx,460(%esp)
+	movl %edx,472(%esp)
+	movl 196(%esp),%edx
+	movl %edx,484(%esp)
+	movl 184(%esp),%edx
+	movl %edx,496(%esp)
+	movl 172(%esp),%edx
+	movl %edx,508(%esp)
+	movl 160(%esp),%edx
+	movl %edx,520(%esp)
+	movl 148(%esp),%edx
+	movl %edx,532(%esp)
+	leal -6(%edi),%edx
+	movl %edx,544(%esp)
+	movl 124(%esp),%edx
+	movl %edx,556(%esp)
+	movl 112(%esp),%edx
+	movl %edx,568(%esp)
+	movl 100(%esp),%edx
+	movl %edx,580(%esp)
+	movl 88(%esp),%edx
+	movl %edx,592(%esp)
+	movl 76(%esp),%edx
+.Ln6Lb:
+	movl %eax,604(%esp)
+	movl %edx,%eax
+	movl %ecx,%edx
+	movl 604(%esp),%ecx
+	jmp .Ls6ua
+.Lc6I2:
+	movl $r6f1_closure,%esi
+	addl $76,%ebp
+	jmp stg_ap_0_fast
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6I4_info)+20
+	.long	143634
+	.long	37683232
+c6I4_info:
+.Lc6I4:
+	movl $c6I8_info,-16(%ebp)
+	movl %esi,%eax
+	movl 8(%ebx),%esi
+	movl 24(%ebx),%ecx
+	movl %ecx,-12(%ebp)
+	movl 32(%ebx),%ecx
+	movl %ecx,-8(%ebp)
+	movl 40(%ebx),%ecx
+	movl %ecx,-4(%ebp)
+	movl 16(%ebx),%ecx
+	movl %ecx,8(%ebp)
+	movl %eax,20(%ebp)
+	addl $-16,%ebp
+	testw $7,%si
+	jne .Lc6I8
+.Lc6I9:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6I8_info)+20
+	.long	9175320
+	.long	37683232
+c6I8_info:
+.Lc6I8:
+	movl $c6Id_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 16(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,16(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Id
+.Lc6Ik:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Id_info)+20
+	.long	18351705
+	.long	37683232
+c6Id_info:
+.Lc6Id:
+	movl 52(%ebp),%eax
+	movl 56(%ebp),%ecx
+	movl 60(%ebp),%edx
+	movl %eax,76(%esp)
+	movl 64(%ebp),%eax
+	movl %ecx,88(%esp)
+	movl 68(%ebp),%ecx
+	movl %edx,100(%esp)
+	movl 72(%ebp),%edx
+	movl %eax,112(%esp)
+	movl 76(%ebp),%eax
+	movl %ecx,124(%esp)
+	movl 80(%ebp),%ecx
+	movl %edx,136(%esp)
+	movl 84(%ebp),%edx
+	movl %eax,148(%esp)
+	movl 88(%ebp),%eax
+	movl %ecx,160(%esp)
+	movl 92(%ebp),%ecx
+	movl %edx,172(%esp)
+	movl 96(%ebp),%edx
+	movl %eax,184(%esp)
+	movl 100(%ebp),%eax
+	movl %ecx,196(%esp)
+	movl 24(%ebp),%ecx
+	movl %edx,460(%esp)
+	movl 19(%esi),%edx
+	movl %eax,472(%esp)
+	movl 15(%esi),%eax
+	movl %eax,484(%esp)
+	movl 11(%esi),%eax
+	movl %eax,496(%esp)
+	movl 7(%esi),%eax
+	movl %eax,508(%esp)
+	movl 3(%esi),%eax
+	movl %eax,520(%esp)
+	movl 16(%ebp),%eax
+	movl %eax,532(%esp)
+	movl 12(%ebp),%eax
+	movl %eax,544(%esp)
+	movl 8(%ebp),%eax
+	movl %eax,556(%esp)
+	movl 28(%ebp),%eax
+	movl %eax,568(%esp)
+	movl 4(%ebp),%eax
+	movl %eax,580(%esp)
+	movl 20(%ebp),%eax
+	movl %eax,592(%esp)
+	movl 40(%ebp),%eax
+	jmp .Ls6ua
+.Lc6J1:
+	cmpl $4,%edx
+	jae .Lc6IY
+.Lc6IZ:
+	addl $52,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Ih
+.Lc6Ig:
+	movl 1(%esi),%edx
+	movl $Define_Switch_con_info,-48(%edi)
+	movl %eax,460(%esp)
+	movl 160(%esp),%eax
+	movl %eax,-44(%edi)
+	movl 172(%esp),%eax
+	movl %eax,-40(%edi)
+	movl 184(%esp),%eax
+	movl %eax,-36(%edi)
+	movl 196(%esp),%eax
+	movl %eax,-32(%edi)
+	movl 460(%esp),%eax
+	movl %eax,-28(%edi)
+	movl $Define_Score_con_info,-24(%edi)
+	movl 88(%esp),%eax
+	movl %eax,-20(%edi)
+	movl 100(%esp),%eax
+	movl %eax,-16(%edi)
+	movl $s6vY_info,-12(%edi)
+	movl 136(%esp),%eax
+	movl %eax,(%edi)
+	movl $c6I4_info,(%ebp)
+	leal -23(%edi),%eax
+	movl %eax,40(%ebx)
+	movl 76(%esp),%eax
+	movl %eax,32(%ebx)
+	movl %edx,24(%ebx)
+	leal -12(%edi),%eax
+	movl %eax,16(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,8(%ebx)
+	movl 112(%esp),%eax
+	movl %eax,-24(%ebp)
+	movl 124(%esp),%eax
+	movl %eax,-20(%ebp)
+	movl 136(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 148(%esp),%eax
+	movl %eax,-12(%ebp)
+	leal -47(%edi),%eax
+	movl %eax,-8(%ebp)
+	movl %ecx,-4(%ebp)
+	addl $-24,%ebp
+	jmp Events_zdwmakeChoice_info
+.Lc6Ih:
+	movl $52,904(%ebx)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Ir_info)+20
+	.long	143634
+	.long	54460448
+c6Ir_info:
+.Lc6Ir:
+	addl $24,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6IL
+.Lc6IK:
+	movl 3(%esi),%eax
+	movl $Define_Switch_con_info,-20(%edi)
+	movl 52(%ebp),%ecx
+	movl %ecx,-16(%edi)
+	movl 56(%ebp),%ecx
+	movl %ecx,-12(%edi)
+	movl 60(%ebp),%ecx
+	movl %ecx,-8(%edi)
+	movl 64(%ebp),%ecx
+	movl %ecx,-4(%edi)
+	movl 68(%ebp),%ecx
+	movl %ecx,(%edi)
+	movl $c6Ix_info,(%ebp)
+	movl 32(%ebp),%ecx
+	movl %ecx,40(%ebx)
+	movl 28(%ebp),%ecx
+	movl %ecx,32(%ebx)
+	movl 24(%ebp),%ecx
+	movl %ecx,24(%ebx)
+	movl %eax,16(%ebx)
+	movl 4(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl 36(%ebp),%eax
+	movl %eax,-24(%ebp)
+	movl 40(%ebp),%eax
+	movl %eax,-20(%ebp)
+	movl 44(%ebp),%eax
+	movl %eax,-16(%ebp)
+	movl 48(%ebp),%eax
+	movl %eax,-12(%ebp)
+	leal -19(%edi),%eax
+	movl %eax,-8(%ebp)
+	movl 72(%ebp),%eax
+	movl %eax,-4(%ebp)
+	addl $-24,%ebp
+	jmp Events_zdwmakeAns_info
+.Lc6IY:
+	movl $c6Ir_info,(%ebp)
+	movl (%esi),%esi
+	testw $7,%si
+	jne .Lc6Ir
+.Lc6Is:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Ix_info)+20
+	.long	143634
+	.long	37683232
+c6Ix_info:
+.Lc6Ix:
+	movl $c6IB_info,-16(%ebp)
+	movl %esi,%eax
+	movl 8(%ebx),%esi
+	movl 24(%ebx),%ecx
+	movl %ecx,-12(%ebp)
+	movl 32(%ebx),%ecx
+	movl %ecx,-8(%ebp)
+	movl 40(%ebx),%ecx
+	movl %ecx,-4(%ebp)
+	movl 16(%ebx),%ecx
+	movl %ecx,8(%ebp)
+	movl %eax,20(%ebp)
+	addl $-16,%ebp
+	testw $7,%si
+	jne .Lc6IB
+.Lc6IC:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6IB_info)+20
+	.long	9175320
+	.long	37683232
+c6IB_info:
+.Lc6IB:
+	movl $c6IG_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 16(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,16(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6IG
+.Lc6IO:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6IG_info)+20
+	.long	18351705
+	.long	37683232
+c6IG_info:
+.Lc6IG:
+	movl 52(%ebp),%eax
+	movl 56(%ebp),%ecx
+	movl 60(%ebp),%edx
+	movl %eax,76(%esp)
+	movl 64(%ebp),%eax
+	movl %ecx,88(%esp)
+	movl 68(%ebp),%ecx
+	movl %edx,100(%esp)
+	movl 72(%ebp),%edx
+	movl %eax,112(%esp)
+	movl 76(%ebp),%eax
+	movl %ecx,124(%esp)
+	movl 80(%ebp),%ecx
+	movl %edx,136(%esp)
+	movl 84(%ebp),%edx
+	movl %eax,148(%esp)
+	movl 88(%ebp),%eax
+	movl %ecx,160(%esp)
+	movl 92(%ebp),%ecx
+	movl %edx,172(%esp)
+	movl 96(%ebp),%edx
+	movl %eax,184(%esp)
+	movl 100(%ebp),%eax
+	movl %ecx,196(%esp)
+	movl 24(%ebp),%ecx
+	movl %edx,460(%esp)
+	movl 19(%esi),%edx
+	movl %eax,472(%esp)
+	movl 15(%esi),%eax
+	movl %eax,484(%esp)
+	movl 11(%esi),%eax
+	movl %eax,496(%esp)
+	movl 7(%esi),%eax
+	movl %eax,508(%esp)
+	movl 3(%esi),%eax
+	movl %eax,520(%esp)
+	movl 16(%ebp),%eax
+	movl %eax,532(%esp)
+	movl 12(%ebp),%eax
+	movl %eax,544(%esp)
+	movl 8(%ebp),%eax
+	movl %eax,556(%esp)
+	movl 28(%ebp),%eax
+	movl %eax,568(%esp)
+	movl 4(%ebp),%eax
+	movl %eax,580(%esp)
+	movl 20(%ebp),%eax
+	movl %eax,592(%esp)
+	movl 40(%ebp),%eax
+	jmp .Ls6ua
+.Lc6IL:
+	movl $24,904(%ebx)
+	jmp stg_gc_unpt_r1
+	.size Loop_zdwa_info, .-Loop_zdwa_info
+.data
+	.align 4
+.align 1
+.globl Loop_inputLoop1_closure
+.type Loop_inputLoop1_closure, @object
+Loop_inputLoop1_closure:
+	.long	Loop_inputLoop1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(Loop_inputLoop1_info)+64
+	.long	458778
+	.long	0
+	.long	196623
+.globl Loop_inputLoop1_info
+.type Loop_inputLoop1_info, @object
+Loop_inputLoop1_info:
+.Lc6LF:
+	movl 40(%ebx),%eax
+	movl 32(%ebx),%ecx
+	movl 24(%ebx),%edx
+	movl %edx,64(%esp)
+	movl 16(%ebx),%edx
+	movl %edx,76(%esp)
+	movl 8(%ebx),%edx
+	movl %edx,88(%esp)
+	leal -56(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .Lc6M3
+.Lc6M4:
+	movl $c6LC_info,-20(%ebp)
+	movl 76(%esp),%edx
+	movl %edx,%esi
+	movl 88(%esp),%edx
+	movl %edx,-16(%ebp)
+	movl 64(%esp),%edx
+	movl %edx,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-20,%ebp
+	testw $7,%si
+	jne .Lc6LC
+.Lc6LD:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6LC_info)+64
+	.long	5
+	.long	65568
+c6LC_info:
+.Lc6LC:
+	movl $c6LI_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 12(%ebp),%esi
+	movl %eax,12(%ebp)
+	testw $7,%si
+	jne .Lc6LI
+.Lc6LJ:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6LI_info)+64
+	.long	5
+	.long	65568
+c6LI_info:
+.Lc6LI:
+	movl $c6LN_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 16(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,16(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6LN
+.Lc6LO:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6LN_info)+64
+	.long	6
+	.long	65568
+c6LN_info:
+.Lc6LN:
+	movl $c6LS_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 24(%ebp),%esi
+	movl %eax,24(%ebp)
+	testw $7,%si
+	jne .Lc6LS
+.Lc6LT:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6LS_info)+64
+	.long	2054
+	.long	65568
+c6LS_info:
+.Lc6LS:
+	movl $c6LX_info,-28(%ebp)
+	movl 3(%esi),%eax
+	movl 11(%esi),%ecx
+	movl 15(%esi),%edx
+	movl %eax,100(%esp)
+	movl 19(%esi),%eax
+	movl %ecx,112(%esp)
+	movl 23(%esi),%ecx
+	movl %edx,124(%esp)
+	movl 27(%esi),%edx
+	movl %eax,136(%esp)
+	movl 31(%esi),%eax
+	movl 7(%esi),%esi
+	movl %eax,148(%esp)
+	movl 112(%esp),%eax
+	movl %eax,-24(%ebp)
+	movl 124(%esp),%eax
+	movl %eax,-20(%ebp)
+	movl 136(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 148(%esp),%eax
+	movl %eax,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl 100(%esp),%eax
+	movl %eax,(%ebp)
+	addl $-28,%ebp
+	testw $7,%si
+	jne .Lc6LX
+.Lc6LY:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6LX_info)+64
+	.long	262669
+	.long	65568
+c6LX_info:
+.Lc6LX:
+	movl $c6M2_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 20(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,20(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6M2
+.Lc6Ma:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6M2_info)+64
+	.long	527438
+	.long	65568
+c6M2_info:
+.Lc6M2:
+	movl 36(%ebp),%eax
+	movl %eax,40(%ebx)
+	movl 52(%ebp),%eax
+	movl %eax,32(%ebx)
+	movl 44(%ebp),%eax
+	movl %eax,24(%ebx)
+	movl 48(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl 40(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl 4(%ebp),%eax
+	movl 56(%ebp),%ecx
+	movl %ecx,4(%ebp)
+	movl 8(%ebp),%ecx
+	movl 32(%ebp),%edx
+	movl %edx,8(%ebp)
+	movl 12(%ebp),%edx
+	movl %ecx,112(%esp)
+	movl 24(%ebp),%ecx
+	movl %ecx,12(%ebp)
+	movl 16(%ebp),%ecx
+	movl %eax,16(%ebp)
+	movl 20(%ebp),%eax
+	movl %edx,124(%esp)
+	movl 112(%esp),%edx
+	movl %edx,20(%ebp)
+	movl 124(%esp),%edx
+	movl %edx,24(%ebp)
+	movl 28(%ebp),%edx
+	movl %ecx,28(%ebp)
+	movl %eax,32(%ebp)
+	movl 3(%esi),%eax
+	movl %eax,36(%ebp)
+	movl 7(%esi),%eax
+	movl %eax,40(%ebp)
+	movl 11(%esi),%eax
+	movl %eax,44(%ebp)
+	movl 15(%esi),%eax
+	movl %eax,48(%ebp)
+	movl 19(%esi),%eax
+	movl %eax,52(%ebp)
+	movl %edx,56(%ebp)
+	addl $4,%ebp
+	jmp Loop_zdwa_info
+.Lc6M3:
+	movl %eax,40(%ebx)
+	movl %ecx,32(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,24(%ebx)
+	movl 76(%esp),%eax
+	movl %eax,16(%ebx)
+	movl 88(%esp),%eax
+	movl %eax,8(%ebx)
+	movl $Loop_inputLoop1_closure,%esi
+	jmp *-8(%ebx)
+	.size Loop_inputLoop1_info, .-Loop_inputLoop1_info
+.data
+	.align 4
+.align 1
+.globl Loop_inputLoop_closure
+.type Loop_inputLoop_closure, @object
+Loop_inputLoop_closure:
+	.long	Loop_inputLoop_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(Loop_inputLoop_info)+68
+	.long	458778
+	.long	0
+	.long	65551
+.globl Loop_inputLoop_info
+.type Loop_inputLoop_info, @object
+Loop_inputLoop_info:
+.Lc6MB:
+	movl 40(%ebx),%eax
+	movl %eax,40(%ebx)
+	movl 32(%ebx),%eax
+	movl %eax,32(%ebx)
+	movl 24(%ebx),%eax
+	movl %eax,24(%ebx)
+	movl 16(%ebx),%eax
+	movl %eax,16(%ebx)
+	movl 8(%ebx),%eax
+	movl %eax,8(%ebx)
+	jmp Loop_inputLoop1_info
+	.size Loop_inputLoop_info, .-Loop_inputLoop_info
+.data
+	.align 4
+.align 1
+r6f2_closure:
+	.long	r6f2_info
+.text
+	.align 4,0x90
+r6f2_slow:
+.Lc6NK:
+	movl 16(%ebp),%eax
+	movl %eax,8(%ebx)
+#	gldsd 8(%ebp),%fake0
+	fldl 8(%ebp) ; fstp %st(1)
+#	gstsd %fake0,112(%ebx)
+	fstl 112(%ebx)
+#	gldsd (%ebp),%fake0
+	fldl (%ebp) ; fstp %st(1)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $20,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f2_info
+	.size r6f2_slow, .-r6f2_slow
+.text
+	.align 4,0x90
+	.long	r6f2_slow-(r6f2_info)+0
+	.long	965
+	.long	0
+	.long	196608
+	.long	0
+	.long	15
+r6f2_info:
+.Lc6NY:
+	movl 8(%ebx),%eax
+#	gldsd 112(%ebx),%fake0
+	fldl 112(%ebx) ; fstp %st(1)
+#	gldsd 104(%ebx),%fake1
+	fldl 104(%ebx) ; fstp %st(2)
+	leal -44(%ebp),%ecx
+	cmpl 840(%ebx),%ecx
+	jae .Lc6NL
+.Lc6NZ:
+	movl $r6f2_closure,%esi
+#	gstsd %fake1,-20(%ebp)
+	fld %st(1) ; fstpl -20(%ebp)
+#	gstsd %fake0,-12(%ebp)
+	fstl -12(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-20,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	62666
+	.long	32
+c6Ox_info:
+.Lc6Ox:
+#	gldsd 28(%ebp),%fake0
+	fldl 28(%ebp) ; fstp %st(1)
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gaddt %fake1,%fake2,%fake1
+	#GADD-xxxcase1
+	fld %st(2) ; faddp %st(0),%st(2)
+#	gcmp_l %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6Ps
+.Lu6Px:
+#	gldsd 36(%ebp),%fake1
+	fldl 36(%ebp) ; fstp %st(2)
+	movl 24(%ebp),%eax
+	addl $4,%ebp
+.Lc6Pn:
+	addl $40,%ebp
+.Ln6PT:
+#	gstt %fake0,76(%esp)
+	fld %st(0) ; fstpt 76(%esp)
+#	gmovsd %fake1,%fake0
+	fld %st(1) ; fstp %st(1)
+#	gldt 76(%esp),%fake1
+	fldt 76(%esp) ; fstp %st(2)
+.Lc6NL:
+	movl $c6NO_info,-20(%ebp)
+	movl %eax,%esi
+#	gstsd %fake1,-16(%ebp)
+	fld %st(1) ; fstpl -16(%ebp)
+#	gstsd %fake0,-8(%ebp)
+	fstl -8(%ebp)
+	addl $-20,%ebp
+	testw $7,%si
+	jne .Lc6NO
+.Lc6NP:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	15752
+	.long	32
+c6OP_info:
+.Lc6OP:
+#	gldsd 28(%ebp),%fake0
+	fldl 28(%ebp) ; fstp %st(1)
+#	gldsd 3(%esi),%fake1
+	fldl 3(%esi) ; fstp %st(2)
+#	gcmp_g %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6Pp
+.Lu6Py:
+#	gldsd 20(%ebp),%fake1
+	fldl 20(%ebp) ; fstp %st(2)
+	movl 16(%ebp),%eax
+	addl $-4,%ebp
+.Ln6PU:
+#	gstt %fake0,64(%esp)
+	fld %st(0) ; fstpt 64(%esp)
+#	gmovsd %fake1,%fake0
+	fld %st(1) ; fstp %st(1)
+#	gldt 64(%esp),%fake1
+	fldt 64(%esp) ; fstp %st(2)
+	jmp .Lc6Pn
+.text
+	.align 4,0x90
+	.long	15816
+	.long	32
+c6P4_info:
+.Lc6P4:
+#	gldsd 28(%ebp),%fake0
+	fldl 28(%ebp) ; fstp %st(1)
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gaddt %fake1,%fake2,%fake1
+	#GADD-xxxcase1
+	fld %st(2) ; faddp %st(0),%st(2)
+#	gcmp_l %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6Pm
+.Lu6Pz:
+#	gldsd 20(%ebp),%fake1
+	fldl 20(%ebp) ; fstp %st(2)
+	movl 16(%ebp),%eax
+	addl $-4,%ebp
+.Ln6PS:
+#	gstt %fake0,64(%esp)
+	fld %st(0) ; fstpt 64(%esp)
+#	gmovsd %fake1,%fake0
+	fld %st(1) ; fstp %st(1)
+#	gldt 64(%esp),%fake1
+	fldt 64(%esp) ; fstp %st(2)
+	jmp .Lc6Pn
+.text
+	.align 4,0x90
+	.long	31241
+	.long	32
+c6Og_info:
+.Lc6Og:
+#	gldsd 24(%ebp),%fake0
+	fldl 24(%ebp) ; fstp %st(1)
+#	gldsd 32(%ebp),%fake1
+	fldl 32(%ebp) ; fstp %st(2)
+	movl 20(%ebp),%eax
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gcmp_g %fake0,%fake2
+	pushl %eax ; fld %st(0)
+	fcomp %st(3); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6Pv
+	jmp .Lc6Pn
+.text
+	.align 4,0x90
+	.long	964
+	.long	32
+c6NO_info:
+.Lc6NO:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6NW
+.Lc6NX:
+	movl $-1,%esi
+	addl $20,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+.Lc6NW:
+	movl $c6O6_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6O6
+.Lc6O7:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1925
+	.long	32
+c6O6_info:
+.Lc6O6:
+	movl $c6Ob_info,-4(%ebp)
+	movl 51(%esi),%eax
+	movl 3(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Ob
+.Lc6Oc:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	3910
+	.long	32
+c6Ob_info:
+.Lc6Ob:
+	movl $c6Og_info,-12(%ebp)
+	movl 7(%esi),%eax
+	movl 11(%esi),%ecx
+	movl 15(%esi),%edx
+	movl 3(%esi),%esi
+	movl %ecx,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl %eax,(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Og
+.Lc6Ok:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6Pv:
+	movl $c6Ox_info,-4(%ebp)
+	movl 4(%ebp),%esi
+#	gstsd %fake2,(%ebp)
+	fld %st(2) ; fstpl (%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Ox
+.Lc6Oz:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6Ps:
+	movl $c6OP_info,8(%ebp)
+	movl 16(%ebp),%esi
+	addl $8,%ebp
+	testw $7,%si
+	jne .Lc6OP
+.Lc6OR:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6Pp:
+	movl $c6P4_info,(%ebp)
+	movl 4(%ebp),%esi
+#	gstsd %fake1,4(%ebp)
+	fld %st(1) ; fstpl 4(%ebp)
+	testw $7,%si
+	jne .Lc6P4
+.Lc6P6:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6Pm:
+	movl 12(%ebp),%esi
+	addl $36,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+	.size r6f2_info, .-r6f2_info
+.data
+	.align 4
+.align 1
+r6f3_closure:
+	.long	r6f3_info
+.text
+	.align 4,0x90
+r6f3_slow:
+.Lc6QW:
+	movl 12(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl 8(%ebp),%eax
+	movl %eax,8(%ebx)
+#	gldsd (%ebp),%fake0
+	fldl (%ebp) ; fstp %st(1)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $16,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f3_info
+	.size r6f3_slow, .-r6f3_slow
+.text
+	.align 4,0x90
+	.long	r6f3_slow-(r6f3_info)+0
+	.long	196
+	.long	0
+	.long	196608
+	.long	0
+	.long	15
+r6f3_info:
+.Lc6Ra:
+	movl 16(%ebx),%eax
+	movl 8(%ebx),%ecx
+#	gldsd 104(%ebx),%fake0
+	fldl 104(%ebx) ; fstp %st(1)
+	leal -44(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jae .Lc6QX
+.Lc6Rb:
+	movl $r6f3_closure,%esi
+#	gstsd %fake0,-16(%ebp)
+	fstl -16(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-16,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	13513
+	.long	32
+c6RJ_info:
+.Lc6RJ:
+#	gldsd 28(%ebp),%fake0
+	fldl 28(%ebp) ; fstp %st(1)
+	movl 36(%ebp),%eax
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gaddt %fake1,%fake2,%fake1
+	#GADD-xxxcase1
+	fld %st(2) ; faddp %st(0),%st(2)
+#	gcmp_l %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6SK
+.Lu6SP:
+	movl 24(%ebp),%ecx
+	addl $4,%ebp
+.Lc6SL:
+	addl $36,%ebp
+.Ln6T8:
+	movl %eax,64(%esp)
+	movl %ecx,%eax
+	movl 64(%esp),%ecx
+.Lc6QX:
+	movl $c6R0_info,-16(%ebp)
+	movl %eax,%esi
+#	gstsd %fake0,-12(%ebp)
+	fstl -12(%ebp)
+	movl %ecx,-4(%ebp)
+	addl $-16,%ebp
+	testw $7,%si
+	jne .Lc6R0
+.Lc6R1:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	6664
+	.long	32
+c6Rs_info:
+.Lc6Rs:
+#	gldsd 24(%ebp),%fake0
+	fldl 24(%ebp) ; fstp %st(1)
+	movl 32(%ebp),%eax
+	movl 20(%ebp),%ecx
+#	gldsd 3(%esi),%fake1
+	fldl 3(%esi) ; fstp %st(2)
+#	gcmp_g %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6SN
+	jmp .Lc6SL
+.text
+	.align 4,0x90
+	.long	195
+	.long	32
+c6R0_info:
+.Lc6R0:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc6R8
+.Lc6R9:
+	movl $-1,%esi
+	addl $16,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+.Lc6R8:
+	movl $c6Ri_info,-4(%ebp)
+	movl 6(%esi),%eax
+	movl 2(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Ri
+.Lc6Rj:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	388
+	.long	32
+c6Ri_info:
+.Lc6Ri:
+	movl $c6Rn_info,-4(%ebp)
+	movl 51(%esi),%eax
+	movl 3(%esi),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Rn
+.Lc6Ro:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	837
+	.long	32
+c6Rn_info:
+.Lc6Rn:
+	movl $c6Rs_info,-12(%ebp)
+	movl 7(%esi),%eax
+	movl 11(%esi),%ecx
+	movl 15(%esi),%edx
+	movl 3(%esi),%esi
+	movl %ecx,-8(%ebp)
+	movl %edx,-4(%ebp)
+	movl %eax,(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Rs
+.Lc6Rw:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6SN:
+	movl $c6RJ_info,-4(%ebp)
+	movl 4(%ebp),%esi
+#	gstsd %fake1,(%ebp)
+	fld %st(1) ; fstpl (%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6RJ
+.Lc6RL:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	7431
+	.long	32
+c6S1_info:
+.Lc6S1:
+	movl $c6S6_info,-12(%ebp)
+#	gldsd 3(%esi),%fake0
+	fldl 3(%esi) ; fstp %st(1)
+	movl 8(%ebp),%esi
+#	gstsd %fake0,-8(%ebp)
+	fstl -8(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6S6
+.Lc6S9:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6SK:
+	movl $c6S1_info,8(%ebp)
+	movl %eax,%esi
+	addl $8,%ebp
+	testw $7,%si
+	jne .Lc6S1
+.Lc6S2:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	60874
+	.long	32
+c6S6_info:
+.Lc6S6:
+#	gldsd 32(%ebp),%fake0
+	fldl 32(%ebp) ; fstp %st(1)
+	movl 28(%ebp),%eax
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gcmp_g %fake1,%fake2
+	pushl %eax ; fld %st(1)
+	fcomp %st(3); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6SH
+.Lc6SF:
+	movl %eax,8(%ebx)
+#	gstsd %fake1,112(%ebx)
+	fld %st(1) ; fstpl 112(%ebx)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $44,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f2_info
+.text
+	.align 4,0x90
+	.long	61386
+	.long	32
+c6Sm_info:
+.Lc6Sm:
+#	gldsd 32(%ebp),%fake0
+	fldl 32(%ebp) ; fstp %st(1)
+	movl 28(%ebp),%eax
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 16(%ebp),%fake2
+	fldl 16(%ebp) ; fstp %st(3)
+#	gldsd 3(%esi),%fake3
+	fldl 3(%esi) ; fstp %st(4)
+#	gaddt %fake2,%fake3,%fake2
+	#GADD-xxxcase1
+	fld %st(3) ; faddp %st(0),%st(3)
+#	gcmp_l %fake1,%fake2
+	pushl %eax ; fld %st(1)
+	fcomp %st(3); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc6SE
+	jmp .Lc6SF
+.Lc6SH:
+	movl $c6Sm_info,(%ebp)
+	movl 16(%ebp),%esi
+#	gstsd %fake2,16(%ebp)
+	fld %st(2) ; fstpl 16(%ebp)
+	testw $7,%si
+	jne .Lc6Sm
+.Lc6So:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6SE:
+	movl 24(%ebp),%esi
+	addl $44,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+	.size r6f3_info, .-r6f3_info
+.data
+	.align 4
+.align 1
+.globl Loop_mouseClick1_closure
+.type Loop_mouseClick1_closure, @object
+Loop_mouseClick1_closure:
+	.long	Loop_mouseClick1_info
+	.long	0
+.text
+	.align 4,0x90
+.globl Loop_mouseClick1_slow
+.type Loop_mouseClick1_slow, @object
+Loop_mouseClick1_slow:
+.Lc6VP:
+	movl 16(%ebp),%eax
+	movl %eax,40(%ebx)
+	movl 12(%ebp),%eax
+	movl %eax,32(%ebx)
+	movl 8(%ebp),%eax
+	movl %eax,24(%ebx)
+	movl 4(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl (%ebp),%eax
+	movl %eax,8(%ebx)
+	addl $20,%ebp
+	jmp Loop_mouseClick1_info
+	.size Loop_mouseClick1_slow, .-Loop_mouseClick1_slow
+.text
+	.align 4,0x90
+	.long	3
+	.long	16
+s6A4_info:
+.Lc6Xe:
+	leal -24(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6XB
+.Lc6XC:
+	movl $c6Xb_info,-12(%ebp)
+	movl 16(%esi),%eax
+	movl 20(%esi),%ecx
+	movl 12(%esi),%esi
+	movl %eax,-8(%ebp)
+	movl %ecx,-4(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Xb
+.Lc6Xc:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	2
+	.long	32
+c6Xb_info:
+.Lc6Xb:
+	movl $c6Xh_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 4(%ebp),%esi
+	movl %eax,4(%ebp)
+	testw $7,%si
+	jne .Lc6Xh
+.Lc6Xi:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	66
+	.long	32
+c6Xh_info:
+.Lc6Xh:
+	movl $c6Xm_info,-12(%ebp)
+#	gldsd 3(%esi),%fake0
+	fldl 3(%esi) ; fstp %st(1)
+	movl 8(%ebp),%esi
+#	gstsd %fake0,-8(%ebp)
+	fstl -8(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Xm
+.Lc6Xn:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1989
+	.long	32
+c6Xm_info:
+.Lc6Xm:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6XH
+.Lc6XG:
+	movl 16(%ebp),%eax
+#	gitodlsd %eax,%fake0
+	pushl %eax ; fildl (%esp) ; fstp %st(1) ; addl $4,%esp
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gdivt %fake1,%fake2,%fake1
+	#GDIV-xxxcase1
+	fld %st(2) ; fdivrp %st(0),%st(2)
+#	gmult %fake0,%fake1,%fake0
+	#GMUL-xxxcase1
+	fld %st(1) ; fmulp %st(0),%st(1)
+	movl $ghczmprim_GHCziTypes_Dzh_con_info,-8(%edi)
+#	gstsd %fake0,-4(%edi)
+	fstl -4(%edi)
+	leal -7(%edi),%esi
+	addl $24,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+.Lc6XB:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *-16(%ebx)
+.Lc6XH:
+	movl $12,904(%ebx)
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp stg_gc_unpt_r1
+	.size s6A4_info, .-s6A4_info
+.text
+	.align 4,0x90
+	.long	3
+	.long	16
+s6Ak_info:
+.Lc6Y3:
+	leal -24(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc6Yq
+.Lc6Yr:
+	movl $c6Y0_info,-12(%ebp)
+	movl 16(%esi),%eax
+	movl 20(%esi),%ecx
+	movl 12(%esi),%esi
+	movl %eax,-8(%ebp)
+	movl %ecx,-4(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Y0
+.Lc6Y1:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	2
+	.long	32
+c6Y0_info:
+.Lc6Y0:
+	movl $c6Y6_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 4(%ebp),%esi
+	movl %eax,4(%ebp)
+	testw $7,%si
+	jne .Lc6Y6
+.Lc6Y7:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	66
+	.long	32
+c6Y6_info:
+.Lc6Y6:
+	movl $c6Yb_info,-12(%ebp)
+#	gldsd 3(%esi),%fake0
+	fldl 3(%esi) ; fstp %st(1)
+	movl 8(%ebp),%esi
+#	gstsd %fake0,-8(%ebp)
+	fstl -8(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Yb
+.Lc6Yc:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	1989
+	.long	32
+c6Yb_info:
+.Lc6Yb:
+	addl $12,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Yw
+.Lc6Yv:
+	movl 16(%ebp),%eax
+#	gitodlsd %eax,%fake0
+	pushl %eax ; fildl (%esp) ; fstp %st(1) ; addl $4,%esp
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gdivt %fake1,%fake2,%fake1
+	#GDIV-xxxcase1
+	fld %st(2) ; fdivrp %st(0),%st(2)
+#	gmult %fake0,%fake1,%fake0
+	#GMUL-xxxcase1
+	fld %st(1) ; fmulp %st(0),%st(1)
+	movl $ghczmprim_GHCziTypes_Dzh_con_info,-8(%edi)
+#	gstsd %fake0,-4(%edi)
+	fstl -4(%edi)
+	leal -7(%edi),%esi
+	addl $24,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%ebp)
+.Lc6Yq:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *-16(%ebx)
+.Lc6Yw:
+	movl $12,904(%ebx)
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp stg_gc_unpt_r1
+	.size s6Ak_info, .-s6Ak_info
+.text
+	.align 4,0x90
+	.long	Loop_mouseClick1_slow-(Loop_mouseClick1_info)+0
+	.long	7
+	.long	S6C3_srt-(Loop_mouseClick1_info)+64
+	.long	524288
+	.long	0
+	.long	327695
+.globl Loop_mouseClick1_info
+.type Loop_mouseClick1_info, @object
+Loop_mouseClick1_info:
+.Lc6Yx:
+	movl 40(%ebx),%eax
+	movl 32(%ebx),%ecx
+	movl 24(%ebx),%edx
+	movl %edx,64(%esp)
+	movl 16(%ebx),%edx
+	movl %edx,76(%esp)
+	movl 8(%ebx),%edx
+	movl %edx,88(%esp)
+	leal -100(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .Lc6Yy
+.Lc6Yz:
+	movl $c6VT_info,-20(%ebp)
+	movl 76(%esp),%edx
+	movl %edx,%esi
+	movl 88(%esp),%edx
+	movl %edx,-16(%ebp)
+	movl 64(%esp),%edx
+	movl %edx,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-20,%ebp
+	testw $7,%si
+	jne .Lc6VT
+.Lc6VU:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6VT_info)+64
+	.long	6
+	.long	65568
+c6VT_info:
+.Lc6VT:
+	movl $c6VY_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 12(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,12(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6VY
+.Lc6VZ:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6VY_info)+64
+	.long	7
+	.long	65568
+c6VY_info:
+.Lc6VY:
+	movl $c6W3_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 28(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,28(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6W3
+.Lc6W4:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6W3_info)+64
+	.long	8
+	.long	65568
+c6W3_info:
+.Lc6W3:
+	movl $c6Wa_info,-32(%ebp)
+	movl $ghczmprim_GHCziTypes_ZMZN_closure+1,16(%ebx)
+	movl 19(%esi),%eax
+	movl %eax,8(%ebx)
+	movl 7(%esi),%ecx
+	movl %ecx,-28(%ebp)
+	movl 11(%esi),%ecx
+	movl %ecx,-24(%ebp)
+	movl 15(%esi),%ecx
+	movl %ecx,-20(%ebp)
+	movl %eax,-16(%ebp)
+	movl 31(%esi),%eax
+	movl %eax,-12(%ebp)
+	movl 23(%esi),%eax
+	movl %eax,-8(%ebp)
+	movl 27(%esi),%eax
+	movl %eax,-4(%ebp)
+	movl 3(%esi),%eax
+	movl %eax,(%ebp)
+	addl $-32,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp base_GHCziList_reverse1_info
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wa_info)+64
+	.long	1040
+	.long	65568
+c6Wa_info:
+.Lc6Wa:
+	movl %esi,%eax
+	andl $7,%eax
+	cmpl $2,%eax
+	jae .Lc70O
+.Lc70P:
+	movl 4(%ebp),%eax
+	addl $-32,%ebp
+	movl $-1,%ecx
+.Ls6z3:
+	movl $c6YG_info,36(%ebp)
+	movl %eax,%esi
+	movl %ecx,92(%ebp)
+	addl $36,%ebp
+	testw $7,%si
+	jne .Lc6YG
+.Lc6YH:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wf_info)+64
+	.long	2065
+	.long	65568
+c6Wf_info:
+.Lc6Wf:
+	movl $c6Wk_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 56(%ebp),%esi
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Wk
+.Lc6Wl:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc70O:
+	movl $c6Wf_info,-4(%ebp)
+	movl 2(%esi),%eax
+	movl 6(%esi),%ecx
+	movl 56(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,56(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Wf
+.Lc6Wg:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wk_info)+64
+	.long	4178
+	.long	65568
+c6Wk_info:
+.Lc6Wk:
+	movl $c6Wp_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 48(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,48(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Wp
+.Lc6Wq:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wp_info)+64
+	.long	8339
+	.long	65568
+c6Wp_info:
+.Lc6Wp:
+	movl $c6Wu_info,-4(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 52(%ebp),%esi
+	movl %ecx,(%ebp)
+	movl %eax,52(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6Wu
+.Lc6Wv:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wu_info)+64
+	.long	16660
+	.long	65568
+c6Wu_info:
+.Lc6Wu:
+	movl $c6Wz_info,-12(%ebp)
+#	gldsd 3(%esi),%fake0
+	fldl 3(%esi) ; fstp %st(1)
+	movl 56(%ebp),%esi
+#	gstsd %fake0,-8(%ebp)
+	fstl -8(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6Wz
+.Lc6WA:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Wz_info)+64
+	.long	4327895
+	.long	65568
+c6Wz_info:
+.Lc6Wz:
+	movl 24(%ebp),%eax
+#	gitodlsd %eax,%fake0
+	pushl %eax ; fildl (%esp) ; fstp %st(1) ; addl $4,%esp
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gdivt %fake1,%fake2,%fake1
+	#GDIV-xxxcase1
+	fld %st(2) ; fdivrp %st(0),%st(2)
+#	gmult %fake0,%fake1,%fake0
+	#GMUL-xxxcase1
+	fld %st(1) ; fmulp %st(0),%st(1)
+	movl $c6WN_info,4(%ebp)
+	movl 84(%ebp),%esi
+#	gstsd %fake0,8(%ebp)
+	fstl 8(%ebp)
+	addl $4,%ebp
+	testw $7,%si
+	jne .Lc6WN
+.Lc6WO:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6WN_info)+64
+	.long	35718358
+	.long	65568
+c6WN_info:
+.Lc6WN:
+	movl $c6WS_info,(%ebp)
+	movl 51(%esi),%eax
+	movl 3(%esi),%esi
+	movl %eax,80(%ebp)
+	testw $7,%si
+	jne .Lc6WS
+.Lc6WT:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6WS_info)+64
+	.long	35718358
+	.long	65568
+c6WS_info:
+.Lc6WS:
+	movl $c6WX_info,-4(%ebp)
+	movl 7(%esi),%eax
+	movl 11(%esi),%ecx
+	movl 15(%esi),%edx
+	movl 3(%esi),%esi
+	movl %edx,(%ebp)
+	movl %ecx,20(%ebp)
+	movl %eax,64(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc6WX
+.Lc6WY:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6WX_info)+64
+	.long	67240343
+	.long	65568
+c6WX_info:
+.Lc6WX:
+	addl $24,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Z8
+.Lc6Z7:
+#	gldsd 8(%ebp),%fake0
+	fldl 8(%ebp) ; fstp %st(1)
+#	gldsd 3(%esi),%fake1
+	fldl 3(%esi) ; fstp %st(2)
+#	gcmp_g %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc70K
+.Lc70L:
+	movl $s6A4_info,-20(%edi)
+	movl 88(%ebp),%eax
+	movl %eax,-8(%edi)
+	movl 20(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 16(%ebp),%eax
+	movl %eax,(%edi)
+	movl 28(%ebp),%eax
+	movl $c6Z9_info,28(%ebp)
+	movl %eax,16(%ebx)
+	leal -20(%edi),%eax
+	movl %eax,8(%ebx)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $28,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f3_info
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6XJ_info)+64
+	.long	537939418
+	.long	65568
+c6XJ_info:
+.Lc6XJ:
+	addl $24,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc6Zj
+.Lc6Zi:
+	movl 100(%ebp),%eax
+#	gldsd 20(%ebp),%fake0
+	fldl 20(%ebp) ; fstp %st(1)
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gaddt %fake1,%fake2,%fake1
+	#GADD-xxxcase1
+	fld %st(2) ; faddp %st(0),%st(2)
+#	gcmp_l %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc70H
+.Lc70I:
+	movl $s6Ak_info,-20(%edi)
+	movl %eax,-8(%edi)
+	movl 32(%ebp),%eax
+	movl %eax,-4(%edi)
+	movl 28(%ebp),%eax
+	movl %eax,(%edi)
+	movl 40(%ebp),%eax
+	movl $c6Zk_info,40(%ebp)
+	movl %eax,16(%ebx)
+	leal -20(%edi),%eax
+	movl %eax,8(%ebx)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $40,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f3_info
+.Lc70K:
+	addl $-24,%edi
+	movl $c6XJ_info,-12(%ebp)
+	movl 24(%ebp),%esi
+#	gstsd %fake1,-8(%ebp)
+	fld %st(1) ; fstpl -8(%ebp)
+	addl $-12,%ebp
+	testw $7,%si
+	jne .Lc6XJ
+.Lc6XK:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc6Yy:
+	movl $Loop_mouseClick1_closure,%esi
+	movl 88(%esp),%edx
+	movl %edx,-20(%ebp)
+	movl 76(%esp),%edx
+	movl %edx,-16(%ebp)
+	movl 64(%esp),%edx
+	movl %edx,-12(%ebp)
+	movl %ecx,-8(%ebp)
+	movl %eax,-4(%ebp)
+	addl $-20,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *-8(%ebx)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6YG_info)+64
+	.long	803343
+	.long	65568
+c6YG_info:
+.Lc6YG:
+	movl $c6YL_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 7(%esi),%ecx
+	movl 20(%ebp),%esi
+	movl %ecx,36(%ebp)
+	movl %eax,52(%ebp)
+	testw $7,%si
+	jne .Lc6YL
+.Lc6YO:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc70B:
+	movl 36(%ebp),%eax
+	movl 88(%ebp),%ecx
+	jmp .Ls6z3
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c70s_info)+64
+	.long	1606672
+	.long	65568
+c70s_info:
+.Lc70s:
+	movl 4(%ebp),%eax
+	addl $-32,%ebp
+	movl %esi,%ecx
+	jmp .Ls6z3
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c705_info)+64
+	.long	1606672
+	.long	65568
+c705_info:
+.Lc705:
+	movl 4(%ebp),%eax
+	addl $-32,%ebp
+	movl %esi,%ecx
+	jmp .Ls6z3
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Zk_info)+64
+	.long	1606672
+	.long	65568
+c6Zk_info:
+.Lc6Zk:
+	movl 4(%ebp),%eax
+	addl $-32,%ebp
+	movl %esi,%ecx
+	jmp .Ls6z3
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Z9_info)+64
+	.long	1606672
+	.long	65568
+c6Z9_info:
+.Lc6Z9:
+	movl 4(%ebp),%eax
+	addl $-32,%ebp
+	movl %esi,%ecx
+	jmp .Ls6z3
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6YL_info)+64
+	.long	804367
+	.long	65568
+c6YL_info:
+.Lc6YL:
+	movl 32(%ebp),%eax
+	movl %eax,40(%ebx)
+	movl 60(%ebp),%eax
+	movl %eax,32(%ebx)
+	movl 44(%ebp),%eax
+	movl %eax,24(%ebx)
+	movl 48(%ebp),%eax
+	movl %eax,16(%ebx)
+	movl 40(%ebp),%eax
+	movl %eax,8(%ebx)
+	movl 8(%ebp),%eax
+	movl 56(%ebp),%ecx
+	movl %ecx,8(%ebp)
+	movl 12(%ebp),%ecx
+	movl 28(%ebp),%edx
+	movl %edx,12(%ebp)
+	movl 16(%ebp),%edx
+	movl %eax,100(%esp)
+	movl 52(%ebp),%eax
+	movl %eax,16(%ebp)
+	movl 36(%ebp),%eax
+	movl %eax,20(%ebp)
+	movl 24(%ebp),%eax
+	movl %ecx,112(%esp)
+	movl 4(%ebp),%ecx
+	movl %ecx,24(%ebp)
+	movl 100(%esp),%ecx
+	movl %ecx,28(%ebp)
+	movl 112(%esp),%ecx
+	movl %ecx,32(%ebp)
+	movl %edx,36(%ebp)
+	movl 3(%esi),%ecx
+	movl %ecx,40(%ebp)
+	movl 7(%esi),%ecx
+	movl %ecx,44(%ebp)
+	movl 11(%esi),%ecx
+	movl %ecx,48(%ebp)
+	movl 15(%esi),%ecx
+	movl %ecx,52(%ebp)
+	movl 19(%esi),%ecx
+	movl %ecx,56(%ebp)
+	movl %eax,60(%ebp)
+	addl $8,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp Loop_zdwa_info
+.Lc6Z8:
+	movl $24,904(%ebx)
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp stg_gc_unpt_r1
+.Lc6Zj:
+	movl $24,904(%ebx)
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp stg_gc_unpt_r1
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Zs_info)+64
+	.long	201460119
+	.long	65568
+c6Zs_info:
+.Lc6Zs:
+	movl $c6Zx_info,(%ebp)
+	movl 3(%esi),%eax
+	movl 20(%ebp),%esi
+	movl %eax,88(%ebp)
+	testw $7,%si
+	jne .Lc6Zx
+.Lc6Zy:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.Lc70H:
+	addl $-24,%edi
+	movl $c6Zs_info,12(%ebp)
+	movl %eax,%esi
+	addl $12,%ebp
+	testw $7,%si
+	jne .Lc6Zs
+.Lc6Zt:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6Zx_info)+64
+	.long	201461143
+	.long	65568
+c6Zx_info:
+.Lc6Zx:
+	movl $c6ZC_info,(%ebp)
+#	gldsd 3(%esi),%fake0
+	fldl 3(%esi) ; fstp %st(1)
+	movl 16(%ebp),%esi
+#	gstsd %fake0,20(%ebp)
+	fstl 20(%ebp)
+	testw $7,%si
+	jne .Lc6ZC
+.Lc6ZD:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6ZC_info)+64
+	.long	201461655
+	.long	65568
+c6ZC_info:
+.Lc6ZC:
+	movl 88(%ebp),%eax
+#	gitodlsd %eax,%fake0
+	pushl %eax ; fildl (%esp) ; fstp %st(1) ; addl $4,%esp
+#	gldsd 20(%ebp),%fake1
+	fldl 20(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gdivt %fake1,%fake2,%fake1
+	#GDIV-xxxcase1
+	fld %st(2) ; fdivrp %st(0),%st(2)
+#	gmult %fake0,%fake1,%fake0
+	#GMUL-xxxcase1
+	fld %st(1) ; fmulp %st(0),%st(1)
+	movl $c6ZQ_info,(%ebp)
+	movl 68(%ebp),%esi
+#	gstsd %fake0,20(%ebp)
+	fstl 20(%ebp)
+	testw $7,%si
+	jne .Lc6ZQ
+.Lc6ZV:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c6ZQ_info)+64
+	.long	205655959
+	.long	65568
+c6ZQ_info:
+.Lc6ZQ:
+#	gldsd 20(%ebp),%fake0
+	fldl 20(%ebp) ; fstp %st(1)
+#	gldsd 3(%esi),%fake1
+	fldl 3(%esi) ; fstp %st(2)
+#	gcmp_g %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	seta %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc70E
+.Lc70F:
+	movl 28(%ebp),%eax
+	movl $c705_info,28(%ebp)
+	movl %eax,8(%ebx)
+#	gstsd %fake0,112(%ebx)
+	fstl 112(%ebx)
+#	gldsd 8(%ebp),%fake0
+	fldl 8(%ebp) ; fstp %st(1)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $28,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f2_info
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c70d_info)+64
+	.long	411312088
+	.long	65568
+c70d_info:
+.Lc70d:
+#	gldsd 24(%ebp),%fake0
+	fldl 24(%ebp) ; fstp %st(1)
+#	gldsd 4(%ebp),%fake1
+	fldl 4(%ebp) ; fstp %st(2)
+#	gldsd 3(%esi),%fake2
+	fldl 3(%esi) ; fstp %st(3)
+#	gaddt %fake1,%fake2,%fake1
+	#GADD-xxxcase1
+	fld %st(2) ; faddp %st(0),%st(2)
+#	gcmp_l %fake0,%fake1
+	pushl %eax ; fld %st(0)
+	fcomp %st(2); fstsw %ax ; sahf ;  setpo %ah
+	setb %al ;  andb %ah,%al ;  decb %al ;  popl %eax
+	je .Lc70B
+.Lc70C:
+	movl 32(%ebp),%eax
+	movl $c70s_info,32(%ebp)
+	movl %eax,8(%ebx)
+#	gstsd %fake0,112(%ebx)
+	fstl 112(%ebx)
+#	gldsd 12(%ebp),%fake0
+	fldl 12(%ebp) ; fstp %st(1)
+#	gstsd %fake0,104(%ebx)
+	fstl 104(%ebx)
+	addl $32,%ebp
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp r6f2_info
+.Lc70E:
+	movl $c70d_info,-4(%ebp)
+	movl 4(%ebp),%esi
+#	gstsd %fake1,(%ebp)
+	fld %st(1) ; fstpl (%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc70d
+.Lc70f:
+	ffree %st(0) ;ffree %st(1) ;ffree %st(2) ;ffree %st(3)
+	ffree %st(4) ;ffree %st(5)
+	jmp *(%esi)
+	.size Loop_mouseClick1_info, .-Loop_mouseClick1_info
+.data
+	.align 4
+.align 1
+.globl Loop_mouseClick_closure
+.type Loop_mouseClick_closure, @object
+Loop_mouseClick_closure:
+	.long	Loop_mouseClick_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(Loop_mouseClick_info)+72
+	.long	393242
+	.long	0
+	.long	196623
+.globl Loop_mouseClick_info
+.type Loop_mouseClick_info, @object
+Loop_mouseClick_info:
+.Lc72n:
+	movl 40(%ebx),%eax
+	movl 32(%ebx),%ecx
+	movl 24(%ebx),%edx
+	movl %edx,64(%esp)
+	movl 16(%ebx),%edx
+	movl %edx,76(%esp)
+	movl 8(%ebx),%edx
+	movl %edx,88(%esp)
+	leal -20(%ebp),%edx
+	cmpl 840(%ebx),%edx
+	jb .Lc72o
+.Lc72p:
+	movl $c72g_info,-20(%ebp)
+	movl %eax,%esi
+	movl 88(%esp),%eax
+	movl %eax,-16(%ebp)
+	movl 76(%esp),%eax
+	movl %eax,-12(%ebp)
+	movl 64(%esp),%eax
+	movl %eax,-8(%ebp)
+	movl %ecx,-4(%ebp)
+	addl $-20,%ebp
+	testw $7,%si
+	jne .Lc72g
+.Lc72h:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	S6C3_srt-(c72g_info)+72
+	.long	5
+	.long	65568
+c72g_info:
+.Lc72g:
+	movl 4(%ebp),%eax
+	movl 8(%ebp),%ecx
+	movl 12(%ebp),%edx
+	movl %eax,88(%esp)
+	movl 16(%ebp),%eax
+	movl %ecx,76(%esp)
+	movl 3(%esi),%ecx
+	movl %edx,64(%esp)
+	movl 7(%esi),%edx
+	movl %eax,100(%esp)
+	movl $Loop_mouseClick1_closure,%eax
+	testb $7,%al
+	je .Lc72s
+.Lc72u:
+	movl $-8,%eax
+	andl $Loop_mouseClick1_closure,%eax
+	movl (%eax),%eax
+	cmpl $7,-12(%eax)
+	jne .Lc72s
+.Lc72t:
+	movl %ecx,40(%ebx)
+	movl 100(%esp),%ecx
+	movl %ecx,32(%ebx)
+	movl 64(%esp),%ecx
+	movl %ecx,24(%ebx)
+	movl 76(%esp),%ecx
+	movl %ecx,16(%ebx)
+	movl 88(%esp),%ecx
+	movl %ecx,8(%ebx)
+	movl $Loop_mouseClick1_closure,%esi
+	movl %edx,16(%ebp)
+	addl $16,%ebp
+	jmp *%eax
+.Lc72o:
+	movl %eax,40(%ebx)
+	movl %ecx,32(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,24(%ebx)
+	movl 76(%esp),%eax
+	movl %eax,16(%ebx)
+	movl 88(%esp),%eax
+	movl %eax,8(%ebx)
+	movl $Loop_mouseClick_closure,%esi
+	jmp *-8(%ebx)
+.Lc72s:
+	movl %ecx,40(%ebx)
+	movl 100(%esp),%eax
+	movl %eax,32(%ebx)
+	movl 64(%esp),%eax
+	movl %eax,24(%ebx)
+	movl 76(%esp),%eax
+	movl %eax,16(%ebx)
+	movl 88(%esp),%eax
+	movl %eax,8(%ebx)
+	movl $Loop_mouseClick1_closure,%esi
+	movl %edx,12(%ebp)
+	movl $stg_ap_p_info,16(%ebp)
+	addl $12,%ebp
+	jmp stg_ap_pppppp_fast
+	.size Loop_mouseClick_info, .-Loop_mouseClick_info
+.section .data
+	.align 4
+.align 1
+S6C3_srt:
+	.long	base_GHCziErr_undefined_closure
+	.long	base_ControlziExceptionziBase_absentError_closure
+	.long	r6eZ_closure
+	.long	Events_makeResult2_closure
+	.long	Events_makeResult3_closure
+	.long	base_GHCziList_zdwznzn_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziAudio_zdwplay_closure
+	.long	z35UPy7JlgLDw888SeTQH5AsL_ControlziMonadziIOziClass_zdfMonadIOIO_closure
+	.long	L1I7vD3tc7JKpsYOmEkn6q_HasteziGraphicsziCanvas_bufferzuf1_closure
+	.long	Output_drawCons1_closure
+	.long	Output_clearScreen2_closure
+	.long	Events_makeStgLt1_closure
+	.long	Events_zdwmakeChoice_closure
+	.long	Events_zdwmakeAns_closure
+	.long	r6f0_closure
+	.long	r6f1_closure
+	.long	Loop_zdwa_closure
+	.long	Loop_inputLoop1_closure
+	.long	Loop_mouseClick1_closure
+	.long	Loop_mouseClick_closure
+.section .note.GNU-stack,"",@progbits
+.ident "GHC 7.10.3"
+
