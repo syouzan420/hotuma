@@ -1,7 +1,8 @@
 module Initialize where
 
+import qualified Data.Map as M
 import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
-             ,Event(..),Stage(..),TxType(..),Score(..))
+             ,Event(..),Stage(..),TxType(..),Score(..),ltQuestSrc)
 
 initState :: State
 initState = State {stage=Nothing
@@ -9,6 +10,7 @@ initState = State {stage=Nothing
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
+                  ,qsrc=ltQuestSrc
                   ,rgn=0
                   ,swc=initSwitch
                   ,db=""

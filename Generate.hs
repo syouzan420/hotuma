@@ -1,19 +1,28 @@
 module Generate(genLtQuest,genCons,genAnsCon) where
 
+import qualified Data.Map as M
 import Libs (selectData,getRan)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..)
-              ,Bord(..),Event(..),TxType(..)
+              ,Bord(..),Event(..),TxType(..),QSource
               ,ltQuestSrc)
 
-genLtQuest :: Int -> Int -> IO (Question,Int)
-genLtQuest g lv = do
+genLtQuest :: Int -> Int -> QSource -> IO ((Question,QSource),Int)
+genLtQuest g lv qs = do
   let aqn = lv+3 -- avalable question numbers 
       qn = 4 + lv `div` 8 -- question numbers
-  (ai,g') <- getRan qn g 
-  (iqlist,ng) <- selectData qn g' (zip [0..] (take aqn ltQuestSrc))
-  let (auInd,qlist) = unzip iqlist
-  return (Question (map (:[]) qlist) auInd ai,ng)
+  (an,g') <- selectData 1 g (M.toList qs) 
+  let ans = head an
+  let nqs = M.delete (fst ans) qs 
+  let aqs = M.delete (fst ans) ltQuestSrc 
+  (ai,g'') <- getRan qn g' 
+  (iqlist,ng) <- selectData (qn-1) g'' (M.toList aqs) 
+  let iqlist' = insertToList ai ans iqlist
+  let (auInd,qlist) = unzip iqlist'
+  return ((Question (map (:[]) qlist) auInd ai,nqs),ng)
+
+insertToList :: Int -> a -> [a] -> [a]
+insertToList i tg lst = take i lst ++ [tg] ++ drop i lst
 
 genCons :: Size -> Question -> [Con]
 genCons cSz@(cW,cH) (Question qlist auInd ai) = 

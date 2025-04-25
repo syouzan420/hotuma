@@ -2,10 +2,12 @@
 module Define where
 
 import Haste(JSString)
+import qualified Data.Map as M
 
 type Pos = (Double,Double)
 type Size = (Double,Double)
 type Fsize = Int          --Font Size
+type QSource = M.Map Int Char
 
 type CInfo = ((Double,Double),(Double,Double))
   -- canvasWidth, canvasHeight, clientRectWidth, clientRectHeight
@@ -58,6 +60,7 @@ data State = State {stage :: !(Maybe Stage)
                    ,quest :: !(Maybe Question)
                    ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]
+                   ,qsrc :: !QSource -- quest source
                    ,rgn :: !Int -- Random Number Generator
                    ,swc :: !Switch
                    ,db :: !String    --for debug
@@ -98,8 +101,8 @@ wstAuFile = "Audio/os"
 seFile :: String
 seFile = "Audio/se"
 
-ltQuestSrc :: String
-ltQuestSrc = "あかはなまいきひにみうくふぬむえけへねめおこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ"
+ltQuestSrc :: QSource 
+ltQuestSrc = M.fromList $ zip [0..] "あかはなまいきひにみうくふぬむえけへねめおこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ"
 
 wstIndex :: String
 wstIndex = "あいうえおxkhnmtrsy かはなまきひにみくふぬむけへねめこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ゛阿和宇吾付須被意百雄間波が9穂ぞ話葉ざぐび緒ど3ずばぶぎべ補芽1府場じ個我ご図時曾火日だ座羽4馬部祖炉具語づ後子男でぜ出裳美"

@@ -10,11 +10,12 @@ import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
 makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
 makeStgLt cvSz oss lv st = do  
   let g = rgn st -- random number generator 
-  (q,ng) <- genLtQuest g lv 
+      qs = qsrc st -- quest source
+  ((q,nqs),ng) <- genLtQuest g lv qs
   let cos = genCons cvSz q
       tau = oss!!(audios q!!aInd q)
   play tau
-  return st{quest=Just q,cons=cos,rgn=ng,swc=(swc st){ita=True}}
+  return st{quest=Just q,cons=cos,qsrc=nqs,rgn=ng,swc=(swc st){ita=True}}
 
 makeStgWd :: Size -> Int -> State -> IO State
 makeStgWd cvSz lv st = undefined
