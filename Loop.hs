@@ -6,7 +6,8 @@ import Control.Monad(unless)
 import Browser(chColors,cvRatio,localStore,stringToJson)
 import Output(clearScreen,drawCons,randomMessage)
 import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult
-             ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission)
+             ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
+             ,makeMEnd,makeStart)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
              ,Event(..),Stage(..))
 
@@ -31,11 +32,13 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
               Just co -> do 
                   let ev = clEv co
                   case ev of
+                    Start -> return $ makeStart cvSz st
                     Study -> return $ makeStudy cvSz st
                     Learn stg num -> makeLearn cvSz oss stg num st
                     Summary stg -> return $ makeSummary cvSz stg st
                     ChClick oi -> makeChClick oss cid oi st
                     Mission stg i lv -> makeMission cvSz oss stg i lv st
+                    MEnd stg lv -> makeMEnd cvSz ses stg lv st
                     Quest stg -> case stg of
                         StgLetter lv -> if lv > 45
                             then makeResult cvSz st 

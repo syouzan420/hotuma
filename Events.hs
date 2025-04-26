@@ -1,15 +1,16 @@
 module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
              ,makeStudy,makeLearn,makeResult,timerEvent,loadState
-             ,makeSummary,makeChClick,makeMission) where
+             ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart) where
 
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
-                ,genSumCons,genMission)
+                ,genSumCons,genMission,genNoticeCon,genStartCons)
 import Libs (sepByChar)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
-              ,Size,CRect(..),Score(..),Switch(..),TxType(..),mTimeLimit)
+              ,Size,CRect(..),Score(..),Switch(..),TxType(..)
+              ,mTimeLimit,clearScore)
 
 makeSaveData :: State -> String
 makeSaveData st =
@@ -25,6 +26,26 @@ loadState str st =
       clearData = read (head dts) :: [Int]
       scoreData = read (dts!!1) :: Score
    in st{score=scoreData,cli=clearData}
+
+makeStart :: Size -> State -> State
+makeStart cvSz st = st{cons=genStartCons cvSz} 
+
+makeMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
+makeMEnd cvSz ses stg lv st = do 
+  let Score ms _ = score st 
+      isClear = lv - ms*2 > clearScore
+      cos = cons st
+      ncons = map (changeEvent NoEvent) cos
+      cln = length cos
+      tx = if isClear then " クリア！" else "ざんねん！"
+      flco = if isClear then 6 else 8
+      atCo = genNoticeCon cvSz cln flco tx Study  
+      ci = cli st
+      ncli = if isClear then if stg `elem` ci then ci else stg:ci
+                        else ci
+      nst = st{cons=ncons++[atCo],cli=ncli}
+  if isClear then play (head ses) else play (ses!!1)
+  return nst
 
 makeMission :: Size -> [Audio] -> Int -> Int -> Int -> State -> IO State
 makeMission cvSz oss stg i lv st = do 
@@ -81,7 +102,7 @@ makeStudy :: Size -> State -> State
 makeStudy cvSz st =
   let clIndexes = cli st 
       ncos = genSCons cvSz clIndexes
-   in st{cons=ncos}
+   in st{score=Score 0 0,quest=Nothing,cons=ncos}
 
 makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
 makeStgLt cvSz oss lv st = do  

@@ -1,12 +1,12 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
-               ,genSumCons,genMission) where
+               ,genSumCons,genMission,genNoticeCon,genStartCons) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
 import Libs (selectData,getRan)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..)
-              ,Bord(..),Event(..),TxType(..),QSource
+              ,Bord(..),Event(..),TxType(..),QSource,Stage(..)
               ,ltQuestSrc)
 
 stageChars :: Int -> (Int,[(Int,Char)])
@@ -53,11 +53,6 @@ insertToList i tg lst = take i lst ++ [tg] ++ drop i lst
 genSumCons :: Size -> Int -> [Con]
 genSumCons cvSz@(cW,cH) stg =
   let (tkn,taso) = stageChars stg
---      dvTwo = stg `div` 2
---      mdTwo = stg `mod` 2
---      psi = if mdTwo==0 then dvTwo*12 else dvTwo*12+5
---      tkn = if mdTwo==0 then 5 else 7
---      taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
       sumConRecs = makeSumConsRec cvSz tkn 
       tpX = 20; tpY = 40 
       fsz = 45 
@@ -80,12 +75,12 @@ genSumCons cvSz@(cW,cH) stg =
                    ,clEv=Mission stg (-1) 0} 
       noticeCon0 = emCon{conID=tkn+1
                    ,cRec=CRect (cW/4*3) (cH/20) (cW/4) (cH/2)
-                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[1]
+                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[7]
                    ,txts=["もじを タップして かくにん してね"]
                    ,typs=[Normal]}
       noticeCon1 = emCon{conID=tkn+2
                    ,cRec=CRect (cW/5) (cH/10) (cW/4) (cH/2)
-                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[1]
+                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[7]
                    ,txts=["よければ もじあて を はじめやう"]
                    ,typs=[Normal]}
    in sumCons++[btCon,noticeCon0,noticeCon1] 
@@ -108,7 +103,7 @@ genLCons (cW,cH) oi ev =
       och = fromMaybe ' ' $ M.lookup oi ltQuestSrc 
    in zipWith (\(i,cn) rec -> emCon{conID=i,cRec=rec
                    ,border=if i==0 then NoBord else Round,borCol=4,filCol=cn
-                   ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
+                   ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[7]
                    ,txts=[[och]],typs=[if i==0 then Normal else Osite]
                    ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
 
@@ -118,11 +113,11 @@ genSCons cvSz clind =
       fsz = 50
       sConRecs = map (makeSConRec cvSz) [0..7]
       lList = "あいふへもをすし"
-      makeClEv n = if n `elem` clind then NoEvent else Learn n 0
-   in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,filCol=7
+      makeFlCol n = if n `elem` clind then 9 else 7
+   in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,filCol=makeFlCol i
                               ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
                               ,txts=[[lList!!i]],typs=[Osite]
-                              ,clEv=makeClEv i}) [0..] sConRecs
+                              ,clEv=Learn i 0}) [0..] sConRecs
 
 makeSConRec :: Size -> Int -> CRect 
 makeSConRec (cW,cH) i =
@@ -201,3 +196,29 @@ makeConsRec (cW,cH) i =
       recs = map (\(px,py) -> CRect px py conW conH) (tps ++ bps)
    in recs 
 
+genStartCons :: Size -> [Con]
+genStartCons (cW,cH) =
+  let mgnX = cW/8; mgnY =cH/12
+      conW = cW*3/4; conH = cH*3/8
+      fsz = 40
+      fsD = fromIntegral fsz
+      stRecs = [CRect mgnX mgnY conW conH,CRect mgnX (mgnY*2+conH) conW conH]
+      txts n = if n==0 then "ヲシテもじを おぼへやう！"
+                       else "チャレンジもんだい！"
+      flco n = if n==0 then 7 else 9
+      clev n = if n==0 then Study else Quest (StgLetter 0) 
+   in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,borCol=1
+                          ,filCol=flco i
+                          ,txtPos=[(cW*2/3-mgnX-fsD/2,fsD)],txtFsz=[fsz]
+                          ,txtCos=[1],txts=[txts i],typs=[Normal],clEv=clev i})
+                                                                [0,1] stRecs
+
+genNoticeCon :: Size -> Int -> Int -> String -> Event -> Con
+genNoticeCon (cW,cH) i flco tx ev = 
+  let mgnX = cW/3; mgnY = cH/6
+      fsz = 40
+      fsD = fromIntegral fsz
+   in emCon{conID=i,cRec=CRect mgnX mgnY (cW-mgnX*2) (cH-mgnY*2)
+           ,border=Round, borCol = 5, filCol = flco 
+           ,txtPos=[(cW/2-mgnX-fsD/2,fsD*3)],txtFsz=[fsz],txtCos=[3]
+           ,txts = [tx], typs=[Normal], clEv=ev}

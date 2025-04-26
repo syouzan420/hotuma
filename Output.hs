@@ -104,7 +104,7 @@ putLettersV c wbmp col tp fz sz@(w,h) miq cln (pd,qd) (x:xs) = do
         case tp of
           Normal -> putLet c col fz 0 (pd,qd) x  
           Osite -> putWst c wbmp fz (pd-fzD/6,qd-fzD*3/4) x 
-        let isMax = cln+1 > mll
+        let isMax = cln > mll
         let ncln = if isMax then 0 else cln+1
         let npd = if isMax then pd-ltw else pd
         let nqd = if isMax then miq else qd+lth 

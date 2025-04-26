@@ -41,7 +41,7 @@ testCon = Con {conID = 0
               ,picSize = []
               ,picNums = []
               ,audio = Nothing
-              ,clEv = Study 
+              ,clEv = Start
               }
 
 emCon :: Con
