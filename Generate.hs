@@ -1,5 +1,5 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
-               ,genSumCons,genMission,genMCons) where
+               ,genSumCons,genMission) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
@@ -9,11 +9,29 @@ import Define (State(..),Con(..),Question(..),Size,CRect(..)
               ,Bord(..),Event(..),TxType(..),QSource
               ,ltQuestSrc)
 
-genMission :: Int -> Int -> IO (Question,Int)
-genMission g stg = undefined
+stageChars :: Int -> (Int,[(Int,Char)])
+stageChars stg =
+  let dvTwo = stg `div` 2
+      mdTwo = stg `mod` 2
+      psi = if mdTwo==0 then dvTwo*12 else dvTwo*12+5
+      tkn = if mdTwo==0 then 5 else 7
+      taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
+   in (tkn,taso) 
 
-genMCons :: Size -> Question -> [Con]
-genMCons cvSz q = undefined
+genMission :: Int -> Int -> Int -> IO (Question,Int)
+genMission g stg pai = do 
+  let (tkn,taso) = stageChars stg
+      qs = M.fromList taso
+      qs' = if pai==(-1) then qs else M.delete pai qs
+          --a list which eliminates the previous answer from the stage char list 
+  (an,g') <- selectData 1 g (M.toList qs')            
+  let ans = head an
+      nqs = M.delete (fst ans) qs'
+  (ai,g'') <- getRan 4 g'
+  (iqlist,ng) <- selectData 3 g'' (M.toList nqs)
+  let iqlist' = insertToList ai ans iqlist
+      (auInd,qlist) = unzip iqlist'
+  return (Question (map (:[]) qlist) auInd ai,ng) 
 
 genLtQuest :: Int -> Int -> QSource -> IO ((Question,QSource),Int)
 genLtQuest g lv qs = do
@@ -34,11 +52,12 @@ insertToList i tg lst = take i lst ++ [tg] ++ drop i lst
 
 genSumCons :: Size -> Int -> [Con]
 genSumCons cvSz@(cW,cH) stg =
-  let dvTwo = stg `div` 2
-      mdTwo = stg `mod` 2
-      psi = if mdTwo==0 then dvTwo*12 else dvTwo*12+5
-      tkn = if mdTwo==0 then 5 else 7
-      taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
+  let (tkn,taso) = stageChars stg
+--      dvTwo = stg `div` 2
+--      mdTwo = stg `mod` 2
+--      psi = if mdTwo==0 then dvTwo*12 else dvTwo*12+5
+--      tkn = if mdTwo==0 then 5 else 7
+--      taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
       sumConRecs = makeSumConsRec cvSz tkn 
       tpX = 20; tpY = 40 
       fsz = 45 
@@ -58,7 +77,7 @@ genSumCons cvSz@(cW,cH) stg =
                    ,txts=["は","じ","め"]
                    ,typs=[Normal,Normal,Normal]
                    ,audio=Nothing
-                   ,clEv=Mission stg 0} 
+                   ,clEv=Mission stg (-1) 0} 
       noticeCon0 = emCon{conID=tkn+1
                    ,cRec=CRect (cW/4*3) (cH/20) (cW/4) (cH/2)
                    ,txtPos=[(20,20)],txtFsz=[30],txtCos=[1]

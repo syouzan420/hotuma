@@ -21,8 +21,8 @@ data TxType = Normal | Osite deriving (Eq,Show)
 data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 
 data Event = NoEvent | Quest Stage | Choice Int | Answer Int
-           | Study | Learn Int Int | Summary Int | Mission Int Int 
-           | ChClick Int                  deriving (Eq,Show)
+           | Study | Learn Int Int | Summary Int | Mission Int Int Int
+           | ChClick Int | MEnd Int Int              deriving (Eq,Show)
 
 data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
 
@@ -85,6 +85,9 @@ nfs = 20; rfs = 8 -- normal font size, rubi font size
 
 cvT :: Double
 cvT = 10  --trim(yohaku)
+
+mTimeLimit :: Int
+mTimeLimit = 30
 
 imgfile :: String
 imgfile = "Images/img"

@@ -5,11 +5,11 @@ module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
-                ,genSumCons,genMission,genMCons)
+                ,genSumCons,genMission)
 import Libs (sepByChar)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
-              ,Size,CRect(..),Score(..),Switch(..),TxType(..))
+              ,Size,CRect(..),Score(..),Switch(..),TxType(..),mTimeLimit)
 
 makeSaveData :: State -> String
 makeSaveData st =
@@ -26,14 +26,28 @@ loadState str st =
       scoreData = read (dts!!1) :: Score
    in st{score=scoreData,cli=clearData}
 
-makeMission :: Size -> [Audio] -> Int -> Int -> State -> IO State
-makeMission cvSz oss stg lv st = do 
-  let g = rgn st -- random number generator 
-  (q,ng) <- genMission g stg 
-  let cos = genMCons cvSz q
-      tau = oss!!(audios q!!aInd q)
+makeMission :: Size -> [Audio] -> Int -> Int -> Int -> State -> IO State
+makeMission cvSz oss stg i lv st = do 
+  let pq = quest st -- previous question
+      (pai,pan) = case pq of
+        Just pq' -> (audios pq'!!aInd pq',aInd pq')
+        Nothing -> (-1,0)
+      correct = i==pan
+      Score ms tm = score st
+      nms = if pai==(-1) || correct then ms else ms+1
+      nscr = Score nms tm
+      g = rgn st -- random number generator 
+  (q,ng) <- genMission g stg pai 
+  let (hco:cos) = genCons cvSz q
+      ai = audios q!!aInd q 
+      end = tm>=mTimeLimit
+      ncos = hco:zipWith (\n co -> 
+            changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
+                                                                       [0..] cos 
+      tau = oss!!ai
   play tau
-  return st{cons=cos,rgn=ng,swc=(swc st){ita=True}}
+  print nscr 
+  return st{score=nscr,quest=Just q,cons=ncos,rgn=ng,swc=(swc st){ita=True}}
 
 makeChClick :: [Audio] -> Int -> Int -> State -> IO State
 makeChClick oss i oi st = do
