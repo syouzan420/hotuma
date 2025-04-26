@@ -11,6 +11,7 @@ initState = State {stage=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
                   ,qsrc=ltQuestSrc
+                  ,cli=[]
                   ,rgn=0
                   ,swc=initSwitch
                   ,db=""
@@ -40,7 +41,7 @@ testCon = Con {conID = 0
               ,picSize = []
               ,picNums = []
               ,audio = Nothing
-              ,clEv = Quest (StgLetter 1)
+              ,clEv = Study 
               }
 
 emCon :: Con

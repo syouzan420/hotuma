@@ -20,9 +20,11 @@ data TxType = Normal | Osite deriving (Eq,Show)
 
 data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 
-data Event = NoEvent | Quest Stage | Choice Int | Answer Int deriving (Eq,Show)
+data Event = NoEvent | Quest Stage | Choice Int | Answer Int
+           | Study | Learn Int Int | Summary Int | Mission Int Int 
+           | ChClick Int                  deriving (Eq,Show)
 
-data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show)
+data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
 
 data Question = Question {quests :: ![String]
                          ,audios :: ![Int]
@@ -47,12 +49,6 @@ data Con = Con {conID :: !Int
                ,clEv :: !Event -- event when clicked
                } deriving (Eq,Show)
 
-data Button = Button {btnId :: !Int
-                     ,btnCon :: !Con
-                     ,clicked :: !Bool
-                     } deriving (Eq,Show)
-
-
 data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
 
 data State = State {stage :: !(Maybe Stage)
@@ -61,6 +57,7 @@ data State = State {stage :: !(Maybe Stage)
                    ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]
                    ,qsrc :: !QSource -- quest source
+                   ,cli :: ![Int] -- clear indexes (learning stages)
                    ,rgn :: !Int -- Random Number Generator
                    ,swc :: !Switch
                    ,db :: !String    --for debug
@@ -100,6 +97,9 @@ wstAuFile = "Audio/os"
 
 seFile :: String
 seFile = "Audio/se"
+
+storeName :: String
+storeName = "hotumaSave"
 
 ltQuestSrc :: QSource 
 ltQuestSrc = M.fromList $ zip [0..] "あかはなまいきひにみうくふぬむえけへねめおこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ"

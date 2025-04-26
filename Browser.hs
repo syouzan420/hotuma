@@ -17,7 +17,7 @@ import Define (State(swc),Switch(itc),CInfo,LSA(..)
 chColors :: [Color]
 chColors = [RGB 200 200 180,RGB 200 255 200,RGB 255 204 153,RGB 255 153 204
            ,RGB 153 255 255,RGB 0 128 128,RGB 255 255 100,RGB 0 0 0
-           ,RGB 100 100 100] 
+           ,RGB 100 100 100,RGB 0 120 30] 
 
 canvasW :: Canvas -> IO Double 
 canvasW = ffi "(function(cv){return cv.width})"

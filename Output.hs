@@ -7,12 +7,13 @@ import Haste.Graphics.Canvas(Canvas,Color(RGB),Bitmap,Point,Vector,Shape
                             ,renderOnTop)
 import Haste.Audio (play,Audio)
 import Control.Monad (when)
-import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex
+import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex,storeName
               ,State(..),Switch(..),Con(..),CRect(..),CInfo
-              ,Pos,Size,Fsize,Bord(..),TxType(..))
-import Browser(chColors)
+              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..))
+import Browser (chColors,localStore)
 import Initialize (testCon)
 import EAffirm (affr)
+import Events (loadState)
 import Libs(getIndex)
 
 type Bmps = ([Bitmap],[Bitmap])
@@ -38,8 +39,12 @@ playAudio audio st = do
     return st{swc=(swc st){ias=True}}
 
 ----------------------------
-startGame :: Canvas -> CInfo -> Bmps -> State -> IO ()
-startGame  = randomMessage  
+
+startGame :: Canvas -> CInfo -> Bmps -> State -> IO State 
+startGame c ci bmps st = do
+  randomMessage c ci bmps st 
+  sData <- localStore Load storeName "" 
+  return $ if sData=="loadError" then st else loadState sData st
 
 randomMessage :: Canvas -> CInfo -> Bmps -> State -> IO ()
 randomMessage c ci bmps st = do

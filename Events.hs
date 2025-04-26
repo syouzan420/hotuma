@@ -1,11 +1,73 @@
-module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult,timerEvent) where
+module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
+             ,makeStudy,makeLearn,makeResult,timerEvent,loadState
+             ,makeSummary,makeChClick,makeMission) where
 
-import Haste.Audio(Audio,play)
-import Generate (genLtQuest,genCons,genAnsCon)
+import Haste.Audio (Audio,play)
+import Data.List (intercalate)
+import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
+                ,genSumCons,genMission,genMCons)
+import Libs (sepByChar)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
-              ,Size,CRect(..),Score(..),Switch(..))
+              ,Size,CRect(..),Score(..),Switch(..),TxType(..))
 
+makeSaveData :: State -> String
+makeSaveData st =
+  let clearData = cli st
+      scoreData = score st
+   in "\""++intercalate "~" [show clearData,show scoreData]++"\""
+
+loadState :: String -> State -> State
+loadState "" st = st
+loadState str st =
+  let dt = if head str=='\"' then tail$init str else str
+      dts = sepByChar '~' dt
+      clearData = read (head dts) :: [Int]
+      scoreData = read (dts!!1) :: Score
+   in st{score=scoreData,cli=clearData}
+
+makeMission :: Size -> [Audio] -> Int -> Int -> State -> IO State
+makeMission cvSz oss stg lv st = do 
+  let g = rgn st -- random number generator 
+  (q,ng) <- genMission g stg 
+  let cos = genMCons cvSz q
+      tau = oss!!(audios q!!aInd q)
+  play tau
+  return st{cons=cos,rgn=ng,swc=(swc st){ita=True}}
+
+makeChClick :: [Audio] -> Int -> Int -> State -> IO State
+makeChClick oss i oi st = do
+  let cos = cons st
+      co = cos!!i
+      tp = head (typs co) -- text type 
+      eps = fromIntegral (head (txtFsz co)) / 4
+      (psx,psy) = head (txtPos co) -- text position
+      ntp = if tp==Osite then Normal else Osite
+      ntps = if tp==Osite then (psx,psy+eps) else (psx,psy-eps) 
+      nco = co{typs=[ntp],txtPos=[ntps]}
+      ncons = repList nco i cos
+  play (oss!!oi)
+  return $ st{cons=ncons}
+
+makeSummary :: Size -> Int -> State -> State
+makeSummary cvSz stg st = st{cons=genSumCons cvSz stg} 
+
+makeLearn :: Size -> [Audio] -> Int -> Int -> State -> IO State 
+makeLearn cvSz oss stg num st = do 
+  let stype = stg `mod` 2
+      dif = stg `div` 2 * 12 + num
+      maxNum = if stype==0 then 4 else 6
+      oi = if stype==0 then dif else dif + 5 
+      clEvnt = if num==maxNum then Summary stg else Learn stg (num+1) 
+      lCons = genLCons cvSz oi clEvnt
+  play (oss!!oi)
+  return st{cons=lCons}
+
+makeStudy :: Size -> State -> State
+makeStudy cvSz st =
+  let clIndexes = cli st 
+      ncos = genSCons cvSz clIndexes
+   in st{cons=ncos}
 
 makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
 makeStgLt cvSz oss lv st = do  

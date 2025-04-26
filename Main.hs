@@ -17,8 +17,8 @@ main = do
   Just ce <- elemById "canvas"
   Just c <- fromElem ce
   ci <- getCanvasInfo c
-  state <- newIORef initState 
-  startGame c ci bmps initState 
+  loadedState <- startGame c ci bmps initState 
+  state <- newIORef loadedState 
   onEvent ce Click $ \(MouseData xy _ _) -> do
     readIORef state >>= mouseClick c ci bmps aus xy >>= writeIORef state
   onEvent ce TouchStart $ \(TouchData {}) -> do
