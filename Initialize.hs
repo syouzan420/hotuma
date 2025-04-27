@@ -10,6 +10,7 @@ initState = State {stage=Nothing
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
+                  ,gaus=[]
                   ,qsrc=ltQuestSrc
                   ,cli=[]
                   ,rgn=0

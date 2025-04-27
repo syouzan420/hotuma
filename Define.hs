@@ -14,7 +14,7 @@ type CInfo = ((Double,Double),(Double,Double))
 
 data CRect = CRect Double Double Double Double deriving (Eq,Show)
 
-data Bord = NoBord | Rigid | Round deriving (Eq,Show)
+data Bord = NoBord | Rigid | Round | Circle deriving (Eq,Show)
 
 data TxType = Normal | Osite deriving (Eq,Show)
 
@@ -25,6 +25,11 @@ data Event = NoEvent | Start | Quest Stage | Choice Int | Answer Int
            | ChClick Int | MEnd Int Int              deriving (Eq,Show)
 
 data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
+
+data Gauge = Gauge {gti :: !String, gps :: !Pos, gsz :: !Size
+                   ,gmx :: !Int, gcu :: !Int} deriving (Eq,Show)
+--gti: gauge title, gps: gauge position, gsz: gauge size
+--gmx: gauge max num, gcu: gauge current num
 
 data Question = Question {quests :: ![String]
                          ,audios :: ![Int]
@@ -56,6 +61,7 @@ data State = State {stage :: !(Maybe Stage)
                    ,quest :: !(Maybe Question)
                    ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]
+                   ,gaus :: ![Gauge] -- gauges
                    ,qsrc :: !QSource -- quest source
                    ,cli :: ![Int] -- clear indexes (learning stages)
                    ,rgn :: !Int -- Random Number Generator

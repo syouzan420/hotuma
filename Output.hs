@@ -1,15 +1,16 @@
 module Output(clearScreen,putMozi,putChara,playAudio
-             ,putText,drawCons,startGame,randomMessage) where
+             ,putText,drawCons,startGame,randomMessage
+             ,drawGauges) where
 
 import Haste.Graphics.Canvas(Canvas,Color(RGB),Bitmap,Point,Vector,Shape
-                            ,color,font,translate,rotate,line,arc,rect
+                            ,color,font,translate,rotate,line,arc,rect,circle
                             ,text,draw,scale,render,stroke,fill,lineWidth
                             ,renderOnTop)
 import Haste.Audio (play,Audio)
-import Control.Monad (when)
+import Control.Monad (when,unless)
 import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex,storeName
               ,State(..),Switch(..),Con(..),CRect(..),CInfo
-              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..))
+              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..),Gauge(..))
 import Browser (chColors,localStore)
 import Initialize (testCon)
 import EAffirm (affr)
@@ -53,9 +54,35 @@ randomMessage c ci bmps st = do
   let affCons = [testCon{txts=[affText]}]
   drawCons c ci bmps affCons 
 
+drawGauges :: Canvas -> [Gauge] -> IO ()
+drawGauges _ [] = return ()
+drawGauges c gausSt = mapM_ (putGauge c) gausSt  
+
 drawCons :: Canvas -> CInfo -> Bmps -> [Con] -> IO ()
 drawCons _ _ _ [] = return ()
 drawCons c ((_,cvH),_) bmps consSt = mapM_ (putCon c cvH bmps) consSt
+
+putGauge :: Canvas -> Gauge -> IO ()
+putGauge c (Gauge title (gx,gy) (gw,gh) mx cu) = do
+  let scol = chColors!!3 -- red
+      mcol = chColors!!6 -- yellow
+      lcol = chColors!!4 -- cyan
+      scu 
+        | cu<0 = 0
+        | cu>mx = mx
+        | otherwise = cu
+      mxD = fromIntegral mx; cuD = fromIntegral scu
+      mdc = mxD / cuD
+      fcol
+        | mdc > 3 = scol
+        | mdc < 2 = lcol
+        | otherwise = mcol
+      bcol = head chColors
+  putText c bcol (floor gh*2) (gx,gy) title
+  unless (cu==0) $ renderOnTop c $ color fcol $ fill $ roundRect (gx,gy) (gw/mdc,gh)
+  renderOnTop c $ color bcol $ lineWidth 1 $
+                                       stroke $ roundRect (gx,gy) (gw,gh)
+  putText c fcol (floor gh*2) (gx+gw,gy+gh) (show (max cu 0))
 
 putCon :: Canvas -> Double -> Bmps -> Con -> IO ()
 putCon c cvH bmps con = do
@@ -76,6 +103,11 @@ putCon c cvH bmps con = do
       renderOnTop c $ color fcol $ fill $ roundRect (cx,cy) (cw,ch)
       renderOnTop c $ color bcol $ lineWidth 3 $
                                        stroke $ roundRect (cx,cy) (cw,ch)
+    Circle -> do
+      let rd = cw/2
+      renderOnTop c $ color fcol $ fill $ circle (cx+rd,cy+rd) rd 
+      renderOnTop c $ color bcol $ lineWidth 3 $
+                                       stroke $ circle (cx+rd,cy+rd) rd 
     _ -> return ()
   mapM_ (\((tx,tp),((tpx,tpy),(fz,col))) ->
              putTextV c wbmp (chColors!!col) tp fz (cw,ch) (tpx+cx,tpy+cy) tx)
@@ -83,8 +115,7 @@ putCon c cvH bmps con = do
 
 putText :: Canvas -> Color -> Fsize -> Point -> String -> IO ()
 putText c col fz (x,y) str = renderOnTop c $ 
-    mapM_ (\(ch,n)->color col$font (show fz++"px Courier")$
-      text (x*wg+wg*n,y*hg) [ch]) (zip str [0..]) 
+    color col $ font (show fz++"px Courier") $ text (x,y) str
 
 putTextV :: Canvas -> [Bitmap] -> Color -> TxType -> Fsize -> Size 
                                                 -> Point -> String -> IO ()

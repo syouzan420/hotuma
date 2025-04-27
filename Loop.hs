@@ -4,7 +4,7 @@ import Haste.Graphics.Canvas(Canvas,Bitmap)
 import Haste.Audio(Audio,play)
 import Control.Monad(unless)
 import Browser(chColors,cvRatio,localStore,stringToJson)
-import Output(clearScreen,drawCons,randomMessage)
+import Output(clearScreen,drawCons,drawGauges,randomMessage)
 import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult
              ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
              ,makeMEnd,makeStart)
@@ -48,6 +48,7 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
                     Answer i -> return $ makeAns cvSz i st
                     _ -> return st
   unless (st==nst) $ clearScreen c >> drawCons c ci bmps (cons nst) 
+                                   >> drawGauges c (gaus nst)
   case seAu nst of
     Just seInd -> play (ses!!seInd) >> return nst{seAu=Nothing}
     Nothing -> return nst

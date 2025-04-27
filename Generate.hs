@@ -1,13 +1,14 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
-               ,genSumCons,genMission,genNoticeCon,genStartCons) where
+               ,genSumCons,genMission,genNoticeCon,genStartCons
+               ,genBackCon,genMGauges) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
 import Libs (selectData,getRan)
 import Initialize (emCon)
-import Define (State(..),Con(..),Question(..),Size,CRect(..)
+import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
               ,Bord(..),Event(..),TxType(..),QSource,Stage(..)
-              ,ltQuestSrc)
+              ,ltQuestSrc,clearScore,mTimeLimit)
 
 stageChars :: Int -> (Int,[(Int,Char)])
 stageChars stg =
@@ -35,8 +36,7 @@ genMission g stg pai = do
 
 genLtQuest :: Int -> Int -> QSource -> IO ((Question,QSource),Int)
 genLtQuest g lv qs = do
-  let aqn = lv+3 -- avalable question numbers 
-      qn = 4 + lv `div` 8 -- question numbers
+  let qn = 4 + lv `div` 8 -- question numbers
   (an,g') <- selectData 1 g (M.toList qs) 
   let ans = head an
   let nqs = M.delete (fst ans) qs 
@@ -75,15 +75,16 @@ genSumCons cvSz@(cW,cH) stg =
                    ,clEv=Mission stg (-1) 0} 
       noticeCon0 = emCon{conID=tkn+1
                    ,cRec=CRect (cW/4*3) (cH/20) (cW/4) (cH/2)
-                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[7]
+                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[1]
                    ,txts=["もじを タップして かくにん してね"]
                    ,typs=[Normal]}
       noticeCon1 = emCon{conID=tkn+2
                    ,cRec=CRect (cW/5) (cH/10) (cW/4) (cH/2)
-                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[7]
+                   ,txtPos=[(20,20)],txtFsz=[30],txtCos=[1]
                    ,txts=["よければ もじあて を はじめやう"]
                    ,typs=[Normal]}
-   in sumCons++[btCon,noticeCon0,noticeCon1] 
+      bCon = genBackCon cvSz (tkn+3) Study
+   in sumCons++[btCon,noticeCon0,noticeCon1,bCon] 
 
 makeSumConsRec :: Size -> Int -> [CRect]
 makeSumConsRec (cW,cH) tkn =
@@ -103,7 +104,7 @@ genLCons (cW,cH) oi ev =
       och = fromMaybe ' ' $ M.lookup oi ltQuestSrc 
    in zipWith (\(i,cn) rec -> emCon{conID=i,cRec=rec
                    ,border=if i==0 then NoBord else Round,borCol=4,filCol=cn
-                   ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[7]
+                   ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
                    ,txts=[[och]],typs=[if i==0 then Normal else Osite]
                    ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
 
@@ -222,3 +223,22 @@ genNoticeCon (cW,cH) i flco tx ev =
            ,border=Round, borCol = 5, filCol = flco 
            ,txtPos=[(cW/2-mgnX-fsD/2,fsD*3)],txtFsz=[fsz],txtCos=[3]
            ,txts = [tx], typs=[Normal], clEv=ev}
+
+genBackCon :: Size -> Int -> Event -> Con
+genBackCon (cW,cH) i ev =
+  let mgnX = cW/25; mgnY = cH/45 
+      conW = cW/12
+      fsz = 32
+      fsD = fromIntegral fsz
+   in emCon{conID=i,cRec=CRect mgnX mgnY conW conW,border=Circle
+           ,borCol=0,filCol=7,txtPos=[(0,fsD/3*2)],txtFsz=[fsz],txtCos=[1]
+           ,txts=["←"],typs=[Normal],clEv=ev}
+
+genMGauges :: Size -> Int -> Int -> [Gauge]
+genMGauges (cW,cH) sc tm =
+  let mgnX = cW/8; mgnY = cH/20
+      spX = cW/5
+      gW = cW/4; gH = 10;
+      gau0 = Gauge "SCORE" (mgnX,mgnY) (gW,gH) clearScore sc 
+      gau1 = Gauge "TIME" (mgnX+gW+spX,mgnY) (gW,gH) mTimeLimit (mTimeLimit-tm)
+   in [gau0,gau1]

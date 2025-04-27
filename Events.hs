@@ -5,7 +5,8 @@ module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
-                ,genSumCons,genMission,genNoticeCon,genStartCons)
+                ,genSumCons,genMission,genNoticeCon,genStartCons
+                ,genBackCon,genMGauges)
 import Libs (sepByChar)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
@@ -65,10 +66,11 @@ makeMission cvSz oss stg i lv st = do
       ncos = hco:zipWith (\n co -> 
             changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
                                                                        [0..] cos 
+      ngaus = genMGauges cvSz (lv-nms*2) tm
       tau = oss!!ai
   play tau
-  print nscr 
-  return st{score=nscr,quest=Just q,cons=ncos,rgn=ng,swc=(swc st){ita=True}}
+--  print nscr 
+  return st{score=nscr,quest=Just q,cons=ncos,gaus=ngaus,rgn=ng,swc=(swc st){ita=True}}
 
 makeChClick :: [Audio] -> Int -> Int -> State -> IO State
 makeChClick oss i oi st = do
@@ -102,7 +104,9 @@ makeStudy :: Size -> State -> State
 makeStudy cvSz st =
   let clIndexes = cli st 
       ncos = genSCons cvSz clIndexes
-   in st{score=Score 0 0,quest=Nothing,cons=ncos}
+      bco = genBackCon cvSz 8 Start
+   in st{score=Score 0 0,quest=Nothing,cons=ncos++[bco],gaus=[]
+        ,swc=(swc st){ita=False}}
 
 makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
 makeStgLt cvSz oss lv st = do  
