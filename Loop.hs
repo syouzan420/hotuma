@@ -1,15 +1,16 @@
-module Loop (inputLoop,mouseClick) where
+module Loop (inputLoop,mouseClick,timerEvent) where
 
 import Haste.Graphics.Canvas(Canvas,Bitmap)
 import Haste.Audio(Audio,play)
-import Control.Monad(unless)
+import Control.Monad(unless,when)
 import Browser(chColors,cvRatio,localStore,stringToJson)
 import Output(clearScreen,drawCons,drawGauges,randomMessage)
+import Generate(genMGauges)
 import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult
              ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
-             ,makeMEnd,makeStart)
+             ,makeMEnd,makeStart,getScore)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
-             ,Event(..),Stage(..))
+             ,Event(..),Stage(..),Score(..))
 
 type Bmps = ([Bitmap],[Bitmap])
 type Auds = ([Audio],[Audio])
@@ -37,7 +38,7 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
                     Learn stg num -> makeLearn cvSz oss stg num st
                     Summary stg -> return $ makeSummary cvSz stg st
                     ChClick oi -> makeChClick oss cid oi st
-                    Mission stg i lv -> makeMission cvSz oss stg i lv st
+                    Mission stg i lv -> makeMission cvSz (oss,ses) stg i lv st
                     MEnd stg lv -> makeMEnd cvSz ses stg lv st
                     Quest stg -> case stg of
                         StgLetter lv -> if lv > 45
@@ -47,11 +48,24 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
                     Choice i -> return $ makeChoice cvSz conNum i st
                     Answer i -> return $ makeAns cvSz i st
                     _ -> return st
-  unless (st==nst) $ clearScreen c >> drawCons c ci bmps (cons nst) 
-                                   >> drawGauges c (gaus nst)
+  unless (st==nst) $ drawScreen c ci bmps nst
   case seAu nst of
     Just seInd -> play (ses!!seInd) >> return nst{seAu=Nothing}
     Nothing -> return nst
+
+drawScreen :: Canvas -> CInfo -> Bmps -> State -> IO ()
+drawScreen c ci bmps st = 
+  clearScreen c >> drawCons c ci bmps (cons st) >> drawGauges c (gaus st)
+
+timerEvent :: Canvas -> CInfo -> Bmps -> State -> IO State
+timerEvent c ci@(cvSz,_) bmps st = do
+  let itime = ita (swc st) -- is timer active? 
+      (Score ms tm) = score st
+      lv = level st
+      ngaus = genMGauges cvSz (getScore lv ms) (tm+1)
+      nst = if not itime then st else st{score=Score ms (tm+1),gaus=ngaus}
+  when itime $ drawScreen c ci bmps nst
+  return nst
 
 findCon :: Int -> [Con] -> Maybe Con
 findCon _ [] = Nothing  

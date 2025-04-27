@@ -6,7 +6,9 @@ import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
 
 initState :: State
 initState = State {stage=Nothing
+                  ,level=0
                   ,score=Score 0 0
+                  ,hiscs=[0,0,0,0,0,0,0,0]
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]

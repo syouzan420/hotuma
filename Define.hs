@@ -57,7 +57,9 @@ data Con = Con {conID :: !Int
 data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
 
 data State = State {stage :: !(Maybe Stage)
+                   ,level :: !Int
                    ,score :: !Score
+                   ,hiscs :: ![Int] -- high scores
                    ,quest :: !(Maybe Question)
                    ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]

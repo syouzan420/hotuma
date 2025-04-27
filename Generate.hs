@@ -108,16 +108,23 @@ genLCons (cW,cH) oi ev =
                    ,txts=[[och]],typs=[if i==0 then Normal else Osite]
                    ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
 
-genSCons :: Size -> [Int] -> [Con]
-genSCons cvSz clind =
+genSCons :: Size -> [Int] -> [Int] -> [Con]
+genSCons cvSz clind hscrs =
   let tpX = 40; tpY = 60
       fsz = 50
+      fsD = fromIntegral fsz
       sConRecs = map (makeSConRec cvSz) [0..7]
       lList = "あいふへもをすし"
-      makeFlCol n = if n `elem` clind then 9 else 7
+      isclear n = n `elem` clind
+      makeFlCol n = if isclear n then 9 else 7
+      txps n = if isclear n then [(tpX,tpY),(tpX-fsD/2,tpY)] else [(tpX,tpY)]
+      txfs n = if isclear n then [fsz,fsz `div` 2] else [fsz]
+      txco n = if isclear n then [1,1] else [1]
+      txs n = if isclear n then [[lList!!n],show (hscrs!!n)] else [[lList!!n]]
+      typ n = if isclear n then [Osite,Normal] else [Osite]
    in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,filCol=makeFlCol i
-                              ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
-                              ,txts=[[lList!!i]],typs=[Osite]
+                              ,txtPos=txps i,txtFsz=txfs i,txtCos=txco i
+                              ,txts=txs i,typs=typ i
                               ,clEv=Learn i 0}) [0..] sConRecs
 
 makeSConRec :: Size -> Int -> CRect 

@@ -1,23 +1,27 @@
 module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
-             ,makeStudy,makeLearn,makeResult,timerEvent,loadState
+             ,makeStudy,makeLearn,makeResult,loadState,getScore
              ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart) where
 
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
+import Control.Monad (when,void)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
                 ,genSumCons,genMission,genNoticeCon,genStartCons
                 ,genBackCon,genMGauges)
 import Libs (sepByChar)
+import Browser (localStore)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
-              ,Size,CRect(..),Score(..),Switch(..),TxType(..)
-              ,mTimeLimit,clearScore)
+              ,Size,CRect(..),Score(..),Switch(..),TxType(..),LSA(..)
+              ,mTimeLimit,clearScore,storeName)
+
+type Auds = ([Audio],[Audio])
 
 makeSaveData :: State -> String
 makeSaveData st =
   let clearData = cli st
-      scoreData = score st
-   in "\""++intercalate "~" [show clearData,show scoreData]++"\""
+      hiScoreData = hiscs st
+   in "\""++intercalate "~" [show clearData,show hiScoreData]++"\""
 
 loadState :: String -> State -> State
 loadState "" st = st
@@ -25,8 +29,8 @@ loadState str st =
   let dt = if head str=='\"' then tail$init str else str
       dts = sepByChar '~' dt
       clearData = read (head dts) :: [Int]
-      scoreData = read (dts!!1) :: Score
-   in st{score=scoreData,cli=clearData}
+      hiScoreData = read (dts!!1) :: [Int] 
+   in st{hiscs=hiScoreData,cli=clearData}
 
 makeStart :: Size -> State -> State
 makeStart cvSz st = st{cons=genStartCons cvSz} 
@@ -34,7 +38,12 @@ makeStart cvSz st = st{cons=genStartCons cvSz}
 makeMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
 makeMEnd cvSz ses stg lv st = do 
   let Score ms _ = score st 
-      isClear = lv - ms*2 > clearScore
+      scr = lv - ms*2
+      hiscores = hiscs st
+      phscr = hiscores!!stg  -- previous high score
+      nhscr = max scr phscr
+      nhiscs = repList nhscr stg hiscores 
+      isClear = scr > clearScore
       cos = cons st
       ncons = map (changeEvent NoEvent) cos
       cln = length cos
@@ -44,18 +53,20 @@ makeMEnd cvSz ses stg lv st = do
       ci = cli st
       ncli = if isClear then if stg `elem` ci then ci else stg:ci
                         else ci
-      nst = st{cons=ncons++[atCo],cli=ncli}
+      nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli}
   if isClear then play (head ses) else play (ses!!1)
+  when isClear $ void $ localStore Save storeName (makeSaveData nst) 
   return nst
 
-makeMission :: Size -> [Audio] -> Int -> Int -> Int -> State -> IO State
-makeMission cvSz oss stg i lv st = do 
+makeMission :: Size -> Auds -> Int -> Int -> Int -> State -> IO State
+makeMission cvSz (oss,ses) stg i lv st = do 
   let pq = quest st -- previous question
       (pai,pan) = case pq of
         Just pq' -> (audios pq'!!aInd pq',aInd pq')
         Nothing -> (-1,0)
       correct = i==pan
-      Score ms tm = score st
+  if correct then return () else when (lv>0) $ play (ses!!1)
+  let Score ms tm = score st
       nms = if pai==(-1) || correct then ms else ms+1
       nscr = Score nms tm
       g = rgn st -- random number generator 
@@ -66,11 +77,15 @@ makeMission cvSz oss stg i lv st = do
       ncos = hco:zipWith (\n co -> 
             changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
                                                                        [0..] cos 
-      ngaus = genMGauges cvSz (lv-nms*2) tm
+      ngaus = genMGauges cvSz (getScore lv nms) tm
       tau = oss!!ai
   play tau
 --  print nscr 
-  return st{score=nscr,quest=Just q,cons=ncos,gaus=ngaus,rgn=ng,swc=(swc st){ita=True}}
+  return st{level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
+           ,rgn=ng,swc=(swc st){ita=True}}
+
+getScore :: Int -> Int -> Int
+getScore lv ms = lv-ms*2
 
 makeChClick :: [Audio] -> Int -> Int -> State -> IO State
 makeChClick oss i oi st = do
@@ -103,7 +118,8 @@ makeLearn cvSz oss stg num st = do
 makeStudy :: Size -> State -> State
 makeStudy cvSz st =
   let clIndexes = cli st 
-      ncos = genSCons cvSz clIndexes
+      hiScores = hiscs st
+      ncos = genSCons cvSz clIndexes hiScores
       bco = genBackCon cvSz 8 Start
    in st{score=Score 0 0,quest=Nothing,cons=ncos++[bco],gaus=[]
         ,swc=(swc st){ita=False}}
@@ -220,7 +236,3 @@ changeText txs co = co{txts=txs}
 changeEvent :: Event -> Con -> Con
 changeEvent ev co = co{clEv=ev}
 
-timerEvent :: State -> State
-timerEvent st = let it = ita (swc st) -- is timer active? 
-                    (Score ms tm) = score st
-                 in if not it then st else st{score=Score ms (tm+1)}
