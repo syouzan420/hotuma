@@ -1,21 +1,25 @@
 module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
              ,makeStudy,makeLearn,makeResult,loadState,getScore
-             ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart) where
+             ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart
+             ,makeResetNotice,removeData) where
 
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
 import Control.Monad (when,void)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
                 ,genSumCons,genMission,genNoticeCon,genStartCons
-                ,genBackCon,genMGauges)
+                ,genBackCon,genMGauges,genScrResetCon)
 import Libs (sepByChar)
 import Browser (localStore)
 import Initialize (testCon)
-import Define (State(..),Event(..),Stage(..),Question(..),Con(..)
+import Define (State(..),Event(..),Stage(..),Question(..),Con(..),MType(..)
               ,Size,CRect(..),Score(..),Switch(..),TxType(..),LSA(..)
               ,mTimeLimit,clearScore,storeName)
 
 type Auds = ([Audio],[Audio])
+
+removeData :: IO ()
+removeData = void $ localStore Remv storeName "" 
 
 makeSaveData :: State -> String
 makeSaveData st =
@@ -32,8 +36,28 @@ loadState str st =
       hiScoreData = read (dts!!1) :: [Int] 
    in st{hiscs=hiScoreData,cli=clearData}
 
+makeResetNotice :: Size -> State -> State
+makeResetNotice cvSz@(cW,cH) st =
+  let mgnX = cW/3 
+      conW = cW-mgnX*2
+      fsz = 30
+      fsD = fromIntegral fsz
+      cns = cons st
+      ncons = map (changeEvent NoEvent) cns 
+      lng = length cns
+      srCon = genNoticeCon cvSz lng 3 "スコアをリセットしますか？" NoEvent
+      srCon' = srCon{txtPos=[(conW-fsD*2,fsD)],txtFsz=[fsz],txtCos=[7]}
+      nCon = genNoticeCon cvSz (lng+1) 7 "いいえ" Study 
+      nCon' = nCon{cRec=CRect (cW/20) (cH/3*2) conW (cH/4)
+                  ,txtPos=[(conW-80,40)],txtCos=[0]} 
+      yCon = genNoticeCon cvSz (lng+2) 7 "はい" ScrReset 
+      yCon' = yCon{cRec=CRect (cW/3*2-cW/20) (cH/3*2) conW (cH/4)
+                  ,txtPos=[(conW-80,80)]}
+   in st{cons=ncons++[srCon',yCon',nCon']}
+
 makeStart :: Size -> State -> State
-makeStart cvSz st = st{cons=genStartCons cvSz} 
+makeStart cvSz st = st{mtype=NoMission,cons=genStartCons cvSz
+                      ,gaus=[],swc=(swc st){ita=False}} 
 
 makeMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
 makeMEnd cvSz ses stg lv st = do 
@@ -77,15 +101,18 @@ makeMission cvSz (oss,ses) stg i lv st = do
       ncos = hco:zipWith (\n co -> 
             changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
                                                                        [0..] cos 
-      ngaus = genMGauges cvSz (getScore lv nms) tm
+      ngaus = genMGauges cvSz Mi (getScore Mi lv nms) tm
       tau = oss!!ai
   play tau
 --  print nscr 
-  return st{level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
+  return st{mtype=Mi,level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
            ,rgn=ng,swc=(swc st){ita=True}}
 
-getScore :: Int -> Int -> Int
-getScore lv ms = lv-ms*2
+getScore :: MType -> Int -> Int -> Int
+getScore Mi lv ms = lv-ms*2
+getScore Qu lv _  = lv 
+getScore _ _ _ = 0
+
 
 makeChClick :: [Audio] -> Int -> Int -> State -> IO State
 makeChClick oss i oi st = do
@@ -121,7 +148,9 @@ makeStudy cvSz st =
       hiScores = hiscs st
       ncos = genSCons cvSz clIndexes hiScores
       bco = genBackCon cvSz 8 Start
-   in st{score=Score 0 0,quest=Nothing,cons=ncos++[bco],gaus=[]
+      rco = genScrResetCon cvSz 9
+      exco = if null clIndexes then [bco] else [bco,rco]
+   in st{score=Score 0 0,quest=Nothing,cons=ncos++exco,gaus=[]
         ,swc=(swc st){ita=False}}
 
 makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
@@ -132,7 +161,7 @@ makeStgLt cvSz oss lv st = do
   let cos = genCons cvSz q
       tau = oss!!(audios q!!aInd q)
   play tau
-  return st{quest=Just q,cons=cos,qsrc=nqs,rgn=ng,swc=(swc st){ita=True}}
+  return st{mtype=Qu,quest=Just q,level=lv,cons=cos,qsrc=nqs,rgn=ng,swc=(swc st){ita=True}}
 
 makeStgWd :: Size -> Int -> State -> IO State
 makeStgWd cvSz lv st = undefined

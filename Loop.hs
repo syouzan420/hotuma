@@ -8,7 +8,7 @@ import Output(clearScreen,drawCons,drawGauges,randomMessage)
 import Generate(genMGauges)
 import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult
              ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
-             ,makeMEnd,makeStart,getScore)
+             ,makeMEnd,makeStart,getScore,makeResetNotice,removeData)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
              ,Event(..),Stage(..),Score(..))
 
@@ -33,6 +33,11 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
               Just co -> do 
                   let ev = clEv co
                   case ev of
+                    ScrReset -> do 
+                      let nst = st{cli=[]}
+                      removeData
+                      return $ makeStudy cvSz nst
+                    IsReset -> return $ makeResetNotice cvSz st
                     Start -> return $ makeStart cvSz st
                     Study -> return $ makeStudy cvSz st
                     Learn stg num -> makeLearn cvSz oss stg num st
@@ -61,8 +66,9 @@ timerEvent :: Canvas -> CInfo -> Bmps -> State -> IO State
 timerEvent c ci@(cvSz,_) bmps st = do
   let itime = ita (swc st) -- is timer active? 
       (Score ms tm) = score st
+      mtp = mtype st
       lv = level st
-      ngaus = genMGauges cvSz (getScore lv ms) (tm+1)
+      ngaus = genMGauges cvSz mtp (getScore mtp lv ms) (tm+1)
       nst = if not itime then st else st{score=Score ms (tm+1),gaus=ngaus}
   when itime $ drawScreen c ci bmps nst
   return nst

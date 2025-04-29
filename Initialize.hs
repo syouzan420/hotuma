@@ -2,10 +2,11 @@ module Initialize where
 
 import qualified Data.Map as M
 import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
-             ,Event(..),Stage(..),TxType(..),Score(..),ltQuestSrc)
+             ,Event(..),Stage(..),TxType(..),Score(..),MType(..),ltQuestSrc)
 
 initState :: State
 initState = State {stage=Nothing
+                  ,mtype=NoMission
                   ,level=0
                   ,score=Score 0 0
                   ,hiscs=[0,0,0,0,0,0,0,0]

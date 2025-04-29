@@ -1,14 +1,14 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
                ,genSumCons,genMission,genNoticeCon,genStartCons
-               ,genBackCon,genMGauges) where
+               ,genBackCon,genMGauges,genScrResetCon) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
 import Libs (selectData,getRan)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
-              ,Bord(..),Event(..),TxType(..),QSource,Stage(..)
-              ,ltQuestSrc,clearScore,mTimeLimit)
+              ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..)
+              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit)
 
 stageChars :: Int -> (Int,[(Int,Char)])
 stageChars stg =
@@ -18,6 +18,7 @@ stageChars stg =
       tkn = if mdTwo==0 then 5 else 7
       taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
    in (tkn,taso) 
+
 
 genMission :: Int -> Int -> Int -> IO (Question,Int)
 genMission g stg pai = do 
@@ -231,6 +232,16 @@ genNoticeCon (cW,cH) i flco tx ev =
            ,txtPos=[(cW/2-mgnX-fsD/2,fsD*3)],txtFsz=[fsz],txtCos=[3]
            ,txts = [tx], typs=[Normal], clEv=ev}
 
+genScrResetCon :: Size -> Int -> Con
+genScrResetCon (cW,cH) i =
+  let mgnX = cW/25*22; mgnY = cH/45
+      conW = cW/12
+      fsD = 32
+      rec = CRect mgnX mgnY conW conW
+      txp = [(fsD/5,fsD/4*3)]
+      bcon = genBackCon (cW,cH) i IsReset
+   in bcon{cRec=rec,txts=["×"],txtPos=txp}
+
 genBackCon :: Size -> Int -> Event -> Con
 genBackCon (cW,cH) i ev =
   let mgnX = cW/25; mgnY = cH/45 
@@ -241,11 +252,14 @@ genBackCon (cW,cH) i ev =
            ,borCol=0,filCol=7,txtPos=[(0,fsD/3*2)],txtFsz=[fsz],txtCos=[1]
            ,txts=["←"],typs=[Normal],clEv=ev}
 
-genMGauges :: Size -> Int -> Int -> [Gauge]
-genMGauges (cW,cH) sc tm =
+genMGauges :: Size -> MType -> Int -> Int -> [Gauge]
+genMGauges (cW,cH) mtp sc tm =
   let mgnX = cW/8; mgnY = cH/20
       spX = cW/5
       gW = cW/4; gH = 10;
-      gau0 = Gauge "SCORE" (mgnX,mgnY) (gW,gH) clearScore sc 
-      gau1 = Gauge "TIME" (mgnX+gW+spX,mgnY) (gW,gH) mTimeLimit (mTimeLimit-tm)
+      tx0 = case mtp of Mi -> "SCORE"; Qu -> "LETTERS"; _ -> ""
+      scMax = case mtp of Mi -> clearScore; Qu -> 48; _ -> 0
+      tmLim = case mtp of Mi -> mTimeLimit; Qu -> qTimeLimit; _ -> 0
+      gau0 = Gauge tx0 (mgnX,mgnY) (gW,gH) scMax sc 
+      gau1 = Gauge "TIME" (mgnX+gW+spX,mgnY) (gW,gH) tmLim (tmLim-tm)
    in [gau0,gau1]

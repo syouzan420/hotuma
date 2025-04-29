@@ -20,9 +20,11 @@ data TxType = Normal | Osite deriving (Eq,Show)
 
 data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 
+data MType = NoMission | Mi | Qu deriving (Eq,Show)
+
 data Event = NoEvent | Start | Quest Stage | Choice Int | Answer Int
            | Study | Learn Int Int | Summary Int | Mission Int Int Int
-           | ChClick Int | MEnd Int Int              deriving (Eq,Show)
+           | ChClick Int | MEnd Int Int | IsReset | ScrReset     deriving (Eq,Show)
 
 data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
 
@@ -57,7 +59,8 @@ data Con = Con {conID :: !Int
 data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
 
 data State = State {stage :: !(Maybe Stage)
-                   ,level :: !Int
+                   ,mtype :: !MType -- mission type (Quest or Mission)
+                   ,level :: !Int -- mission level
                    ,score :: !Score
                    ,hiscs :: ![Int] -- high scores
                    ,quest :: !(Maybe Question)
@@ -96,6 +99,9 @@ cvT = 10  --trim(yohaku)
 
 mTimeLimit :: Int
 mTimeLimit = 30
+
+qTimeLimit :: Int
+qTimeLimit = 150
 
 clearScore :: Int
 clearScore = 15
