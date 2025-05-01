@@ -147,8 +147,9 @@ makeStudy cvSz st =
   let clIndexes = cli st 
       hiScores = hiscs st
       ncos = genSCons cvSz clIndexes hiScores
-      bco = genBackCon cvSz 8 Start
-      rco = genScrResetCon cvSz 9
+      lngCos = length ncos
+      bco = genBackCon cvSz lngCos Start
+      rco = genScrResetCon cvSz (lngCos+1)
       exco = if null clIndexes then [bco] else [bco,rco]
    in st{score=Score 0 0,quest=Nothing,cons=ncos++exco,gaus=[]
         ,swc=(swc st){ita=False}}

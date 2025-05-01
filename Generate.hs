@@ -8,7 +8,7 @@ import Libs (selectData,getRan)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
               ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..)
-              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit)
+              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,extStages)
 
 stageChars :: Int -> (Int,[(Int,Char)])
 stageChars stg =
@@ -19,10 +19,18 @@ stageChars stg =
       taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
    in (tkn,taso) 
 
+stageCharsEx :: Int -> (Int,[(Int,Char)])
+stageCharsEx stg
+  | stg < 8 = stageChars stg
+  | otherwise = let iex = stg-8
+                    exInd = extStages!!iex
+                 in foldl (\(k,a) s -> 
+                            let (tk,ta) = stageChars s in (k+tk,a++ta))
+                          (stageChars (head exInd)) (tail exInd) 
 
 genMission :: Int -> Int -> Int -> IO (Question,Int)
 genMission g stg pai = do 
-  let (tkn,taso) = stageChars stg
+  let (tkn,taso) = stageCharsEx stg
       qs = M.fromList taso
       qs' = if pai==(-1) then qs else M.delete pai qs
           --a list which eliminates the previous answer from the stage char list 
@@ -109,6 +117,17 @@ genLCons (cW,cH) oi ev =
                    ,txts=[[och]],typs=[if i==0 then Normal else Osite]
                    ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
 
+getExtStages :: [Int] -> [Int]
+getExtStages clind = getExtStages' 8 clind extStages
+
+getExtStages' :: Int -> [Int] -> [[Int]] -> [Int]
+getExtStages' _ _ [] = []
+getExtStages' i clind (x:xs) = 
+  let bl = all (`elem` clind) x 
+      next = getExtStages' (i+1) clind xs
+   in if bl then i:next else next 
+
+
 genSCons :: Size -> [Int] -> [Int] -> [Con]
 genSCons cvSz clind hscrs =
   let tpX = 40; tpY = 60
@@ -123,10 +142,37 @@ genSCons cvSz clind hscrs =
       txco n = if isclear n then [1,1] else [1]
       txs n = if isclear n then [[lList!!n],show (hscrs!!n)] else [[lList!!n]]
       typ n = if isclear n then [Osite,Normal] else [Osite]
-   in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,filCol=makeFlCol i
+      sCons = zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round
+                              ,filCol=makeFlCol i
                               ,txtPos=txps i,txtFsz=txfs i,txtCos=txco i
                               ,txts=txs i,typs=typ i
                               ,clEv=Learn i 0}) [0..] sConRecs
+      exInds = getExtStages clind
+      eConRecs = map (makeEConRec cvSz) exInds
+      txE n = if isclear n then show (hscrs!!n) else "" 
+      fszEx = 20
+      fsED = fromIntegral fszEx
+      eCons = zipWith (\(i,es) rec -> emCon{conID=i+8,cRec=rec,border=Circle
+                              ,filCol=makeFlCol es 
+                              ,txtPos=[(fsED/2*3,fsED/2*3)],txtFsz=[fszEx]
+                              ,txtCos=[1],txts=[txE es],typs=[Normal]
+                              ,clEv=Mission es (-1) 0}) (zip [0..] exInds) eConRecs
+   in sCons++eCons
+
+makeEConRec :: Size -> Int -> CRect
+makeEConRec (cW,cH) ei =
+  let i = fromIntegral (ei - 8)
+      conW = cW/5 
+      mgnX = cW/15; mgY = cH/30
+      spX = cW/7; spY = cH/8; spY0 = cH/12
+      gapX = conW+spX; gapY = conW+spY; gapY0 = conW+spY0
+      (px,py)
+        | i==0 = (mgnX+gapX,mgY)
+        | i <4 = (mgnX+gapX*(i-1),mgY+gapY0)
+        | i <7 = (mgnX+gapX*(i-4),mgY+gapY0+gapY)
+        | i<10 = (mgnX+gapX*(i-7),mgY+gapY0+gapY*2)
+        | otherwise = (mgnX+gapX,mgY+gapY0*2+gapY*2)
+   in CRect px py conW conW
 
 makeSConRec :: Size -> Int -> CRect 
 makeSConRec (cW,cH) i =

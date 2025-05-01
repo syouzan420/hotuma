@@ -9,7 +9,7 @@ initState = State {stage=Nothing
                   ,mtype=NoMission
                   ,level=0
                   ,score=Score 0 0
-                  ,hiscs=[0,0,0,0,0,0,0,0]
+                  ,hiscs=replicate 19 0
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
