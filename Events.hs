@@ -1,14 +1,15 @@
 module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
              ,makeStudy,makeLearn,makeResult,loadState,getScore
              ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart
-             ,makeResetNotice,removeData) where
+             ,makeResetNotice,removeData,makeIntro,makeExplain) where
 
 import Haste.Audio (Audio,play)
 import Data.List (intercalate)
 import Control.Monad (when,void)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
                 ,genSumCons,genMission,genNoticeCon,genStartCons
-                ,genBackCon,genMGauges,genScrResetCon)
+                ,genBackCon,genMGauges,genScrResetCon,genIntroCons
+                ,genExpCons)
 import Libs (sepByChar)
 import Browser (localStore)
 import Initialize (testCon)
@@ -54,6 +55,12 @@ makeResetNotice cvSz@(cW,cH) st =
       yCon' = yCon{cRec=CRect (cW/3*2-cW/20) (cH/3*2) conW (cH/4)
                   ,txtPos=[(conW-80,80)]}
    in st{cons=ncons++[srCon',yCon',nCon']}
+
+makeExplain :: Size -> Int -> State -> State
+makeExplain cvSz i st = st{cons=genExpCons cvSz i}
+
+makeIntro :: Size -> State -> State
+makeIntro cvSz st = st{cons=genIntroCons cvSz} 
 
 makeStart :: Size -> State -> State
 makeStart cvSz st = st{mtype=NoMission,cons=genStartCons cvSz

@@ -22,8 +22,8 @@ data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 
 data MType = NoMission | Mi | Qu deriving (Eq,Show)
 
-data Event = NoEvent | Start | Quest Stage | Choice Int | Answer Int
-           | Study | Learn Int Int | Summary Int | Mission Int Int Int
+data Event = NoEvent | Intro | Explain Int | Start | Quest Stage | Choice Int 
+           | Answer Int | Study | Learn Int Int | Summary Int | Mission Int Int Int
            | ChClick Int | MEnd Int Int | IsReset | ScrReset     deriving (Eq,Show)
 
 data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
@@ -129,3 +129,6 @@ wstIndex = "あいうえおxkhnmtrsy かはなまきひにみくふぬむけへ�
 
 extStages :: [[Int]]
 extStages = [[0,1],[0,2],[0,1,2,3],[1,3],[2,4],[2,3,4,5],[3,5],[4,6],[4,5,6,7],[5,7],[6,7]]
+
+expLst :: [String]
+expLst = ["ホツマツタヱは\rわたしたちの くにに\rふるくからある\rもじ で かかれた\rものがたりです","どのくらゐ\rふるいのか\rよくわかって\rゐません","ものがたりは\rごもじ と ななもじ からなる わか の\rリズムで\rかかれてゐます","ものがたりを よむと\rこのくにの ひみつが\rいろいろと\rかかれてゐて\rとても おもしろいです","ここで つかはれてゐるもじは\rヲシデもじ\rと よばれてゐます","まづは ヲシデもじを まなんで ホツマツタヱにふれる じゅんびを\rしていきましょう"]

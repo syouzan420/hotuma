@@ -38,14 +38,14 @@ testCon = Con {conID = 0
               ,filCol = 5
               ,txtPos = [(100,30)]
               ,picPos = []
-              ,txtFsz = [20]
+              ,txtFsz = [30]
               ,txtCos = [1]
               ,txts = ["こんにちは\n元氣ですか？"]
               ,typs = [Normal]
               ,picSize = []
               ,picNums = []
               ,audio = Nothing
-              ,clEv = Start
+              ,clEv = Intro 
               }
 
 emCon :: Con

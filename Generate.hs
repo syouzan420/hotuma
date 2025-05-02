@@ -1,6 +1,7 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
                ,genSumCons,genMission,genNoticeCon,genStartCons
-               ,genBackCon,genMGauges,genScrResetCon) where
+               ,genBackCon,genMGauges,genScrResetCon,genIntroCons
+               ,genExpCons) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
@@ -8,7 +9,7 @@ import Libs (selectData,getRan)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
               ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..)
-              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,extStages)
+              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,extStages,expLst)
 
 stageChars :: Int -> (Int,[(Int,Char)])
 stageChars stg =
@@ -251,22 +252,70 @@ makeConsRec (cW,cH) i =
       recs = map (\(px,py) -> CRect px py conW conH) (tps ++ bps)
    in recs 
 
-genStartCons :: Size -> [Con]
-genStartCons (cW,cH) =
-  let mgnX = cW/8; mgnY =cH/12
-      conW = cW*3/4; conH = cH*3/8
+genUDCons :: Size -> (Int,Int) -> (Int,Int) -> (String,String) 
+                  -> (Event,Event) -> Maybe Event -> [Con]
+genUDCons (cW,cH) bcpr tcpr txpr evpr bcev =
+  let mgnX = cW/8; mgnY =cH/15
+      conW = cW*3/4; conH = cH*7/18
       fsz = 40
       fsD = fromIntegral fsz
       stRecs = [CRect mgnX mgnY conW conH,CRect mgnX (mgnY*2+conH) conW conH]
-      txts n = if n==0 then "ヲシテもじを おぼへやう！"
-                       else "チャレンジもんだい！"
-      flco n = if n==0 then 7 else 9
-      clev n = if n==0 then Study else Quest (StgLetter 0) 
-   in zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,borCol=1
+      flco n = if n==0 then fst bcpr else snd bcpr 
+      txco n = if n==0 then fst tcpr else snd tcpr 
+      txts n = if n==0 then fst txpr else snd txpr 
+      clev n = if n==0 then fst evpr else snd evpr 
+      bcon = case bcev of
+                Just bev -> [genBackCon (cW,cH) 2 bev]
+                Nothing -> []
+      ncons = zipWith (\i rec -> emCon{conID=i,cRec=rec,border=Round,borCol=1
                           ,filCol=flco i
                           ,txtPos=[(cW*2/3-mgnX-fsD/2,fsD)],txtFsz=[fsz]
-                          ,txtCos=[1],txts=[txts i],typs=[Normal],clEv=clev i})
+                          ,txtCos=[txco i],txts=[txts i],typs=[Normal],clEv=clev i})
                                                                 [0,1] stRecs
+   in ncons++bcon
+
+genExpCons :: Size -> Int -> [Con]
+genExpCons cvSz@(cW,cH) i =
+  let mgnX = cW/8; mgnY =cH/15
+      conW = cW*3/4; conH = cH*3/4
+      hcW = cW/8*3-20
+      indY = 50; spcX = 50
+      tps = [(hcW-spcX,indY),(hcW,indY),(hcW+spcX,indY)]
+      fsz = 40
+      fsD = fromIntegral fsz
+      rec = CRect mgnX mgnY conW conH
+      lngExp = length expLst
+      mcon = emCon{conID=0,cRec=rec,border=NoBord
+                          ,txtPos=[(cW*2/3,fsD)],txtFsz=[fsz]
+                          ,txtCos=[1],txts=[expLst!!i],typs=[Normal]
+                          ,clEv=NoEvent}
+      btcon = emCon{conID=1,cRec=makeBtmRec cvSz,border=Round
+                ,borCol=1,filCol=6,txtPos=tps
+                ,txtFsz=[fsz,fsz,fsz],txtCos=[5,5,5]
+                ,txts=["つ","ぎ","へ"]
+                ,typs=[Normal,Normal,Normal]
+                ,audio=Nothing,clEv=if i+1==lngExp then Intro else Explain (i+1)}
+      bkcon = genBackCon cvSz 2 (if i==0 then Intro else Explain (i-1))
+   in [mcon,btcon,bkcon]
+
+
+genIntroCons :: Size -> [Con]
+genIntroCons cvSz =
+  let bcpr = (3,9)
+      tcpr = (7,1)
+      txpr = ("ホツマツタヱってなに？","ヲシテの\rせかいへ")
+      evpr = (Explain 0,Start)
+      bcev = Nothing
+   in genUDCons cvSz bcpr tcpr txpr evpr bcev
+
+genStartCons :: Size -> [Con]
+genStartCons cvSz = 
+  let bcpr = (7,9)
+      tcpr = (1,1)
+      txpr = ("ヲシテもじをおぼへやう！","チャレンジ\rもんだい！")
+      evpr = (Study,Quest (StgLetter 0))
+      bcev = Just Intro
+   in genUDCons cvSz bcpr tcpr txpr evpr bcev
 
 genNoticeCon :: Size -> Int -> Int -> String -> Event -> Con
 genNoticeCon (cW,cH) i flco tx ev = 

@@ -6,9 +6,9 @@ import Control.Monad(unless,when)
 import Browser(chColors,cvRatio,localStore,stringToJson)
 import Output(clearScreen,drawCons,drawGauges,randomMessage)
 import Generate(genMGauges)
-import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult
+import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult,makeIntro
              ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
-             ,makeMEnd,makeStart,getScore,makeResetNotice,removeData)
+             ,makeMEnd,makeStart,getScore,makeResetNotice,removeData,makeExplain)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
              ,Event(..),Stage(..),Score(..))
 
@@ -38,6 +38,8 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
                       removeData
                       return $ makeStudy cvSz nst
                     IsReset -> return $ makeResetNotice cvSz st
+                    Intro -> return $ makeIntro cvSz st
+                    Explain i -> return $ makeExplain cvSz i st
                     Start -> return $ makeStart cvSz st
                     Study -> return $ makeStudy cvSz st
                     Learn stg num -> makeLearn cvSz oss stg num st
