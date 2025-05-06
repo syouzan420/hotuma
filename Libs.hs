@@ -32,6 +32,12 @@ getInside ch mc msg = drop (mc+1) (getToChar ch (mc+1) msg)
 concatWith :: Char -> [String] -> String
 concatWith ch lst = init$concatMap (++[ch]) lst
 
+repList :: Int -> a -> [a] -> [a]
+repList i tg lst = take i lst ++ [tg] ++ drop (i+1) lst
+
+insToList :: Int -> a -> [a] -> [a]
+insToList i tg lst = take i lst ++ [tg] ++ drop i lst
+
 -- get random number(Int) from 0 to (i-1)
 -- input (Number,Generator) -> output (Number,Generator)
 getRandomNumIO :: (Int,Int) -> IO (Int,Int)

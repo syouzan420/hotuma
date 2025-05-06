@@ -1,16 +1,16 @@
-module Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeSaveData
-             ,makeStudy,makeLearn,makeResult,loadState,getScore
-             ,makeSummary,makeChClick,makeMission,makeMEnd,makeStart
-             ,makeResetNotice,removeData,makeIntro,makeExplain) where
+module Events(evStgLt,evStgWd,evChoice,evAns
+             ,evStudy,evLearn,evResult
+             ,evSummary,evChClick,evMission,evMEnd,evStart
+             ,evResetNotice,removeData,evIntro,evExplain) where
 
 import Haste.Audio (Audio,play)
-import Data.List (intercalate)
 import Control.Monad (when,void)
+import Getting (getScore)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
                 ,genSumCons,genMission,genNoticeCon,genStartCons
                 ,genBackCon,genMGauges,genScrResetCon,genIntroCons
-                ,genExpCons)
-import Libs (sepByChar)
+                ,genExpCons,genSaveData)
+import Libs (sepByChar,repList)
 import Browser (localStore)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..),MType(..)
@@ -22,23 +22,8 @@ type Auds = ([Audio],[Audio])
 removeData :: IO ()
 removeData = void $ localStore Remv storeName "" 
 
-makeSaveData :: State -> String
-makeSaveData st =
-  let clearData = cli st
-      hiScoreData = hiscs st
-   in "\""++intercalate "~" [show clearData,show hiScoreData]++"\""
-
-loadState :: String -> State -> State
-loadState "" st = st
-loadState str st =
-  let dt = if head str=='\"' then tail$init str else str
-      dts = sepByChar '~' dt
-      clearData = read (head dts) :: [Int]
-      hiScoreData = read (dts!!1) :: [Int] 
-   in st{hiscs=hiScoreData,cli=clearData}
-
-makeResetNotice :: Size -> State -> State
-makeResetNotice cvSz@(cW,cH) st =
+evResetNotice :: Size -> State -> State
+evResetNotice cvSz@(cW,cH) st =
   let mgnX = cW/3 
       conW = cW-mgnX*2
       fsz = 30
@@ -56,24 +41,24 @@ makeResetNotice cvSz@(cW,cH) st =
                   ,txtPos=[(conW-80,80)]}
    in st{cons=ncons++[srCon',yCon',nCon']}
 
-makeExplain :: Size -> Int -> State -> State
-makeExplain cvSz i st = st{cons=genExpCons cvSz i}
+evExplain :: Size -> Int -> State -> State
+evExplain cvSz i st = st{cons=genExpCons cvSz i}
 
-makeIntro :: Size -> State -> State
-makeIntro cvSz st = st{cons=genIntroCons cvSz} 
+evIntro :: Size -> State -> State
+evIntro cvSz st = st{cons=genIntroCons cvSz} 
 
-makeStart :: Size -> State -> State
-makeStart cvSz st = st{mtype=NoMission,cons=genStartCons cvSz
+evStart :: Size -> State -> State
+evStart cvSz st = st{mtype=NoMission,cons=genStartCons cvSz
                       ,gaus=[],swc=(swc st){ita=False}} 
 
-makeMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
-makeMEnd cvSz ses stg lv st = do 
+evMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
+evMEnd cvSz ses stg lv st = do 
   let Score ms _ = score st 
       scr = lv - ms*2
       hiscores = hiscs st
       phscr = hiscores!!stg  -- previous high score
       nhscr = max scr phscr
-      nhiscs = repList nhscr stg hiscores 
+      nhiscs = repList stg nhscr hiscores 
       isClear = scr > clearScore
       cos = cons st
       ncons = map (changeEvent NoEvent) cos
@@ -86,11 +71,11 @@ makeMEnd cvSz ses stg lv st = do
                         else ci
       nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli}
   if isClear then play (head ses) else play (ses!!1)
-  when isClear $ void $ localStore Save storeName (makeSaveData nst) 
+  when isClear $ void $ localStore Save storeName (genSaveData nst) 
   return nst
 
-makeMission :: Size -> Auds -> Int -> Int -> Int -> State -> IO State
-makeMission cvSz (oss,ses) stg i lv st = do 
+evMission :: Size -> Auds -> Int -> Int -> Int -> State -> IO State
+evMission cvSz (oss,ses) stg i lv st = do 
   let pq = quest st -- previous question
       (pai,pan) = case pq of
         Just pq' -> (audios pq'!!aInd pq',aInd pq')
@@ -115,14 +100,8 @@ makeMission cvSz (oss,ses) stg i lv st = do
   return st{mtype=Mi,level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
            ,rgn=ng,swc=(swc st){ita=True}}
 
-getScore :: MType -> Int -> Int -> Int
-getScore Mi lv ms = lv-ms*2
-getScore Qu lv _  = lv 
-getScore _ _ _ = 0
-
-
-makeChClick :: [Audio] -> Int -> Int -> State -> IO State
-makeChClick oss i oi st = do
+evChClick :: [Audio] -> Int -> Int -> State -> IO State
+evChClick oss i oi st = do
   let cos = cons st
       co = cos!!i
       tp = head (typs co) -- text type 
@@ -131,15 +110,15 @@ makeChClick oss i oi st = do
       ntp = if tp==Osite then Normal else Osite
       ntps = if tp==Osite then (psx,psy+eps) else (psx,psy-eps) 
       nco = co{typs=[ntp],txtPos=[ntps]}
-      ncons = repList nco i cos
+      ncons = repList i nco cos
   play (oss!!oi)
   return $ st{cons=ncons}
 
-makeSummary :: Size -> Int -> State -> State
-makeSummary cvSz stg st = st{cons=genSumCons cvSz stg} 
+evSummary :: Size -> Int -> State -> State
+evSummary cvSz stg st = st{cons=genSumCons cvSz stg} 
 
-makeLearn :: Size -> [Audio] -> Int -> Int -> State -> IO State 
-makeLearn cvSz oss stg num st = do 
+evLearn :: Size -> [Audio] -> Int -> Int -> State -> IO State 
+evLearn cvSz oss stg num st = do 
   let stype = stg `mod` 2
       dif = stg `div` 2 * 12 + num
       maxNum = if stype==0 then 4 else 6
@@ -149,8 +128,8 @@ makeLearn cvSz oss stg num st = do
   play (oss!!oi)
   return st{cons=lCons}
 
-makeStudy :: Size -> State -> State
-makeStudy cvSz st =
+evStudy :: Size -> State -> State
+evStudy cvSz st =
   let clIndexes = cli st 
       hiScores = hiscs st
       ncos = genSCons cvSz clIndexes hiScores
@@ -161,8 +140,8 @@ makeStudy cvSz st =
    in st{score=Score 0 0,quest=Nothing,cons=ncos++exco,gaus=[]
         ,swc=(swc st){ita=False}}
 
-makeStgLt :: Size -> [Audio] -> Int -> State -> IO State
-makeStgLt cvSz oss lv st = do  
+evStgLt :: Size -> [Audio] -> Int -> State -> IO State
+evStgLt cvSz oss lv st = do  
   let g = rgn st -- random number generator 
       qs = qsrc st -- quest source
   ((q,nqs),ng) <- genLtQuest g lv qs
@@ -171,11 +150,11 @@ makeStgLt cvSz oss lv st = do
   play tau
   return st{mtype=Qu,quest=Just q,level=lv,cons=cos,qsrc=nqs,rgn=ng,swc=(swc st){ita=True}}
 
-makeStgWd :: Size -> Int -> State -> IO State
-makeStgWd cvSz lv st = undefined
+evStgWd :: Size -> Int -> State -> IO State
+evStgWd cvSz lv st = undefined
 
-makeResult :: Size -> State -> IO State
-makeResult cvSz st = do 
+evResult :: Size -> State -> IO State
+evResult cvSz st = do 
   let (Score mis tim) = score st 
       ntxt = if mis==0 then "すごい！ 全問正解！"
                        else show mis ++ "回まちがへちゃったね！"
@@ -185,8 +164,8 @@ makeResult cvSz st = do
       nst = st{score=nScr,cons=[ncon]}
   return nst
 
-makeChoice :: Size -> Int -> Int -> State -> State
-makeChoice cvSz conNum i st =
+evChoice :: Size -> Int -> Int -> State -> State
+evChoice cvSz conNum i st =
   let mbQ = quest st
       qNum = case mbQ of
         Just (Question qlist _ _) -> length qlist
@@ -195,16 +174,13 @@ makeChoice cvSz conNum i st =
       tco = chCos!!i
       chCos' = map (changeFColor 7 . changeBColor 0) chCos 
       ntco = (changeFColor 8 . changeBColor 4) tco
-      chCos'' = repList ntco i chCos'
+      chCos'' = repList i ntco chCos'
       nchCos = if qNum+1==conNum then chCos'' else init chCos'' 
       aco = genAnsCon cvSz (qNum+1) i
    in st{cons=hco:nchCos++[aco]}
 
-repList :: a -> Int -> [a] -> [a]
-repList tg i lst = take i lst ++ [tg] ++ drop (i+1) lst
-
-makeAns :: Size -> Int -> State -> State
-makeAns cvSz i st =  
+evAns :: Size -> Int -> State -> State
+evAns cvSz i st =  
   let mbQ = quest st
       (qs,au,ai) = case mbQ of
           Just (Question qs' au' ai') -> (qs',au',ai')
@@ -254,8 +230,8 @@ evWrong i st =
       naco = changeBColor 4 aco
       lco' = changeText ["は","づ","れ"] lco
       nlco = changeEvent (Quest nstg) lco'
-      chCos' = repList ntco i chCos
-      chCos'' = repList naco ai chCos'
+      chCos' = repList i ntco chCos
+      chCos'' = repList ai naco chCos'
       nchCos = map (changeEvent NoEvent) chCos''
       (Score pmis tim) = score st  
    in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=Just 1}

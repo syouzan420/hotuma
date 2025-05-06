@@ -2,6 +2,7 @@ module Initialize where
 
 import qualified Data.Map as M
 import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
+             ,Board(..),BMode(..),BEvent(..)
              ,Event(..),Stage(..),TxType(..),Score(..),MType(..),ltQuestSrc)
 
 initState :: State
@@ -13,6 +14,7 @@ initState = State {stage=Nothing
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
+                  ,board=Board NoB (0,0) 1
                   ,gaus=[]
                   ,qsrc=ltQuestSrc
                   ,cli=[]

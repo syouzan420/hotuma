@@ -14,7 +14,7 @@ import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex,storeName
 import Browser (chColors,localStore)
 import Initialize (testCon)
 import EAffirm (affr)
-import Events (loadState)
+import Getting (loadState)
 import Libs(getIndex)
 
 type Bmps = ([Bitmap],[Bitmap])

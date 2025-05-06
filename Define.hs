@@ -33,6 +33,18 @@ data Gauge = Gauge {gti :: !String, gps :: !Pos, gsz :: !Size
 --gti: gauge title, gps: gauge position, gsz: gauge size
 --gmx: gauge max num, gcu: gauge current num
 
+data BMode = Ko | Ne Int | NoB deriving (Eq,Show)
+
+data BEvent = NoBEvent | GetNe Int | GetOs Int Int deriving (Eq,Show)
+
+data BKo = BKo !CRect !BEvent deriving (Eq,Show)
+
+data BNe = BNe !CRect !BEvent deriving (Eq,Show)
+
+data Board = Board {bMode :: !BMode
+                   ,bPos :: !Pos
+                   ,bScale :: !Double} deriving (Eq,Show) 
+
 data Question = Question {quests :: ![String]
                          ,audios :: ![Int]
                          ,aInd :: !Int -- answer index
@@ -67,6 +79,7 @@ data State = State {stage :: !(Maybe Stage)
                    ,seAu :: !(Maybe Int) -- sound index
                    ,cons :: ![Con]
                    ,gaus :: ![Gauge] -- gauges
+                   ,board :: !Board
                    ,qsrc :: !QSource -- quest source
                    ,cli :: ![Int] -- clear indexes (learning stages)
                    ,rgn :: !Int -- Random Number Generator
@@ -81,6 +94,19 @@ data Switch = Switch { ita:: !Bool,    -- Is timer active?
                        ini:: !Bool,     -- No Input?
                        ias:: !Bool      -- audio start?
                      } deriving (Eq, Show)
+
+initBKoW :: Double
+initBKoW = 60
+
+initBKoH :: Double
+initBKoH = 60
+
+initBNeW :: Double
+initBNeW = 50
+
+initBNeH :: Double
+initBNeH = 50
+
 
 miy :: Int -- map initial y
 miy = 2
@@ -131,4 +157,4 @@ extStages :: [[Int]]
 extStages = [[0,1],[0,2],[0,1,2,3],[1,3],[2,4],[2,3,4,5],[3,5],[4,6],[4,5,6,7],[5,7],[6,7]]
 
 expLst :: [String]
-expLst = ["ホツマツタヱは\rわたしたちの くに にふるくからある\rもじ で かかれた\rものがたりです","ホツマツタヱ が\rどのくらゐ\rふるくから あるのか\rよくわかって\rゐません","ものがたり は\rごもじ と ななもじ からなる わか の\rリズムで\rかかれてゐます","そこには\rにほん の なりたち\rことば の ゆらい\rれきし など が\rかかれてゐます","にほん かくち の\rじんじゃ に のこる\rいひつたへ や\rひみつ を とく\rてがかりにも なります","ここで\rつかはれてゐる\rもじは\rヲシテ\rと よばれてゐます","まづは ヲシテもじ をまなんで\rホツマツタヱ の\rぼうけん を\rはじめましょう"]
+expLst = ["ホツマツタヱは\rわたしたちの くに にふるくからある\rもじ で かかれた\rものがたりです","ホツマツタヱ が\rどのくらゐ\rふるくから あるのか\rよくわかって\rゐません","ものがたり は\rごもじ と ななもじ からなる わか の\rリズムで\rかかれてゐます","そこには\rにほん の なりたち\rことば の ゆらい\rれきし など が\rかかれてゐます","にほん かくち の\rじんじゃ に のこる\rいひつたへ や\rひみつ を とく\rてがかりにも なります","ここで\rつかはれてゐる\rもじは\rヲシテ\rと よばれてゐます","まづは\rヲシテ をまなんで\rホツマツタヱ の\rぼうけん を\rはじめましょう"]

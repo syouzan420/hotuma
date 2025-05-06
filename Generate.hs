@@ -1,33 +1,26 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
                ,genSumCons,genMission,genNoticeCon,genStartCons
                ,genBackCon,genMGauges,genScrResetCon,genIntroCons
-               ,genExpCons) where
+               ,genExpCons,genSaveData
+               ) where
 
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
-import Libs (selectData,getRan)
+import Data.List (intercalate)
+import Libs (selectData,getRan,insToList)
+import Getting (getExtStages,makeConsRec,makeBtmRec,makeSConRec
+               ,makeEConRec,makeSumConsRec,stageChars,stageCharsEx)
 import Initialize (emCon)
 import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
               ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..)
-              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,extStages,expLst)
+              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,expLst
+              )
 
-stageChars :: Int -> (Int,[(Int,Char)])
-stageChars stg =
-  let dvTwo = stg `div` 2
-      mdTwo = stg `mod` 2
-      psi = if mdTwo==0 then dvTwo*12 else dvTwo*12+5
-      tkn = if mdTwo==0 then 5 else 7
-      taso = take tkn (drop psi (M.toList ltQuestSrc)) -- target associate list
-   in (tkn,taso) 
-
-stageCharsEx :: Int -> (Int,[(Int,Char)])
-stageCharsEx stg
-  | stg < 8 = stageChars stg
-  | otherwise = let iex = stg-8
-                    exInd = extStages!!iex
-                 in foldl (\(k,a) s -> 
-                            let (tk,ta) = stageChars s in (k+tk,a++ta))
-                          (stageChars (head exInd)) (tail exInd) 
+genSaveData :: State -> String
+genSaveData st =
+  let clearData = cli st
+      hiScoreData = hiscs st
+   in "\""++intercalate "~" [show clearData,show hiScoreData]++"\""
 
 genMission :: Int -> Int -> Int -> IO (Question,Int)
 genMission g stg pai = do 
@@ -40,7 +33,7 @@ genMission g stg pai = do
       nqs = M.delete (fst ans) qs'
   (ai,g'') <- getRan 4 g'
   (iqlist,ng) <- selectData 3 g'' (M.toList nqs)
-  let iqlist' = insertToList ai ans iqlist
+  let iqlist' = insToList ai ans iqlist
       (auInd,qlist) = unzip iqlist'
   return (Question (map (:[]) qlist) auInd ai,ng) 
 
@@ -53,12 +46,9 @@ genLtQuest g lv qs = do
   let aqs = M.delete (fst ans) ltQuestSrc 
   (ai,g'') <- getRan qn g' 
   (iqlist,ng) <- selectData (qn-1) g'' (M.toList aqs) 
-  let iqlist' = insertToList ai ans iqlist
+  let iqlist' = insToList ai ans iqlist
   let (auInd,qlist) = unzip iqlist'
   return ((Question (map (:[]) qlist) auInd ai,nqs),ng)
-
-insertToList :: Int -> a -> [a] -> [a]
-insertToList i tg lst = take i lst ++ [tg] ++ drop i lst
 
 genSumCons :: Size -> Int -> [Con]
 genSumCons cvSz@(cW,cH) stg =
@@ -96,13 +86,6 @@ genSumCons cvSz@(cW,cH) stg =
       bCon = genBackCon cvSz (tkn+3) Study
    in sumCons++[btCon,noticeCon0,noticeCon1,bCon] 
 
-makeSumConsRec :: Size -> Int -> [CRect]
-makeSumConsRec (cW,cH) tkn =
-  let conW = cW/5; conH = cH/10
-      mgnX = cW/9*4; mgnY = cH/60
-      spY = cH/60 
-   in map (\i -> CRect mgnX (mgnY+(conH+spY)*fromIntegral i) conW conH) [0..tkn]
-
 genLCons :: Size -> Int -> Event -> [Con]
 genLCons (cW,cH) oi ev = 
   let conW = cW/2; conH = cH/3 
@@ -117,17 +100,6 @@ genLCons (cW,cH) oi ev =
                    ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
                    ,txts=[[och]],typs=[if i==0 then Normal else Osite]
                    ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
-
-getExtStages :: [Int] -> [Int]
-getExtStages clind = getExtStages' 8 clind extStages
-
-getExtStages' :: Int -> [Int] -> [[Int]] -> [Int]
-getExtStages' _ _ [] = []
-getExtStages' i clind (x:xs) = 
-  let bl = all (`elem` clind) x 
-      next = getExtStages' (i+1) clind xs
-   in if bl then i:next else next 
-
 
 genSCons :: Size -> [Int] -> [Int] -> [Con]
 genSCons cvSz clind hscrs =
@@ -159,30 +131,6 @@ genSCons cvSz clind hscrs =
                               ,txtCos=[1],txts=[txE es],typs=[Normal]
                               ,clEv=Mission es (-1) 0}) (zip [0..] exInds) eConRecs
    in sCons++eCons
-
-makeEConRec :: Size -> Int -> CRect
-makeEConRec (cW,cH) ei =
-  let i = fromIntegral (ei - 8)
-      conW = cW/5 
-      mgnX = cW/15; mgY = cH/30
-      spX = cW/7; spY = cH/8; spY0 = cH/12
-      gapX = conW+spX; gapY = conW+spY; gapY0 = conW+spY0
-      (px,py)
-        | i==0 = (mgnX+gapX,mgY)
-        | i <4 = (mgnX+gapX*(i-1),mgY+gapY0)
-        | i <7 = (mgnX+gapX*(i-4),mgY+gapY0+gapY)
-        | i<10 = (mgnX+gapX*(i-7),mgY+gapY0+gapY*2)
-        | otherwise = (mgnX+gapX,mgY+gapY0*2+gapY*2)
-   in CRect px py conW conW
-
-makeSConRec :: Size -> Int -> CRect 
-makeSConRec (cW,cH) i =
-  let conW = cW/3; conH = cH/6
-      mgX = cW/8; mgY = cH/12
-      spX = cW/10; spY = cH/16
-      yi = i `div` 2
-      xi = i `mod` 2
-   in CRect (mgX+(conW+spX)*fromIntegral xi) (mgY+(conH+spY)*fromIntegral yi) conW conH
 
 genCons :: Size -> Question -> [Con]
 genCons cSz@(cW,cH) (Question qlist auInd ai) = 
@@ -222,35 +170,6 @@ genAnsCon cvSz@(cW,_) conNum i =
            ,typs=[Normal,Normal,Normal]
            ,audio=Nothing
            ,clEv=Answer i}
-
-makeBtmRec :: Size -> CRect
-makeBtmRec (cW,cH) = let indX = cW/8; indY = cH/6
-                         conW = cW-indX*2; conH = cH/8
-                      in CRect indX (cH-indY) conW conH
-
-makeConsRec :: Size -> Int -> [CRect]
-makeConsRec (cW,cH) i =
-  let bi = div i 2 -- the numbers of the bottom lined cons 
-      biD = fromIntegral bi
-      rm = mod i 2 -- the reminder (0 or 1)
-      ti = bi + rm -- the numbers of the top lined cons
-      tiD = fromIntegral ti
-      cntX = cW/2  -- center x
-      spX = cW/16 - fromIntegral (div (i-3) 2)
-      spY = cW/20
-      mgnX = spX*2
-      mgnY = cH/10
-      conW = (cW - mgnX*2 - spX*(tiD-1))/tiD
-      conH = cH/5 - fromIntegral (div (i-3) 2) *3
-      psX n = mgnX + (conW + spX)* fromIntegral n
-      mgnBX = (cW - (conW*biD + spX*(biD-1)))/2
-      psBX n = mgnBX + (conW + spX)* fromIntegral n
-      tpsY = cH/4+mgnY
-      bpsY = tpsY + conH + spY
-      tps = map (\n -> (psX n,tpsY)) [0..(ti-1)]
-      bps = map (\n -> (psBX n,bpsY)) [0..(bi-1)]
-      recs = map (\(px,py) -> CRect px py conW conH) (tps ++ bps)
-   in recs 
 
 genUDCons :: Size -> (Int,Int) -> (Int,Int) -> (String,String) 
                   -> (Event,Event) -> Maybe Event -> [Con]
@@ -312,7 +231,7 @@ genStartCons :: Size -> [Con]
 genStartCons cvSz = 
   let bcpr = (7,9)
       tcpr = (1,1)
-      txpr = ("ヲシテもじをおぼへやう！","チャレンジ\rもんだい！")
+      txpr = ("ヲシテを\rおぼへやう！","チャレンジ\rもんだい！")
       evpr = (Study,Quest (StgLetter 0))
       bcev = Just Intro
    in genUDCons cvSz bcpr tcpr txpr evpr bcev
@@ -358,3 +277,4 @@ genMGauges (cW,cH) mtp sc tm =
       gau0 = Gauge tx0 (mgnX,mgnY) (gW,gH) scMax sc 
       gau1 = Gauge "TIME" (mgnX+gW+spX,mgnY) (gW,gH) tmLim (tmLim-tm)
    in [gau0,gau1]
+

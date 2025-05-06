@@ -6,11 +6,13 @@ import Control.Monad(unless,when)
 import Browser(chColors,cvRatio,localStore,stringToJson)
 import Output(clearScreen,drawCons,drawGauges,randomMessage)
 import Generate(genMGauges)
-import Events(makeStgLt,makeStgWd,makeChoice,makeAns,makeResult,makeIntro
-             ,makeStudy,makeLearn,makeSummary,makeChClick,makeMission
-             ,makeMEnd,makeStart,getScore,makeResetNotice,removeData,makeExplain)
+import Getting (findCon,getConID,getBoardEv,getScore)
+import Events(evStgLt,evStgWd,evChoice,evAns,evResult,evIntro
+             ,evStudy,evLearn,evSummary,evChClick,evMission
+             ,evMEnd,evStart,evResetNotice,removeData,evExplain)
 import Define(State(..),Switch(..),Con(..),CRect(..),CInfo,Pos
-             ,Event(..),Stage(..),Score(..))
+             ,Event(..),BEvent(..),Stage(..),Score(..)
+             )
 
 type Bmps = ([Bitmap],[Bitmap])
 type Auds = ([Audio],[Audio])
@@ -21,10 +23,13 @@ mouseClick c ci bmps aus (x,y) st = do
       nx = fromIntegral x*rtx
       ny = fromIntegral y*rty
       consSt = cons st
-  inputLoop c ci bmps aus (getConID (nx,ny) (reverse consSt)) st 
+      boardSt = board st
+      ncid = getConID (nx,ny) (reverse consSt)
+      nbev = getBoardEv (nx,ny) boardSt
+  inputLoop c ci bmps aus ncid nbev st 
 
-inputLoop :: Canvas -> CInfo -> Bmps -> Auds -> Int -> State -> IO State 
-inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
+inputLoop :: Canvas -> CInfo -> Bmps -> Auds -> Int -> BEvent -> State -> IO State 
+inputLoop c ci@(cvSz,_) bmps (oss,ses) cid bev st = do
   let consSt = cons st
       conNum = length consSt
       mbCon = if cid==(-1) then Nothing else findCon cid consSt
@@ -36,24 +41,24 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid st = do
                     ScrReset -> do 
                       let nst = st{cli=[]}
                       removeData
-                      return $ makeStudy cvSz nst
-                    IsReset -> return $ makeResetNotice cvSz st
-                    Intro -> return $ makeIntro cvSz st
-                    Explain i -> return $ makeExplain cvSz i st
-                    Start -> return $ makeStart cvSz st
-                    Study -> return $ makeStudy cvSz st
-                    Learn stg num -> makeLearn cvSz oss stg num st
-                    Summary stg -> return $ makeSummary cvSz stg st
-                    ChClick oi -> makeChClick oss cid oi st
-                    Mission stg i lv -> makeMission cvSz (oss,ses) stg i lv st
-                    MEnd stg lv -> makeMEnd cvSz ses stg lv st
+                      return $ evStudy cvSz nst
+                    IsReset -> return $ evResetNotice cvSz st
+                    Intro -> return $ evIntro cvSz st
+                    Explain i -> return $ evExplain cvSz i st
+                    Start -> return $ evStart cvSz st
+                    Study -> return $ evStudy cvSz st
+                    Learn stg num -> evLearn cvSz oss stg num st
+                    Summary stg -> return $ evSummary cvSz stg st
+                    ChClick oi -> evChClick oss cid oi st
+                    Mission stg i lv -> evMission cvSz (oss,ses) stg i lv st
+                    MEnd stg lv -> evMEnd cvSz ses stg lv st
                     Quest stg -> case stg of
                         StgLetter lv -> if lv > 45
-                            then makeResult cvSz st 
-                            else makeStgLt cvSz oss lv st{stage=Just stg} 
-                        StgWord lv -> makeStgWd cvSz lv st{stage=Just stg}
-                    Choice i -> return $ makeChoice cvSz conNum i st
-                    Answer i -> return $ makeAns cvSz i st
+                            then evResult cvSz st 
+                            else evStgLt cvSz oss lv st{stage=Just stg} 
+                        StgWord lv -> evStgWd cvSz lv st{stage=Just stg}
+                    Choice i -> return $ evChoice cvSz conNum i st
+                    Answer i -> return $ evAns cvSz i st
                     _ -> return st
   unless (st==nst) $ drawScreen c ci bmps nst
   case seAu nst of
@@ -75,13 +80,3 @@ timerEvent c ci@(cvSz,_) bmps st = do
   when itime $ drawScreen c ci bmps nst
   return nst
 
-findCon :: Int -> [Con] -> Maybe Con
-findCon _ [] = Nothing  
-findCon i (co:xs) = let cid = conID co in if i==cid then Just co else findCon i xs
-
-getConID :: Pos -> [Con] -> Int
-getConID _ [] = -1
-getConID (x,y) (co:xs) = 
-  let (CRect cx cy cw ch) = cRec co
-      isIn = x > cx && x < cx+cw && y > cy && y < cy+ch
-   in if isIn then conID co else getConID (x,y) xs  
