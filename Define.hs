@@ -3,6 +3,7 @@ module Define where
 
 import Haste(JSString)
 import qualified Data.Map as M
+import Data.Array (Array,listArray)
 
 type Pos = (Double,Double)
 type Size = (Double,Double)
@@ -23,7 +24,8 @@ data Stage = StgLetter Int | StgWord Int deriving (Eq,Show)
 data MType = NoMission | Mi | Qu deriving (Eq,Show)
 
 data Event = NoEvent | Intro | Explain Int | Start | Quest Stage | Choice Int 
-           | Answer Int | Study | Learn Int Int | Summary Int | Mission Int Int Int
+           | Answer Int | Study | Learn Int Int | RevealL | Summary Int 
+           | Mission Int Int Int
            | ChClick Int | MEnd Int Int | IsReset | ScrReset     deriving (Eq,Show)
 
 data Score = Score {miss :: !Int, time :: !Int} deriving (Eq,Show,Read)
@@ -33,7 +35,7 @@ data Gauge = Gauge {gti :: !String, gps :: !Pos, gsz :: !Size
 --gti: gauge title, gps: gauge position, gsz: gauge size
 --gmx: gauge max num, gcu: gauge current num
 
-data BMode = Ko | Ne Int | NoB deriving (Eq,Show)
+data BMode = Ko | Ne Int | Os Int | NoB deriving (Eq,Show)
 
 data BEvent = NoBEvent | GetNe Int | GetOs Int Int deriving (Eq,Show)
 
@@ -43,7 +45,9 @@ data BNe = BNe !CRect !BEvent deriving (Eq,Show)
 
 data Board = Board {bMode :: !BMode
                    ,bPos :: !Pos
-                   ,bScale :: !Double} deriving (Eq,Show) 
+                   ,bScale :: !Double
+                   ,bInd :: !Int
+                   ,exeEv :: !Event} deriving (Eq,Show) 
 
 data Question = Question {quests :: ![String]
                          ,audios :: ![Int]
@@ -66,6 +70,8 @@ data Con = Con {conID :: !Int
                ,picNums :: ![Int] -- picture indexes
                ,audio :: !(Maybe Int) -- audio index when (show or pressed)
                ,clEv :: !Event -- event when clicked
+               ,visible :: !Bool
+               ,enable :: !Bool
                } deriving (Eq,Show)
 
 data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
@@ -151,10 +157,13 @@ ltQuestSrc :: QSource
 ltQuestSrc = M.fromList $ zip [0..] "あかはなまいきひにみうくふぬむえけへねめおこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ"
 
 wstIndex :: String
-wstIndex = "あいうえおxkhnmtrsy かはなまきひにみくふぬむけへねめこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ゛阿和宇吾付須被意百雄間波が9穂ぞ話葉ざぐび緒ど3ずばぶぎべ補芽1府場じ個我ご図時曾火日だ座羽4馬部祖炉具語づ後子男でぜ出裳美"
+wstIndex = "あいうえおxkhnmtrsy かはなまきひにみくふぬむけへねめこほのもとろそよをてれせゑつるすゆんちりしゐたらさやわ゛阿和宇吾付須被意百雄間波が9穂ぞ話葉ざぐび緒ど3ずばぶぎべ補芽1府場じ個我ご図時曾火日だ座羽4馬部祖炉具語づ後子男でぜ出裳美aiueow"
 
 extStages :: [[Int]]
 extStages = [[0,1],[0,2],[0,1,2,3],[1,3],[2,4],[2,3,4,5],[3,5],[4,6],[4,5,6,7],[5,7],[6,7]]
+
+ostIndArr :: Array (Int,Int) Int
+ostIndArr = listArray ((0,0),(4,8)) [46,45,44,1,0,43,2,3,4,42,41,40,6,5,39,7,8,9,28,27,26,21,20,25,22,23,24,37,36,35,11,10,34,12,13,14,33,32,31,16,15,30,17,18,19]
 
 expLst :: [String]
 expLst = ["ホツマツタヱは\rわたしたちの くに にふるくからある\rもじ で かかれた\rものがたりです","ホツマツタヱ が\rどのくらゐ\rふるくから あるのか\rよくわかって\rゐません","ものがたり は\rごもじ と ななもじ からなる わか の\rリズムで\rかかれてゐます","そこには\rにほん の なりたち\rことば の ゆらい\rれきし など が\rかかれてゐます","にほん かくち の\rじんじゃ に のこる\rいひつたへ や\rひみつ を とく\rてがかりにも なります","ここで\rつかはれてゐる\rもじは\rヲシテ\rと よばれてゐます","まづは\rヲシテ をまなんで\rホツマツタヱ の\rぼうけん を\rはじめましょう"]

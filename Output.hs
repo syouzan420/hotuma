@@ -1,6 +1,6 @@
 module Output(clearScreen,putMozi,putChara,playAudio
              ,putText,drawCons,startGame,randomMessage
-             ,drawGauges) where
+             ,drawGauges,drawBoard) where
 
 import Haste.Graphics.Canvas(Canvas,Color(RGB),Bitmap,Point,Vector,Shape
                             ,color,font,translate,rotate,line,arc,rect,circle
@@ -10,11 +10,12 @@ import Haste.Audio (play,Audio)
 import Control.Monad (when,unless)
 import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex,storeName
               ,State(..),Switch(..),Con(..),CRect(..),CInfo
-              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..),Gauge(..))
+              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..),Gauge(..)
+              ,Board(..),BMode(..),BKo(..),BNe(..))
 import Browser (chColors,localStore)
 import Initialize (testCon)
 import EAffirm (affr)
-import Getting (loadState)
+import Getting (loadState,makeBKos,makeBNes)
 import Libs(getIndex)
 
 type Bmps = ([Bitmap],[Bitmap])
@@ -54,6 +55,47 @@ randomMessage c ci bmps st = do
   let affCons = [testCon{txts=[affText]}]
   drawCons c ci bmps affCons 
 
+drawRoundRect :: Canvas -> CRect -> Double -> (Color,Color) -> IO ()
+drawRoundRect c (CRect x y w h) lnw (bcol,fcol) = do
+  renderOnTop c $ color fcol $ fill $ roundRect (x,y) (w,h)
+  renderOnTop c $ color bcol $ lineWidth lnw $ stroke $ roundRect (x,y) (w,h)
+
+drawCircle :: Canvas -> CRect -> Double -> (Color,Color) -> IO ()
+drawCircle c (CRect x y w h) lnw (bcol,fcol) = do
+  let r = w/2
+  renderOnTop c $ color fcol $ fill $ circle (x+r,y+r) r 
+  renderOnTop c $ color bcol $ lineWidth lnw $ stroke $ circle (x+r,y+r) r 
+
+drawKos :: Canvas -> [Bitmap] -> Board -> Int -> IO ()
+drawKos c wbmp (Board _ bps bsc _ _) i = do
+  let bkos = makeBKos bps bsc
+      bcol = chColors!!1
+      fcol = chColors!!(if i<0 then 3 else 8)
+      f2col = chColors!!4
+  mapM_ (\(BKo rec@(CRect rx ry _ _) _,(n,x)) -> do
+              drawRoundRect c rec 2 (bcol,if n==i then f2col else fcol)
+              putWst c wbmp 40 (rx+10,ry+10) x 
+         ) (zip bkos (zip [0..] "ysrkxthnm")) 
+  
+drawNes :: Canvas -> [Bitmap] -> Board -> Int -> IO ()
+drawNes c wbmp bd@(Board _ bps bsc _ _) i = do
+  let bnes = makeBNes i bps bsc
+      bcol = chColors!!1
+      fcol = chColors!!3
+  drawKos c wbmp bd i  
+  mapM_ (\(BNe rec@(CRect rx ry _ _) _,x) -> do
+               drawRoundRect c rec 2 (bcol,fcol)
+               putWst c wbmp 36 (rx+9,ry+9) x 
+        ) (zip bnes "aiouew雄")
+
+drawBoard :: Canvas -> [Bitmap] -> Board -> IO ()
+drawBoard c wbmp bd@(Board bmd _ _ _ _) =
+  case bmd of
+    NoB -> return ()
+    Os _ -> return ()
+    Ko -> drawKos c wbmp bd (-1)
+    Ne i -> drawNes c wbmp bd i 
+
 drawGauges :: Canvas -> [Gauge] -> IO ()
 drawGauges _ [] = return ()
 drawGauges c gausSt = mapM_ (putGauge c) gausSt  
@@ -85,8 +127,8 @@ putGauge c (Gauge title (gx,gy) (gw,gh) mx cu) = do
   putText c fcol (floor gh*2) (gx+gw,gy+gh) (show (max cu 0))
 
 putCon :: Canvas -> Double -> Bmps -> Con -> IO ()
-putCon c cvH bmps con = do
-  let (CRect cx cy cw ch) = cRec con
+putCon c cvH bmps con = if not (visible con) then return () else do 
+  let rec@(CRect cx cy cw ch) = cRec con
       bocol = borCol con
       ficol = filCol con
       txpos = txtPos con
@@ -99,15 +141,8 @@ putCon c cvH bmps con = do
       (_,wbmp) = bmps
   case border con of
     Rigid -> renderOnTop c $ color bcol $ stroke $ rect (cx,cy) (cx+cw,cy+ch)
-    Round -> do
-      renderOnTop c $ color fcol $ fill $ roundRect (cx,cy) (cw,ch)
-      renderOnTop c $ color bcol $ lineWidth 3 $
-                                       stroke $ roundRect (cx,cy) (cw,ch)
-    Circle -> do
-      let rd = cw/2
-      renderOnTop c $ color fcol $ fill $ circle (cx+rd,cy+rd) rd 
-      renderOnTop c $ color bcol $ lineWidth 3 $
-                                       stroke $ circle (cx+rd,cy+rd) rd 
+    Round -> drawRoundRect c rec 3 (bcol,fcol) 
+    Circle -> drawCircle c rec 3 (bcol,fcol) 
     _ -> return ()
   mapM_ (\((tx,tp),((tpx,tpy),(fz,col))) ->
              putTextV c wbmp (chColors!!col) tp fz (cw,ch) (tpx+cx,tpy+cy) tx)

@@ -1,5 +1,5 @@
 module Events(evStgLt,evStgWd,evChoice,evAns
-             ,evStudy,evLearn,evResult
+             ,evStudy,evLearn,evResult,evRevealL
              ,evSummary,evChClick,evMission,evMEnd,evStart
              ,evResetNotice,removeData,evIntro,evExplain) where
 
@@ -9,12 +9,13 @@ import Getting (getScore)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
                 ,genSumCons,genMission,genNoticeCon,genStartCons
                 ,genBackCon,genMGauges,genScrResetCon,genIntroCons
-                ,genExpCons,genSaveData)
+                ,genExpCons,genSaveData,genLBoard)
 import Libs (sepByChar,repList)
 import Browser (localStore)
 import Initialize (testCon)
 import Define (State(..),Event(..),Stage(..),Question(..),Con(..),MType(..)
               ,Size,CRect(..),Score(..),Switch(..),TxType(..),LSA(..)
+              ,Board(..),BMode(..)
               ,mTimeLimit,clearScore,storeName)
 
 type Auds = ([Audio],[Audio])
@@ -123,10 +124,18 @@ evLearn cvSz oss stg num st = do
       dif = stg `div` 2 * 12 + num
       maxNum = if stype==0 then 4 else 6
       oi = if stype==0 then dif else dif + 5 
-      clEvnt = if num==maxNum then Summary stg else Learn stg (num+1) 
-      lCons = genLCons cvSz oi clEvnt
+      clEvent = if num==maxNum then Summary stg else Learn stg (num+1) 
+      lCons = genLCons cvSz oi clEvent
+      boardSt@(Board bmd _ _ _ _) = board st
+      nboard = if bmd==NoB then genLBoard cvSz oi RevealL else boardSt
   play (oss!!oi)
-  return st{cons=lCons}
+  return st{cons=lCons,board=nboard}
+
+evRevealL :: State -> State
+evRevealL st = let cns = cons st
+                   tcon = last cns
+                   ncon = tcon{visible=True,enable=True}
+                in st{cons=init cns++[ncon]}
 
 evStudy :: Size -> State -> State
 evStudy cvSz st =

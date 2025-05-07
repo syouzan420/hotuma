@@ -1,7 +1,7 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
                ,genSumCons,genMission,genNoticeCon,genStartCons
                ,genBackCon,genMGauges,genScrResetCon,genIntroCons
-               ,genExpCons,genSaveData
+               ,genExpCons,genSaveData,genLBoard
                ) where
 
 import qualified Data.Map as M
@@ -11,8 +11,8 @@ import Libs (selectData,getRan,insToList)
 import Getting (getExtStages,makeConsRec,makeBtmRec,makeSConRec
                ,makeEConRec,makeSumConsRec,stageChars,stageCharsEx)
 import Initialize (emCon)
-import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..)
-              ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..)
+import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..),Board(..)
+              ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..),BMode(..)
               ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,expLst
               )
 
@@ -96,10 +96,15 @@ genLCons (cW,cH) oi ev =
       lConRecs = [CRect mgnX mgnY conW conH,CRect mgnX (mgnY+conH+spY) conW conH]
       och = fromMaybe ' ' $ M.lookup oi ltQuestSrc 
    in zipWith (\(i,cn) rec -> emCon{conID=i,cRec=rec
-                   ,border=if i==0 then NoBord else Round,borCol=4,filCol=cn
+                   ,border=Round,borCol=4,filCol=cn
                    ,txtPos=[(tpX,tpY)],txtFsz=[fsz],txtCos=[1]
-                   ,txts=[[och]],typs=[if i==0 then Normal else Osite]
-                   ,clEv=if i==0 then NoEvent else ev}) [(0,5),(1,9)] lConRecs
+                   ,txts=[[och]],typs=[if i==0 then Osite else Normal]
+                   ,clEv=if i==0 then NoEvent else ev
+                   ,visible=i==0,enable=i==0}) [(0,9),(1,5)] lConRecs
+
+genLBoard :: Size -> Int -> Event -> Board
+genLBoard (cW,cH) oi ev = let mgnX = cW/5; mgnY = cH*3/5; scl = 1.2
+                           in Board Ko (mgnX,mgnY) scl oi ev
 
 genSCons :: Size -> [Int] -> [Int] -> [Con]
 genSCons cvSz clind hscrs =

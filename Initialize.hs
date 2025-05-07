@@ -14,7 +14,7 @@ initState = State {stage=Nothing
                   ,quest=Nothing
                   ,seAu=Nothing
                   ,cons=[testCon]
-                  ,board=Board NoB (0,0) 1
+                  ,board=initBoard
                   ,gaus=[]
                   ,qsrc=ltQuestSrc
                   ,cli=[]
@@ -22,6 +22,9 @@ initState = State {stage=Nothing
                   ,swc=initSwitch
                   ,db=""
                   }
+
+initBoard :: Board
+initBoard = Board NoB (0,0) 1 0 NoEvent
 
 initSwitch :: Switch
 initSwitch = Switch {ita=False
@@ -48,6 +51,8 @@ testCon = Con {conID = 0
               ,picNums = []
               ,audio = Nothing
               ,clEv = Intro 
+              ,visible = True
+              ,enable = True
               }
 
 emCon :: Con
@@ -66,4 +71,6 @@ emCon = Con {conID = 0
             ,picNums = []
             ,audio = Nothing
             ,clEv = NoEvent
+            ,visible = True
+            ,enable = True
             }

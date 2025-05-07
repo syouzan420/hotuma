@@ -76,7 +76,7 @@ loadImgs i str = loadImgs (i-1) str ++ [loadBitmap (pack (str ++ show i ++".png"
 setBmps :: IO ([Bitmap],[Bitmap])
 setBmps = do
   imgs <- sequence (loadImgs 5 imgfile)
-  wsts <- sequence (loadImgs 120 wstfile)
+  wsts <- sequence (loadImgs 126 wstfile)
   return (imgs,wsts)
 
 oneAudio :: JSString -> IO Audio

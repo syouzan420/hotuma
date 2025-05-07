@@ -1,13 +1,14 @@
 module Getting (getExtStages,findCon,getConID,stageChars,stageCharsEx
                ,makeConsRec,makeBtmRec,makeSConRec,makeEConRec,makeSumConsRec
-               ,getBoardEv,getScore,loadState
+               ,getBoardEv,getScore,loadState,getOstInd
                ,makeBKos,makeBNes) where
 
 import qualified Data.Map as M
+import Data.Array ((!))
 import Libs (sepByChar)
 import Define (Pos,Size,CRect(..),Con(..),State(..)
               ,Board(..),BMode(..),BEvent(..),BKo(..),BNe(..),MType(..)
-              ,extStages,initBKoW,initBKoH,initBNeW,initBNeH,ltQuestSrc)
+              ,extStages,initBKoW,initBKoH,initBNeW,initBNeH,ltQuestSrc,ostIndArr)
 
 loadState :: String -> State -> State
 loadState "" st = st
@@ -121,9 +122,10 @@ makeConsRec (cW,cH) i =
    in recs 
 
 getBoardEv :: Pos -> Board -> BEvent
-getBoardEv _ (Board NoB _ _ ) = NoBEvent
-getBoardEv mps (Board Ko bps bsc) = getBKoEv mps (makeBKos bps bsc) 
-getBoardEv mps (Board (Ne i) bps bsc) = getBNeEv mps (makeBNes i bps bsc)  
+getBoardEv _ (Board NoB _ _ _ _) = NoBEvent
+getBoardEv mps (Board Ko bps bsc _ _) = getBKoEv mps (makeBKos bps bsc) 
+getBoardEv mps (Board (Ne i) bps bsc _ _) = getBNeEv mps (makeBNes i bps bsc)  
+getBoardEv _ _ = NoBEvent
 
 isInRec :: Pos -> CRect -> Bool
 isInRec (x,y) (CRect rx ry rw rh) = x > rx && x < rx+rw && y > ry && y < ry+rh
@@ -154,13 +156,22 @@ makeBNes i (bx,by) bsc = map (\j ->
         | otherwise = 2
       colN
         | j==0 || j==2 || j==4 = 1
-        | j==1 = 0
+        | j==1 || j==5 = 0
         | otherwise = 2
       rowK = fromIntegral $ i `div` 3
       colK = fromIntegral $ i `mod` 3
       kw = initBKoW; kh = initBKoH
       nw = initBNeW; nh = initBNeH
-      rec = CRect (bx+(kw*colK+nw*colN)*bsc) (by+(kh*rowK+nh*rowN)*bsc)
+      rec = CRect (bx+(kw*(colK-1)+nw*colN)*bsc) (by+(kh*(rowK-1)+nh*rowN)*bsc)
                                                        (nw*bsc) (nh*bsc)
-   in BNe rec (GetOs i j)   ) [0..4]
+   in BNe rec (GetOs i j)   ) [0..maxj]
+   where maxj
+          | i==4 = 6
+          | i==7 = 5
+          | otherwise = 4
 
+getOstInd :: Int -> Int -> Int
+getOstInd 4 5 = 47  -- wa
+getOstInd 4 6 = 29  -- wo
+getOstInd 7 5 = 38  -- n
+getOstInd i j = ostIndArr!(j,i) 
