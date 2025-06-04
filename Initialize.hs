@@ -2,7 +2,7 @@ module Initialize where
 
 import qualified Data.Map as M
 import Define(State(..),Switch(..),Con(..),CRect(..),Bord(..)
-             ,Board(..),BMode(..),BEvent(..)
+             ,Board(..),BMode(..),BEvent(..),Sound(..),LSA(..)
              ,Event(..),Stage(..),TxType(..),Score(..),MType(..),ltQuestSrc)
 
 initState :: State
@@ -12,12 +12,14 @@ initState = State {stage=Nothing
                   ,score=Score 0 0
                   ,hiscs=replicate 19 0
                   ,quest=Nothing
-                  ,seAu=Nothing
+                  ,seAu=NoSound
                   ,cons=[testCon]
-                  ,board=initBoard
                   ,gaus=[]
+                  ,board=initBoard
+                  ,dcon=Nothing
                   ,qsrc=ltQuestSrc
                   ,cli=[]
+                  ,lsa=NoLSA
                   ,rgn=0
                   ,swc=initSwitch
                   ,db=""
@@ -36,24 +38,15 @@ initSwitch = Switch {ita=False
                     }
 
 testCon :: Con
-testCon = Con {conID = 0
-              ,cRec = CRect 80 100 200 370 
-              ,border = Round
-              ,borCol = 0
-              ,filCol = 5
-              ,txtPos = [(100,30)]
-              ,picPos = []
-              ,txtFsz = [30]
-              ,txtCos = [1]
-              ,txts = ["こんにちは\n元氣ですか？"]
-              ,typs = [Normal]
-              ,picSize = []
-              ,picNums = []
-              ,audio = Nothing
-              ,clEv = Intro 
-              ,visible = True
-              ,enable = True
-              }
+testCon = emCon {cRec = CRect 80 100 200 370 
+                ,border = Round
+                ,txtPos = [(100,30)]
+                ,txtFsz = [30]
+                ,txtCos = [1]
+                ,txts = ["こんにちは\n元氣ですか？"]
+                ,typs = [Normal]
+                ,clEv = Intro 
+                }
 
 emCon :: Con
 emCon = Con {conID = 0

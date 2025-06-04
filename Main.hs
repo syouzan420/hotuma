@@ -18,9 +18,9 @@ main = do
   ci <- getCanvasInfo c
   loadedState <- startGame c ci bmps initState 
   state <- newIORef loadedState 
-  onEvent ce Click $ \(MouseData xy _ _) -> do
+  onEvent ce Click $ \(MouseData xy _ _) ->
     readIORef state >>= mouseClick c ci bmps aus xy >>= writeIORef state
-  onEvent ce TouchStart $ \(TouchData {}) -> do
+  onEvent ce TouchStart $ \(TouchData {}) ->
     readIORef state >>= tcStart >>= writeIORef state
   onEvent ce TouchEnd $ \(TouchData {}) -> do
     readIORef state >>= touchIsTrue >>= writeIORef state

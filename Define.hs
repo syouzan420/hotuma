@@ -7,6 +7,8 @@ import Data.Array (Array,listArray)
 
 type Pos = (Double,Double)
 type Size = (Double,Double)
+type GPos = (Int,Int)
+type GSize = (Int,Int)
 type Fsize = Int          --Font Size
 type QSource = M.Map Int Char
 
@@ -54,6 +56,27 @@ data Question = Question {quests :: ![String]
                          ,aInd :: !Int -- answer index
                          } deriving (Eq,Show)
 
+data Sound = Aoss Int | Ases Int | NoSound deriving (Eq,Show) -- Sound type
+
+data Dir = South | North | East | West | NoDir deriving (Eq,Show)
+
+data PEvent = NoPEvent | Collide Obj deriving (Eq,Show)
+
+data Role = Pl Dir | Ob Int | Mz Char | It Int | Ex | En Char deriving (Eq,Show)
+-- Player, Obstacle, Mozi, Item, Exit, Enemy
+
+data Obj = Obj {role :: !Role
+               ,opos :: !Pos -- object position
+               ,oai :: !Int -- object animation index
+               } deriving (Eq,Show)
+
+--dynContainer
+data DCon = DCon {cBase :: !Con
+                 ,gSize :: !GSize --- grid size
+                 ,obs :: ![Obj]  
+                 ,tmCnt :: !Int -- timer count
+                 } deriving (Eq,Show)
+
 --container
 data Con = Con {conID :: !Int
                ,cRec :: !CRect
@@ -74,7 +97,7 @@ data Con = Con {conID :: !Int
                ,enable :: !Bool
                } deriving (Eq,Show)
 
-data LSA = Save | Load | Remv deriving (Eq,Show)  -- local storage actions 
+data LSA = Save String | Load | Remv | NoLSA deriving (Eq,Show)  -- local storage actions 
 
 data State = State {stage :: !(Maybe Stage)
                    ,mtype :: !MType -- mission type (Quest or Mission)
@@ -82,13 +105,15 @@ data State = State {stage :: !(Maybe Stage)
                    ,score :: !Score
                    ,hiscs :: ![Int] -- high scores
                    ,quest :: !(Maybe Question)
-                   ,seAu :: !(Maybe Int) -- sound index
+                   ,seAu :: !Sound -- sound index
                    ,cons :: ![Con]
                    ,gaus :: ![Gauge] -- gauges
                    ,board :: !Board
+                   ,dcon :: !(Maybe DCon)
                    ,qsrc :: !QSource -- quest source
                    ,cli :: ![Int] -- clear indexes (learning stages)
                    ,rgn :: !Int -- Random Number Generator
+                   ,lsa :: !LSA -- local storage actions
                    ,swc :: !Switch
                    ,db :: !String    --for debug
                    } deriving (Eq,Show)
@@ -129,6 +154,12 @@ nfs = 20; rfs = 8 -- normal font size, rubi font size
 cvT :: Double
 cvT = 10  --trim(yohaku)
 
+defGSize :: GSize
+defGSize = (14,14)
+
+defPlGPos :: GPos
+defPlGPos = (7,14)
+
 mTimeLimit :: Int
 mTimeLimit = 30
 
@@ -143,6 +174,9 @@ imgfile = "Images/img"
 
 wstfile :: String
 wstfile = "Images/Wst/wst"
+
+chrfile :: String
+chrfile = "Images/Chr/ch"
 
 wstAuFile :: String
 wstAuFile = "Audio/os"

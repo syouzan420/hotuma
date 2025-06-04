@@ -1,16 +1,17 @@
-module Output(clearScreen,putMozi,putChara,playAudio
-             ,putText,drawCons,startGame,randomMessage
+module Output(clearScreen,putChara,playAudio
+             ,putText,drawCons,startGame
              ,drawGauges,drawBoard) where
 
-import Haste.Graphics.Canvas(Canvas,Color(RGB),Bitmap,Point,Vector,Shape
-                            ,color,font,translate,rotate,line,arc,rect,circle
+import Haste.Graphics.Canvas(color,font,translate,rotate,line,arc,rect,circle
                             ,text,draw,scale,render,stroke,fill,lineWidth
-                            ,renderOnTop)
+                            ,renderOnTop
+                            ,Canvas,Color(RGB),Bitmap,Point,Vector,Shape)
 import Haste.Audio (play,Audio)
 import Control.Monad (when,unless)
-import Define (miy,wg,hg,wt,ht,cvT,nfs,rfs,wstIndex,storeName
-              ,State(..),Switch(..),Con(..),CRect(..),CInfo
-              ,Pos,Size,Fsize,Bord(..),TxType(..),LSA(..),Gauge(..)
+import Define (nfs,wstIndex,storeName
+              ,Pos,Size,Fsize,CInfo
+              ,State(..),Switch(..),Con(..),CRect(..)
+              ,Bord(..),TxType(..),LSA(..),Gauge(..)
               ,Board(..),BMode(..),BKo(..),BNe(..))
 import Browser (chColors,localStore)
 import Initialize (testCon)
@@ -18,16 +19,11 @@ import EAffirm (affr)
 import Getting (loadState,makeBKos,makeBNes)
 import Libs(getIndex)
 
-type Bmps = ([Bitmap],[Bitmap])
+type Bmps = ([Bitmap],[Bitmap],[Bitmap])
 
 
 clearScreen :: Canvas -> IO ()
 clearScreen c = render c $ text (0,0) "" 
-
-putMozi :: Canvas -> Color -> Pos -> String -> IO ()
-putMozi c col (x,y) str = renderOnTop c $ 
-    mapM_ (\(ch,n)->color col$font (show nfs++"px Courier")$
-      text (x*wg+wg*n,y*hg) [ch]) (zip str [0..]) 
 
 putChara :: Canvas -> [Bitmap] -> Double -> Pos -> Int -> IO ()
 putChara c chrs cvW pos ind = do  
@@ -45,7 +41,7 @@ playAudio audio st = do
 startGame :: Canvas -> CInfo -> Bmps -> State -> IO State 
 startGame c ci bmps st = do
   randomMessage c ci bmps st 
-  sData <- localStore Load storeName "" 
+  sData <- localStore Load storeName 
   return $ if sData=="loadError" then st else loadState sData st
 
 randomMessage :: Canvas -> CInfo -> Bmps -> State -> IO ()
@@ -138,7 +134,7 @@ putCon c cvH bmps con = if not (visible con) then return () else do
       tps = typs con
       bcol = chColors!!bocol
       fcol = chColors!!ficol
-      (_,wbmp) = bmps
+      (_,wbmp,_) = bmps
   case border con of
     Rigid -> renderOnTop c $ color bcol $ stroke $ rect (cx,cy) (cx+cw,cy+ch)
     Round -> drawRoundRect c rec 3 (bcol,fcol) 
@@ -186,17 +182,6 @@ putLet :: Canvas -> Color -> Fsize -> Double -> Point -> Char -> IO ()
 putLet c col fs rd (x,y) ch = do
   renderOnTop c $ color col$font (show fs++"px IPAGothic")$
     translate (x,y)$rotate rd$text (0,0) [ch]
-
-roundRectLine :: Point -> Vector -> Shape ()
-roundRectLine (x,y) (w,h) = do  
-  line (x,y+10) (x,y+h-10)
---  arc (x+10,y+h-10) 10 (pi*0.5) pi
-  line (x+10,y+h) (x+w-10,y+h)
---  arc (x+w-10,y+h-10) 10 0 (pi*0.5)
-  line (x+w,y+h-10) (x+w,y+10)
---  arc (x+w-10,y+10) 10 (pi*1.5) (pi*2)
-  line (x+w-10,y) (x+10,y)
---  arc (x+10,y+10) 10 pi (pi*1.5)
 
 roundRect :: Point -> Vector -> Shape ()
 roundRect (x,y) (w,h) = do  

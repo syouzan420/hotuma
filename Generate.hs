@@ -1,7 +1,7 @@
 module Generate(genLtQuest,genCons,genAnsCon,genSCons,genLCons
                ,genSumCons,genMission,genNoticeCon,genStartCons
                ,genBackCon,genMGauges,genScrResetCon,genIntroCons
-               ,genExpCons,genSaveData,genLBoard
+               ,genExpCons,genSaveData,genLBoard,genDCon
                ) where
 
 import qualified Data.Map as M
@@ -9,18 +9,15 @@ import Data.Maybe (fromMaybe)
 import Data.List (intercalate)
 import Libs (selectData,getRan,insToList)
 import Getting (getExtStages,makeConsRec,makeBtmRec,makeSConRec
-               ,makeEConRec,makeSumConsRec,stageChars,stageCharsEx)
+               ,makeEConRec,makeSumConsRec,stageChars,stageCharsEx
+               ,getCellSize)
 import Initialize (emCon)
-import Define (State(..),Con(..),Question(..),Size,CRect(..),Gauge(..),Board(..)
-              ,Bord(..),Event(..),TxType(..),QSource,Stage(..),MType(..),BMode(..)
-              ,ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,expLst
-              )
-
-genSaveData :: State -> String
-genSaveData st =
-  let clearData = cli st
-      hiScoreData = hiscs st
-   in "\""++intercalate "~" [show clearData,show hiScoreData]++"\""
+import Define (ltQuestSrc,clearScore,mTimeLimit,qTimeLimit,expLst
+              ,defGSize,defPlGPos
+              ,Pos,Size,GPos,GSize,QSource 
+              ,State(..),Con(..),Question(..),CRect(..),Gauge(..),Board(..)
+              ,Bord(..),Event(..),TxType(..),Stage(..),MType(..),BMode(..)
+              ,Obj(..),Role(..),DCon(..),Dir(..))
 
 genMission :: Int -> Int -> Int -> IO (Question,Int)
 genMission g stg pai = do 
@@ -49,6 +46,12 @@ genLtQuest g lv qs = do
   let iqlist' = insToList ai ans iqlist
   let (auInd,qlist) = unzip iqlist'
   return ((Question (map (:[]) qlist) auInd ai,nqs),ng)
+
+genSaveData :: State -> String
+genSaveData st =
+  let clearData = cli st
+      hiScoreData = hiscs st
+   in "\""++intercalate "~" [show clearData,show hiScoreData]++"\""
 
 genSumCons :: Size -> Int -> [Con]
 genSumCons cvSz@(cW,cH) stg =
@@ -222,7 +225,6 @@ genExpCons cvSz@(cW,cH) i =
       bkcon = genBackCon cvSz 2 (if i==0 then Intro else Explain (i-1))
    in [mcon,btcon,bkcon]
 
-
 genIntroCons :: Size -> [Con]
 genIntroCons cvSz =
   let bcpr = (3,9)
@@ -282,4 +284,29 @@ genMGauges (cW,cH) mtp sc tm =
       gau0 = Gauge tx0 (mgnX,mgnY) (gW,gH) scMax sc 
       gau1 = Gauge "TIME" (mgnX+gW+spX,mgnY) (gW,gH) tmLim (tmLim-tm)
    in [gau0,gau1]
+
+genObjects :: CRect -> GSize -> GPos -> String -> [Obj]
+genObjects _ _ _ [] = []
+genObjects rec@(CRect cx cy cw ch) gsz@(igw,igh) gps@(igx,igy) (x:xs) = 
+  let gw = cw / fromIntegral igw; gh = ch / fromIntegral igh 
+      nop = (cx+gw*fromIntegral igx,cy+gh*fromIntegral igy)
+      isBottom = igh==igy+1
+      ngps = case x of
+        '\r' -> (igx-1,0)
+        _other -> (if isBottom then igx-1 else igx
+                  ,if isBottom then 0 else igy+1)
+      nobs = genObjects rec gsz ngps xs  
+   in if x==' ' then nobs else Obj (Mz x) nop 0:nobs
+
+genDCon :: Size -> DCon
+genDCon cvSz@(cW,cH) =  
+  let mgX = cW/12; mgY = cH/20 
+      conW = cW - mgX*2
+      baseCon = emCon{cRec = CRect mgX mgY conW conW,border = Rigid}
+      (clw,clh) = getCellSize baseCon defGSize 
+      (pgx,pgy) = defPlGPos
+      plPos = (clw * fromIntegral pgx,clh * fromIntegral pgy) 
+      opl = Obj (Pl South) plPos 0 
+   in DCon baseCon defGSize [opl] 0
+
 

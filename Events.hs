@@ -1,9 +1,8 @@
 module Events(evStgLt,evStgWd,evChoice,evAns
              ,evStudy,evLearn,evResult,evRevealL
              ,evSummary,evChClick,evMission,evMEnd,evStart
-             ,evResetNotice,removeData,evIntro,evExplain) where
+             ,evResetNotice,evIntro,evExplain) where
 
-import Haste.Audio (Audio,play)
 import Control.Monad (when,void)
 import Getting (getScore)
 import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
@@ -13,15 +12,47 @@ import Generate (genLtQuest,genCons,genSCons,genAnsCon,genLCons
 import Libs (sepByChar,repList)
 import Browser (localStore)
 import Initialize (testCon)
-import Define (State(..),Event(..),Stage(..),Question(..),Con(..),MType(..)
-              ,Size,CRect(..),Score(..),Switch(..),TxType(..),LSA(..)
-              ,Board(..),BMode(..)
-              ,mTimeLimit,clearScore,storeName)
+import Define (mTimeLimit,clearScore,storeName
+              ,Size
+              ,State(..),Event(..),Stage(..),Question(..),Con(..),MType(..)
+              ,CRect(..),Score(..),Switch(..),TxType(..),LSA(..)
+              ,Board(..),BMode(..),Sound(..))
 
-type Auds = ([Audio],[Audio])
+evMission :: Size -> Int -> Int -> Int -> State -> IO State
+evMission cvSz stg i lv st = do 
+  let pq = quest st -- previous question
+      (pai,pan) = case pq of
+        Just pq' -> (audios pq'!!aInd pq',aInd pq')
+        Nothing -> (-1,0)
+      correct = i==pan
+  --if correct then return () else when (lv>0) $ play (ses!!1)
+  let Score ms tm = score st
+      nms = if pai==(-1) || correct then ms else ms+1
+      nscr = Score nms tm
+      g = rgn st -- random number generator 
+  (q,ng) <- genMission g stg pai 
+  let (hco:cos) = genCons cvSz q
+      ai = audios q!!aInd q 
+      end = tm>=mTimeLimit
+      ncos = hco:zipWith (\n co -> 
+            changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
+                                                                       [0..] cos 
+      ngaus = genMGauges cvSz Mi (getScore Mi lv nms) tm
+  return st{mtype=Mi,level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
+           ,rgn=ng,swc=(swc st){ita=True},seAu=Aoss ai}
 
-removeData :: IO ()
-removeData = void $ localStore Remv storeName "" 
+evStgLt :: Size -> Int -> State -> IO State
+evStgLt cvSz lv st = do  
+  let g = rgn st -- random number generator 
+      qs = qsrc st -- quest source
+  ((q,nqs),ng) <- genLtQuest g lv qs
+  let cos = genCons cvSz q
+      tau = audios q!!aInd q
+  return st{mtype=Qu,quest=Just q,level=lv,cons=cos,qsrc=nqs,rgn=ng
+           ,swc=(swc st){ita=True},seAu=Aoss tau}
+
+evStgWd :: Size -> Int -> State -> IO State
+evStgWd cvSz lv st = undefined
 
 evResetNotice :: Size -> State -> State
 evResetNotice cvSz@(cW,cH) st =
@@ -52,8 +83,8 @@ evStart :: Size -> State -> State
 evStart cvSz st = st{mtype=NoMission,cons=genStartCons cvSz
                       ,gaus=[],swc=(swc st){ita=False}} 
 
-evMEnd :: Size -> [Audio] -> Int -> Int -> State -> IO State
-evMEnd cvSz ses stg lv st = do 
+evMEnd :: Size -> Int -> Int -> State -> State
+evMEnd cvSz stg lv st = do 
   let Score ms _ = score st 
       scr = lv - ms*2
       hiscores = hiscs st
@@ -70,39 +101,13 @@ evMEnd cvSz ses stg lv st = do
       ci = cli st
       ncli = if isClear then if stg `elem` ci then ci else stg:ci
                         else ci
-      nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli}
-  if isClear then play (head ses) else play (ses!!1)
-  when isClear $ void $ localStore Save storeName (genSaveData nst) 
-  return nst
+      sei = if isClear then 0 else 1
+      nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli,seAu=Ases sei}
+      nlsa = if isClear then Save (genSaveData nst) else NoLSA 
+   in nst{lsa=nlsa}
 
-evMission :: Size -> Auds -> Int -> Int -> Int -> State -> IO State
-evMission cvSz (oss,ses) stg i lv st = do 
-  let pq = quest st -- previous question
-      (pai,pan) = case pq of
-        Just pq' -> (audios pq'!!aInd pq',aInd pq')
-        Nothing -> (-1,0)
-      correct = i==pan
-  if correct then return () else when (lv>0) $ play (ses!!1)
-  let Score ms tm = score st
-      nms = if pai==(-1) || correct then ms else ms+1
-      nscr = Score nms tm
-      g = rgn st -- random number generator 
-  (q,ng) <- genMission g stg pai 
-  let (hco:cos) = genCons cvSz q
-      ai = audios q!!aInd q 
-      end = tm>=mTimeLimit
-      ncos = hco:zipWith (\n co -> 
-            changeEvent (if end then MEnd stg lv else Mission stg n (lv+1)) co)
-                                                                       [0..] cos 
-      ngaus = genMGauges cvSz Mi (getScore Mi lv nms) tm
-      tau = oss!!ai
-  play tau
---  print nscr 
-  return st{mtype=Mi,level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
-           ,rgn=ng,swc=(swc st){ita=True}}
-
-evChClick :: [Audio] -> Int -> Int -> State -> IO State
-evChClick oss i oi st = do
+evChClick :: Int -> Int -> State -> State
+evChClick i oi st = 
   let cos = cons st
       co = cos!!i
       tp = head (typs co) -- text type 
@@ -112,14 +117,13 @@ evChClick oss i oi st = do
       ntps = if tp==Osite then (psx,psy+eps) else (psx,psy-eps) 
       nco = co{typs=[ntp],txtPos=[ntps]}
       ncons = repList i nco cos
-  play (oss!!oi)
-  return $ st{cons=ncons}
+   in st{cons=ncons,seAu=Aoss oi}
 
 evSummary :: Size -> Int -> State -> State
 evSummary cvSz stg st = st{cons=genSumCons cvSz stg} 
 
-evLearn :: Size -> [Audio] -> Int -> Int -> State -> IO State 
-evLearn cvSz oss stg num st = do 
+evLearn :: Size -> Int -> Int -> State -> State 
+evLearn cvSz stg num st =  
   let stype = stg `mod` 2
       dif = stg `div` 2 * 12 + num
       maxNum = if stype==0 then 4 else 6
@@ -128,8 +132,7 @@ evLearn cvSz oss stg num st = do
       lCons = genLCons cvSz oi clEvent
       boardSt@(Board bmd _ _ _ _) = board st
       nboard = if bmd==NoB then genLBoard cvSz oi RevealL else boardSt
-  play (oss!!oi)
-  return st{cons=lCons,board=nboard}
+   in st{cons=lCons,board=nboard,seAu=Aoss oi}
 
 evRevealL :: State -> State
 evRevealL st = let cns = cons st
@@ -149,21 +152,8 @@ evStudy cvSz st =
    in st{score=Score 0 0,quest=Nothing,cons=ncos++exco,gaus=[]
         ,swc=(swc st){ita=False}}
 
-evStgLt :: Size -> [Audio] -> Int -> State -> IO State
-evStgLt cvSz oss lv st = do  
-  let g = rgn st -- random number generator 
-      qs = qsrc st -- quest source
-  ((q,nqs),ng) <- genLtQuest g lv qs
-  let cos = genCons cvSz q
-      tau = oss!!(audios q!!aInd q)
-  play tau
-  return st{mtype=Qu,quest=Just q,level=lv,cons=cos,qsrc=nqs,rgn=ng,swc=(swc st){ita=True}}
-
-evStgWd :: Size -> Int -> State -> IO State
-evStgWd cvSz lv st = undefined
-
-evResult :: Size -> State -> IO State
-evResult cvSz st = do 
+evResult :: Size -> State -> State
+evResult cvSz st =  
   let (Score mis tim) = score st 
       ntxt = if mis==0 then "すごい！ 全問正解！"
                        else show mis ++ "回まちがへちゃったね！"
@@ -171,7 +161,7 @@ evResult cvSz st = do
       ncon = testCon{txts=[ntxt++ntxt2]}
       nScr = Score 0 0
       nst = st{score=nScr,cons=[ncon]}
-  return nst
+   in nst
 
 evChoice :: Size -> Int -> Int -> State -> State
 evChoice cvSz conNum i st =
@@ -218,7 +208,7 @@ evCorrect (cW,cH) i st =
                 ,txtFsz=[fsz]
                 ,txts=["せいかい！"]
                 ,clEv=Quest nstg}
-   in st{cons=niCos++[nlco],seAu=Just 0} 
+   in st{cons=niCos++[nlco],seAu=Ases 0} 
 
 evWrong :: Int -> State -> State
 evWrong i st = 
@@ -243,7 +233,7 @@ evWrong i st =
       chCos'' = repList ai naco chCos'
       nchCos = map (changeEvent NoEvent) chCos''
       (Score pmis tim) = score st  
-   in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=Just 1}
+   in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=Ases 1}
 
 
 changeBColor :: Int -> Con -> Con

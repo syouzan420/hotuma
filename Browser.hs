@@ -12,7 +12,7 @@ import Haste.JSString(pack,unpack)
 import Haste.LocalStorage(setItem,getItem,removeItem)
 import Haste.Audio(mkSource,newAudio,defaultAudioSettings,AudioSettings(..),Audio)
 import Define (State(swc),Switch(itc),CInfo,LSA(..)
-              ,imgfile,wstfile,wstAuFile,seFile)
+              ,imgfile,wstfile,chrfile,wstAuFile,seFile)
 
 chColors :: [Color]
 chColors = [RGB 200 200 180,RGB 200 255 200,RGB 255 204 153,RGB 255 153 204
@@ -52,10 +52,10 @@ tcEnd st = return st{swc=(swc st){itc=False}}
 touchIsTrue :: State -> IO State
 touchIsTrue st = return st{swc=(swc st){itc=True}}
 
-localStore :: LSA -> String -> String -> IO String 
-localStore lsa name dt =
+localStore :: LSA -> String -> IO String 
+localStore lsa name =
   case lsa of
-    Save -> setItem (pack name) (stringToJson dt) >> return "saved"
+    Save dt -> setItem (pack name) (stringToJson dt) >> return "saved"
     Load -> do js <- getItem (pack name) :: IO (Either JSString JSON)
                return (either loadError jsonToString js)
     Remv -> removeItem (pack name) >> return "removed"
@@ -73,11 +73,12 @@ loadImgs :: Int -> String -> [IO Bitmap]
 loadImgs (-1) str = []
 loadImgs i str = loadImgs (i-1) str ++ [loadBitmap (pack (str ++ show i ++".png"))]
 
-setBmps :: IO ([Bitmap],[Bitmap])
+setBmps :: IO ([Bitmap],[Bitmap],[Bitmap])
 setBmps = do
   imgs <- sequence (loadImgs 5 imgfile)
   wsts <- sequence (loadImgs 126 wstfile)
-  return (imgs,wsts)
+  chrs <- sequence (loadImgs 7 chrfile)
+  return (imgs,wsts,chrs)
 
 oneAudio :: JSString -> IO Audio
 oneAudio aufile = do
