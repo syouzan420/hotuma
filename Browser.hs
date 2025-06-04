@@ -59,6 +59,7 @@ localStore lsa name =
     Load -> do js <- getItem (pack name) :: IO (Either JSString JSON)
                return (either loadError jsonToString js)
     Remv -> removeItem (pack name) >> return "removed"
+    _ -> return ""
 
 loadError :: JSString -> String
 loadError js = "loadError"

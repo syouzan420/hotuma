@@ -25,7 +25,7 @@ evMission cvSz stg i lv st = do
         Just pq' -> (audios pq'!!aInd pq',aInd pq')
         Nothing -> (-1,0)
       correct = i==pan
-  --if correct then return () else when (lv>0) $ play (ses!!1)
+      sa = [Ases 1 | not (correct || lv <= 0)]
   let Score ms tm = score st
       nms = if pai==(-1) || correct then ms else ms+1
       nscr = Score nms tm
@@ -39,7 +39,7 @@ evMission cvSz stg i lv st = do
                                                                        [0..] cos 
       ngaus = genMGauges cvSz Mi (getScore Mi lv nms) tm
   return st{mtype=Mi,level=lv,score=nscr,quest=Just q,cons=ncos,gaus=ngaus
-           ,rgn=ng,swc=(swc st){ita=True},seAu=Aoss ai}
+           ,rgn=ng,swc=(swc st){ita=True},seAu=sa++[Aoss ai]}
 
 evStgLt :: Size -> Int -> State -> IO State
 evStgLt cvSz lv st = do  
@@ -49,7 +49,7 @@ evStgLt cvSz lv st = do
   let cos = genCons cvSz q
       tau = audios q!!aInd q
   return st{mtype=Qu,quest=Just q,level=lv,cons=cos,qsrc=nqs,rgn=ng
-           ,swc=(swc st){ita=True},seAu=Aoss tau}
+           ,swc=(swc st){ita=True},seAu=[Aoss tau]}
 
 evStgWd :: Size -> Int -> State -> IO State
 evStgWd cvSz lv st = undefined
@@ -102,7 +102,7 @@ evMEnd cvSz stg lv st = do
       ncli = if isClear then if stg `elem` ci then ci else stg:ci
                         else ci
       sei = if isClear then 0 else 1
-      nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli,seAu=Ases sei}
+      nst = st{hiscs=nhiscs,cons=ncons++[atCo],cli=ncli,seAu=[Ases sei]}
       nlsa = if isClear then Save (genSaveData nst) else NoLSA 
    in nst{lsa=nlsa}
 
@@ -117,7 +117,7 @@ evChClick i oi st =
       ntps = if tp==Osite then (psx,psy+eps) else (psx,psy-eps) 
       nco = co{typs=[ntp],txtPos=[ntps]}
       ncons = repList i nco cos
-   in st{cons=ncons,seAu=Aoss oi}
+   in st{cons=ncons,seAu=[Aoss oi]}
 
 evSummary :: Size -> Int -> State -> State
 evSummary cvSz stg st = st{cons=genSumCons cvSz stg} 
@@ -132,7 +132,7 @@ evLearn cvSz stg num st =
       lCons = genLCons cvSz oi clEvent
       boardSt@(Board bmd _ _ _ _) = board st
       nboard = if bmd==NoB then genLBoard cvSz oi RevealL else boardSt
-   in st{cons=lCons,board=nboard,seAu=Aoss oi}
+   in st{cons=lCons,board=nboard,seAu=[Aoss oi]}
 
 evRevealL :: State -> State
 evRevealL st = let cns = cons st
@@ -208,7 +208,7 @@ evCorrect (cW,cH) i st =
                 ,txtFsz=[fsz]
                 ,txts=["せいかい！"]
                 ,clEv=Quest nstg}
-   in st{cons=niCos++[nlco],seAu=Ases 0} 
+   in st{cons=niCos++[nlco],seAu=[Ases 0]} 
 
 evWrong :: Int -> State -> State
 evWrong i st = 
@@ -233,7 +233,7 @@ evWrong i st =
       chCos'' = repList ai naco chCos'
       nchCos = map (changeEvent NoEvent) chCos''
       (Score pmis tim) = score st  
-   in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=Ases 1}
+   in st{score=Score (pmis+1) tim,cons=hco:nchCos++[nlco],seAu=[Ases 1]}
 
 
 changeBColor :: Int -> Con -> Con

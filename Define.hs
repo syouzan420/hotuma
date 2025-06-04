@@ -105,7 +105,7 @@ data State = State {stage :: !(Maybe Stage)
                    ,score :: !Score
                    ,hiscs :: ![Int] -- high scores
                    ,quest :: !(Maybe Question)
-                   ,seAu :: !Sound -- sound index
+                   ,seAu :: ![Sound] -- sound indexes
                    ,cons :: ![Con]
                    ,gaus :: ![Gauge] -- gauges
                    ,board :: !Board

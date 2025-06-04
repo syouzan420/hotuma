@@ -1,3 +1,4 @@
+{-# LANGUAGE LambdaCase #-}
 module Loop (inputLoop,mouseClick,timerEvent) where
 
 import Haste.Graphics.Canvas(Canvas,Bitmap)
@@ -46,7 +47,7 @@ evBoard cvSz cid conNum bev st =
       (Board nbmd _ _ nbi nxev) = nboard
    in case nbmd of 
     Os i -> do
-        let st' = st{seAu=Aoss i}
+        let st' = st{seAu=[Aoss i]}
         if i==nbi 
           then execEvent cvSz cid conNum nxev st'{board=initBoard}
           else st'{board=Board Ko bps bsc bi xev}
@@ -86,11 +87,11 @@ inputLoop c ci@(cvSz,_) bmps (oss,ses) cid bev pdr st = do
     Save dt -> void $ localStore (Save dt) storeName
     Remv -> void $ localStore Remv storeName 
     _ -> return ()
-  case seAu nst of
+  mapM_ (\case
     Aoss osInd -> play (oss!!osInd)
     Ases seInd -> play (ses!!seInd) 
-    NoSound -> return () 
-  return nst{seAu=NoSound,lsa=NoLSA}
+    NoSound -> return ()) (seAu nst) 
+  return nst{seAu=[],lsa=NoLSA}
 
 execEventIO :: Size -> Int -> Int -> Event -> State -> IO State
 execEventIO cvSz cid conNum ev st = case ev of   

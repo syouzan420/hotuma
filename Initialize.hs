@@ -12,7 +12,7 @@ initState = State {stage=Nothing
                   ,score=Score 0 0
                   ,hiscs=replicate 19 0
                   ,quest=Nothing
-                  ,seAu=NoSound
+                  ,seAu=[]
                   ,cons=[testCon]
                   ,gaus=[]
                   ,board=initBoard
